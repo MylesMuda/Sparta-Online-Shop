@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Sparta_Online_Shop.Product>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -29,3 +31,12 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+@foreach(Product product in Model)
+{
+    <div>
+        <p>@product.ProductName</p>
+        <p>@product.ProductDescription</p>
+        <p>@product.Price</p>
+    </div>
+}

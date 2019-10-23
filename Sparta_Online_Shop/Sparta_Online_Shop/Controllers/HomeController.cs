@@ -10,7 +10,12 @@ namespace Sparta_Online_Shop.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = new List<Product>();
+            using(var dbc = new SpartaShopModel())
+            {
+                products = dbc.Products.ToList();
+            }
+            return View(products);
         }
 
         public ActionResult About()
