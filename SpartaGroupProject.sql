@@ -11,120 +11,120 @@ use SpartaShop
 go
 
 
-drop table if exists UserType
-go 
-create table UserType(
-	UserTypeID int not null identity primary key,
-	TypeName nvarchar(100) null,
-	TypeDescription varchar(MAX) null, 
+DROP TABLE IF EXISTS UserType
+GO 
+CREATE TABLE UserType(
+	UserTypeID INT NOT NULL IDENTITY PRIMARY KEY,
+	TypeName NVARCHAR(100) NULL,
+	TypeDescription VARCHAR(MAX) NULL, 
 );
 
 
-drop table if exists Users
-go
-create table Users(
-	UserID int not null identity primary key,
-	UserTypeID int null foreign key references UserType(UserTypeID),
-	FirstName nvarchar(50) not null,
-	LastName nvarchar(50) not null,
-	UserPassword nvarchar(50) not null, 
-	UserEmail nvarchar(320) not null, 
+DROP TABLE IF EXISTS Users
+GO
+CREATE TABLE Users(
+	UserID INT NOT NULL IDENTITY PRIMARY KEY,
+	UserTypeID INT NULL FOREIGN KEY REFERENCES UserType(UserTypeID),
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	UserPassword NVARCHAR(50) NOT NULL, 
+	UserEmail NVARCHAR(320) NOT NULL, 
 	--UserAddress //needs to be looked into more before adding
-	isVerified bit not null, 
-	ActivationCode nvarchar(MAX), 
-	LastLogin DateTime null,
-	Locked bit not null
+	IsVerified BIT NOT NULL, 
+	ActivationCode NVARCHAR(MAX) NULL, 
+	LastLogin DATETIME NULL,
+	Locked BIT NULL
 );
 
 
-drop table if exists OrderStatus
-go
-create table OrderStatus(
-	OrderStatusID int not null identity primary key,
-	StatusName nvarchar(100) null,
-	StatusDescription varchar(MAX) null
+DROP TABLE IF EXISTS OrderStatus
+GO
+CREATE TABLE OrderStatus(
+	OrderStatusID INT NOT NULL IDENTITY PRIMARY KEY,
+	StatusName NVARCHAR(100) NULL,
+	StatusDescription VARCHAR(MAX) NULL
 );
 
 
-drop table if exists Orders
-go
-create table Orders(
-	OrderID int not null identity primary key, 
-	UserID int null foreign key references Users(UserID),
-	OrderStatusID int null foreign key references OrderStatus(OrderStatusID), 
-	TotalCost decimal(10, 2) null, 
-	OrderDate DateTime not null,
-	ShipDate DateTime null
+DROP TABLE IF EXISTS Orders
+GO
+CREATE TABLE Orders(
+	OrderID INT NOT NULL IDENTITY PRIMARY KEY, 
+	UserID INT NOT NULL FOREIGN KEY REFERENCES Users(UserID),
+	OrderStatusID INT NULL FOREIGN KEY REFERENCES OrderStatus(OrderStatusID), 
+	TotalCost DECIMAL(10, 2) NULL, 
+	OrderDate DATETIME NULL,
+	ShipDate DATETIME NULL
 );
 
 
-drop table if exists Products
-go
-create table Products(
-	ProductID int not null identity primary key,
-	SKU nvarchar(100), 
-	ProductName nvarchar(100),
-	ProductDescription varchar(MAX) null, 
-	Stock int null, 
-	Price decimal(10, 2) not null
+DROP TABLE IF EXISTS Products
+GO
+CREATE TABLE Products(
+	ProductID INT NOT NULL IDENTITY PRIMARY KEY,
+	SKU NVARCHAR(100), 
+	ProductName NVARCHAR(100),
+	ProductDescription VARCHAR(MAX) NULL, 
+	Stock INT NULL, 
+	Price DECIMAL(10, 2) NOT NULL
 );
 
-drop table if exists OrderDetails
-go
-create table OrderDetails(
-	OrderDetailID int not null identity primary key,
-	OrderID int null foreign key references Orders(OrderID),
-	ProductID int null foreign key references Products(ProductID),
-	ProductPrice decimal(10, 2) not null,
-	Quantity int null
+DROP TABLE IF EXISTS OrderDetails
+GO
+CREATE TABLE OrderDetails(
+	OrderDetailID INT NOT NULL IDENTITY PRIMARY KEY,
+	OrderID INT NOT NULL FOREIGN KEY REFERENCES Orders(OrderID),
+	ProductID INT NOT NULL FOREIGN KEY REFERENCES Products(ProductID),
+	ProductPrice DECIMAL(10, 2) NOT NULL,
+	Quantity INT NULL
 );
 
-drop table if exists Reviews
-go
-create table Reviews(
-	ReviewID int not null identity primary key,
-	UserID int null foreign key references Users(UserID),
-	ProductID int null foreign key references Products(ProductID),
-	Rating int not null,
-	ReviewText varchar(MAX) null,
-	DateOfReview DateTime not null
+DROP TABLE IF EXISTS Reviews
+GO
+CREATE TABLE Reviews(
+	ReviewID INT NOT NULL IDENTITY PRIMARY KEY,
+	UserID INT NULL FOREIGN KEY REFERENCES Users(UserID),
+	ProductID INT NULL FOREIGN KEY REFERENCES Products(ProductID),
+	Rating INT NOT NULL,
+	ReviewText VARCHAR(MAX) NULL,
+	DateOfReview DATETIME NOT NULL
 );
 
 
-drop table if exists Baskets
-go
+DROP TABLE IF EXISTS Baskets
+GO
 CREATE TABLE Baskets(
     BasketID INT NOT NULL IDENTITY PRIMARY KEY,
     UserID INT NULL FOREIGN KEY REFERENCES Users(UserID)
 );
 
  
-drop table if exists BasketItems
-go
+DROP TABLE IF EXISTS BasketItems
+GO
 CREATE TABLE BasketItems(
     BasketItemID INT NOT NULL IDENTITY PRIMARY KEY,
-    BasketID INT NULL FOREIGN KEY REFERENCES Baskets(BasketID),
-    ProductID INT NULL FOREIGN KEY REFERENCES Products(ProductID),
+    BasketID INT NOT NULL FOREIGN KEY REFERENCES Baskets(BasketID),
+    ProductID INT NOT NULL FOREIGN KEY REFERENCES Products(ProductID),
     Quantity INT NULL
 );
 
  
-drop table if exists Creators
-go
+DROP TABLE IF EXISTS Creators
+GO
 CREATE TABLE Creators(
     CreatorID INT NOT NULL IDENTITY PRIMARY KEY,
     CreatorName NVARCHAR(100) NULL,
     ProfileImage NVARCHAR(MAX) NULL,
-    Description VARCHAR(MAX) NULL,
+    [Description] VARCHAR(MAX) NULL,
     GitHubLink NVARCHAR(MAX) NULL,
     Website NVARCHAR(MAX) NULL
 );
 
 
 -- have more data input here if wanted
-INSERT INTO Products VALUES (null, 'Hoodie', 'Hoodie with sparta logo', 20, 30.00);
-INSERT INTO Products VALUES (null, 'Cap', 'Cap with sparta logo', 25, 15.00);
-INSERT INTO Products VALUES (null, 'Key chain', 'Key chain in the shape of sparta logo', 45, 10.00);
+INSERT INTO Products VALUES (NULL, 'Hoodie', 'Hoodie with sparta logo', 20, 30.00);
+INSERT INTO Products VALUES (NULL, 'Cap', 'Cap with sparta logo', 25, 15.00);
+INSERT INTO Products VALUES (NULL, 'Key chain', 'Key chain in the shape of sparta logo', 45, 10.00);
 
 INSERT INTO UserType VALUES ('Admin', 'This user can modify the website');
 INSERT INTO UserType VALUES ('Customer', 'This user can only user the website commercially');
@@ -140,13 +140,13 @@ INSERT INTO Creators(CreatorName) VALUES ('Ryan Burdus');
 INSERT INTO Creators(CreatorName) VALUES ('Samuel Ribeiro');
 
 
-select * from BasketItems;
-select * from Baskets;
-select * from Creators;
-select * from OrderDetails;
-select * from Orders;
-select * from OrderStatus;
-select * from Products;
-select * from Reviews;
-select * from Users;
-select * from UserType;
+SELECT * FROM BasketItems;
+SELECT * FROM Baskets;
+SELECT * FROM Creators;
+SELECT * FROM OrderDetails;
+SELECT * FROM Orders;
+SELECT * FROM OrderStatus;
+SELECT * FROM Products;
+SELECT * FROM Reviews;
+SELECT * FROM Users;
+SELECT * FROM UserType;
