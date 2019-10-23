@@ -1,13 +1,13 @@
 use master 
 go
 
-drop database if exists e41ShopDb
+drop database if exists SpartaShop
 go
 
-create database e41ShopDb
+create database SpartaShop
 go
 
-use e41ShopDb
+use SpartaShop
 go
 
 
