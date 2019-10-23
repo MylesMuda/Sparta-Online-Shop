@@ -52,7 +52,7 @@ create table Orders(
 	OrderID int not null identity primary key, 
 	UserID int null foreign key references Users(UserID),
 	OrderStatusID int null foreign key references OrderStatus(OrderStatusID), 
-	TotalCost decimal null, 
+	TotalCost decimal(10, 2) null, 
 	OrderDate DateTime not null,
 	ShipDate DateTime null
 );
@@ -66,7 +66,7 @@ create table Products(
 	ProductName nvarchar(100),
 	ProductDescription varchar(MAX) null, 
 	Stock int null, 
-	Price decimal not null
+	Price decimal(10, 2) not null
 );
 
 drop table if exists OrderDetails
@@ -75,7 +75,7 @@ create table OrderDetails(
 	OrderDetailID int not null identity primary key,
 	OrderID int null foreign key references Orders(OrderID),
 	ProductID int null foreign key references Products(ProductID),
-	ProductPrice decimal not null,
+	ProductPrice decimal(10, 2) not null,
 	Quantity int null
 );
 
