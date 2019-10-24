@@ -10,33 +10,21 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
 
-@foreach(Product product in Model)
-{
-    <div>
-        <p>@product.ProductName</p>
-        <p>@product.ProductDescription</p>
-        <p>@product.Price</p>
-    </div>
+@{ 
+    var productImage = "https://3se5un1sjwoxoshar1u4hm6z-wpengine.netdna-ssl.com/wp-content/uploads/2019/08/jumper-woman-no17-arce-1-644x800.jpg";
 }
+
+<div class="row">
+    @foreach (Product product in Model)
+    {
+        <div class="col-lg-3" style="padding:0; display:inline-block; ">
+            <div style="width:300px; height:200px; background:url(@productImage); background-size:cover;">
+                <div style="text-align:right;width:100%; height:40px; background-color:rgba(216,134,221,0.67); position:absolute;bottom:0;">
+                    <p style="padding:0 5px; color:#ffffff; margin:0;">@product.ProductName</p>
+                    <p style="padding:0 5px; color:#ffffff; font-weight:bold;margin:0;">@product.Price</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

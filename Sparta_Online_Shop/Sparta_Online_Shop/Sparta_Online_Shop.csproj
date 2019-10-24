@@ -195,6 +195,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketItem.cs" />
     <Compile Include="Controllers\AccountManagementController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderStatu.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SpartaShopModel.cs" />

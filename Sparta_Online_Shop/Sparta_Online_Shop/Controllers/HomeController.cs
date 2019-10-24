@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Sparta_Online_Shop.Models;
 
 namespace Sparta_Online_Shop.Controllers
 {
@@ -44,12 +46,6 @@ namespace Sparta_Online_Shop.Controllers
 
             return View();
         }
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Your Login page.";
-
-            return View();
-        }
         public ActionResult PrivacyPolicy()
         {
             ViewBag.Message = "Your PrivacyPolicy page.";
@@ -79,6 +75,91 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.Message = "Your TermsAndConditions page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            if (RedirectLoggedIn()) { return RedirectToAction("Index", "Home"); }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin login, string ReturnURL = "")
+        {
+            string message = "";
+
+            using (var dbc = new SpartaShopModel())
+            {
+                var ExisitingUser = dbc.Users.Where(u => u.UserEmail == login.UserEmail).FirstOrDefault();
+                if (ExisitingUser != null)
+                {
+                    if (string.Compare(ExisitingUser.UserPassword, Crypto.Hash(login.UserPassword)) == 0)
+                    {
+                        if (ExisitingUser.IsVerified == true)
+                        {
+                            int timeout = login.RememberMe ? 525600 : 30;
+                            var ticket = new FormsAuthenticationTicket(login.UserEmail, login.RememberMe, timeout);
+                            string encrypted = FormsAuthentication.Encrypt(ticket);
+                            FormsAuthentication.SetAuthCookie(login.UserEmail, login.RememberMe);
+                            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                            cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                            cookie.HttpOnly = true;
+                            Response.Cookies.Add(cookie);
+
+                            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, login.UserEmail, DateTime.Now,
+                            //    DateTime.Now.AddMinutes(timeout), login.RememberMe, null, FormsAuthentication.FormsCookiePath);
+
+                            if (Url.IsLocalUrl(ReturnURL))
+                            {
+                                return Redirect(ReturnURL);
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Warning = true;
+                            message = "This email address has not yet been verified, please check your inbox and junk folder.";
+                        }
+                    }
+                    else
+                    {
+                        message = "Invalid password and/or email provided";
+                    }
+                }
+                else
+                {
+                    message = "Invalid password and/or email provided";
+                }
+            }
+
+            ViewBag.Username = login.UserEmail;
+            ViewBag.Password = login.UserPassword;
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            //Logout user from the web application and redirect to homepage
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home");
+        }
+
+        public bool RedirectLoggedIn()
+        {
+            //Check if a user is logged in
+            if (User.Identity.IsAuthenticated)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
