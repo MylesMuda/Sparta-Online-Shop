@@ -1,23 +1,41 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Overview";
+    int? TotalSales = (int?)ViewBag.TotalSales;
+    decimal? Profit = (decimal?)ViewBag.Profit;
+    decimal? ProfitDay = (decimal?)ViewBag.ProfitDay;
+    decimal? ProfitMonth = (decimal?)ViewBag.ProfitMonth;
+    decimal? ProfitYear = (decimal?)ViewBag.ProfitYear;
 }
 <style>
-
 </style>
 <h1>Overview</h1>
 <p>This is the admin page</p>
 
 <div>
     <h2>@Html.ActionLink("Products", "Products", "Admin")</h2>
-    <h2></h2>>@Html.ActionLink("Stock Orders", "StockOrders", "Admin")</h2>
+    <h2>@Html.ActionLink("Stock Orders", "StockOrders", "Admin")</h2>
     <h2>@Html.ActionLink("Users", "Users", "Admin")</h2>
 </div>
 
-<div>
-    <h3>Total Sales: @ViewBag.TotalSales</h3>
-    <h3>Total Profit: @ViewBag.TotalProfit</h3>
-    <h3>Day:@ViewBag.ProfitDay</h3>
-    <h3>Month:@ViewBag.ProfitMonth</h3>
-    <h3>Year:@ViewBag.ProfitYear</h3>
-</div>
+
+<body>
+    <div>
+        <h3>Total Sales</h3>
+        <p>@TotalSales.Value</p>
+    </div>
+    <div>
+        <h3>Total Profit:</h3>
+        <p>£@Profit.Value</p>
+
+        <h4>Day:</h4>
+        <p>£@ProfitDay.Value</p>
+
+        <h4>Month:</h4>
+        <p>£@ProfitMonth.Value</p>
+
+        <h4>Year:</h4>
+        <p>£@ProfitYear.Value</p>
+    </div>
+</body>
+
