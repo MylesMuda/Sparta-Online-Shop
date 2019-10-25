@@ -14,6 +14,7 @@ namespace Sparta_Online_Shop.Controllers
         private decimal? ProfitDay= 0;
         private decimal? ProfitMonth = 0;
         private decimal? ProfitYear = 0;
+
         public ActionResult Index()
         {
             using (var db = new SpartaShopModel())
@@ -61,11 +62,6 @@ namespace Sparta_Online_Shop.Controllers
             return View();
         }
 
-        public ActionResult Products()
-        {
-            return View();
-        }
-
         public ActionResult StockOrders()
         {
             return View();
@@ -75,5 +71,6 @@ namespace Sparta_Online_Shop.Controllers
         {
             return View();
         }
+
     }
 }
