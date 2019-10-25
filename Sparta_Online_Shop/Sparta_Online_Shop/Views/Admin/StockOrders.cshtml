@@ -5,20 +5,26 @@
 <style>
 
 </style>
-<h2>Order Stock</h2>
+<h1>Order Stock</h1>
+
+<body>
+    <div>
+        <h2>Product Name:</h2>
+        <p>@ViewBag.ProductName</p>
+
+        <h2>Stock Left:</h2> 
+        <p>@ViewBag.StockLevel</p>
+
+        <h2>Order Amount:</h2>
+        <p>@ViewBag.SetStockLevel</p>
+        
+        <h2>Order Amount</h2>
+        <p>@Html.Editor("Stock")</p>
+    </div>
+</body>
 
 <div>
-    <div>Product Name: @ViewBag.ProductName</div>
-    <div>Stock Left: @ViewBag.StockLevel</div>
-    <div>Order Ammount: @ViewBag.OrderAmmount</div>
-</div>
-
-<div>
-    <div>Total Price: @ViewBag</div>
-</div>
-
-<div>
-    <h2>@Html.ActionLink("Index", "Index", "Admin")</h2>
-    <h2>@Html.ActionLink("Products", "Products", "Admin")</h2>
-    <h2>@Html.ActionLink("Users", "Users", "Admin")</h2>
+    <h4>@Html.ActionLink("Index", "Index", "Admin")</h4>
+    <h4>@Html.ActionLink("Products", "Products", "Admin")</h4>
+    <h4>@Html.ActionLink("Users", "Users", "Admin")</h4>
 </div>
