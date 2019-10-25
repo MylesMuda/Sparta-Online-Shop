@@ -193,6 +193,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketItem.cs" />
     <Compile Include="Controllers\AccountManagementController.cs" />
@@ -207,6 +209,8 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderStatu.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductReview.cs" />
+    <Compile Include="Models\UserOrderStatusOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SpartaShopModel.cs" />
@@ -262,9 +266,17 @@
     <Content Include="Views\Home\FAQs.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Products.cshtml" />
-    <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\StockOrders.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

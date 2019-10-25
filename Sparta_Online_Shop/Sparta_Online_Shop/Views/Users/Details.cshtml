@@ -1,0 +1,128 @@
+﻿@model Sparta_Online_Shop.UserOrderStatusOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user.UserType.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.UserType.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.UserEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.UserEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.IsVerified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.IsVerified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.ActivationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.ActivationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.LastLogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.LastLogin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Locked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.Locked)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.user.UserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h2>Orders</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Order Status
+        </th>
+        <th>
+            Total Cost
+        </th>
+        <th>
+            Order Date
+        </th>
+        <th>
+            Ship Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model.orders)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatu.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+            </td>
+        </tr>
+    }
+</table>
