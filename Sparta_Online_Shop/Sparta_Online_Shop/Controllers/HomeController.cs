@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Security;
 using Sparta_Online_Shop.Models;
+
 
 namespace Sparta_Online_Shop.Controllers
 {
@@ -66,9 +70,73 @@ namespace Sparta_Online_Shop.Controllers
         }
         public ActionResult SignUp()
         {
-            ViewBag.Message = "Your SignUp page.";
-
+            if (RedirectLoggedIn()) { return RedirectToAction("Index", "Home"); }
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(User user)
+        {
+
+            bool Status = false;
+            string message = "";
+
+            if (ModelState.IsValid)
+            {
+                #region Check If Email Exists
+                var EmailExists = DoesEmailExist(user.UserEmail);
+                if (EmailExists)
+                {
+                    ModelState.Remove("Email");
+                    TempData["EmailExists"] = "This email address has already been registered";
+                    ModelState.AddModelError("Email", "This email address has already been registered");
+
+                    return View();
+                }
+                #endregion
+
+                #region Generate Activation Code
+               
+                user.IsVerified = false;
+                user.ActivationCode = Guid.NewGuid().ToString();
+                #endregion
+
+                #region Password Hashing
+                user.UserPassword = Crypto.Hash(user.UserPassword);
+                user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
+                #endregion
+
+                #region Save to Database - Send Verification Email
+                using (var dbc = new SpartaShopModel())
+                {
+                    //user.UserID = null;
+
+                    //Commit user to database
+                    dbc.Users.Add(user);
+                    dbc.SaveChanges();
+
+                    SendVerificationLinkEmail(user.UserEmail, user.ActivationCode.ToString());
+
+                    //Set success message for web output
+                    message = $"You have successfully registered to MiniBank!" +
+                        $" Welcome {user.FirstName}. An account verfication email" +
+                        $" has been sent to : {user.UserEmail}";
+                    Status = true;
+                }
+
+                var AccName = $"{user.FirstName.Substring(0, 1)}{user.LastName}";
+                #endregion
+            }
+            else
+            {
+                //Model error handling
+                message = "Invalid Request";
+            }
+
+            ViewBag.Message = message;
+            ViewBag.Status = Status;
+            return View(user);
         }
         public ActionResult TermsAndConditions()
         {
@@ -141,6 +209,84 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.Password = login.UserPassword;
             ViewBag.Message = message;
             return View();
+        }
+        [NonAction]
+        public bool DoesEmailExist(string email)
+        {
+            using (var dbc = new SpartaShopModel())
+            {
+                var ExistingEmail = dbc.Users.Where(u => u.UserEmail == email).FirstOrDefault();
+                return ExistingEmail != null;
+            }
+        }
+
+        [NonAction]
+        public void SendVerificationLinkEmail(string email, string activationCode, bool resend = false)
+        {
+            #region Build verification link
+            var verifyURL = "/Home/VerifyAccount/" + activationCode;
+            //var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
+            #endregion
+
+            //Set as Env Variable
+            #region SMTP Credentials
+            string HubEmail = "sprt.711@gmail.com";
+            string HubEmailPassword = "password5!";
+            var fromEmail = new MailAddress(HubEmail, "Sparta Eccomerce");
+            var fromEmailPassword = HubEmailPassword;
+            #endregion
+
+            #region Recipient Details
+            var toEmail = new MailAddress(email);
+            #endregion
+
+            #region Set up email details
+            string subject;
+            string body;
+            if (resend)
+            {
+                subject = "Sparta Store Email Verification.";
+
+                body = "<br/><br/>We would like to verify your email address for security purposes." +
+                    " Please click on the below link to verify your email address." +
+                    " <br/><br/><a href='" + link + "'>" + link + "</a> ";
+
+            }
+            else
+            {
+                subject = "Welcome to The Sparta Store, Email Verification.";
+
+                body = "<br/><br/>We are excited to tell you that your Sparta Shopping account was" +
+                    " successfully created. Please click on the below link to verify your email address and get started." +
+                    " <br/><br/><a href='" + link + "'>" + link + "</a> ";
+            }
+            #endregion
+
+            #region Set up SMTP Client
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,//TLS PORT
+                           // Port = 465,//SSL PORT
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+            #endregion
+
+            #region Send email
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            {
+                smtp.Send(message);
+            }
+            #endregion
         }
 
         [Authorize]
