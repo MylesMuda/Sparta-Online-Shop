@@ -11,6 +11,21 @@
         }
     }
 
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #807185 !important;
+      opacity:0.6;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: #807185 !important;
+      opacity:0.6;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: #807185 !important;
+      opacity:0.6;
+    }
+
     body {
         font-family: 'Helvetica';
         background: url(/Content/images/mb_background2.jpg);
@@ -19,16 +34,21 @@
         max-height: 100vmin;
         background-position: right bottom;
         background-attachment: fixed;
+        background: #01181b;
     }
 
-    form {
+    form {    
         width: fit-content;
-        background: #fff;
+        background: #01181b;
         padding: 1vmin 2vmin;
-        margin: 10vmin 50px;
-        box-shadow: 2px 2px 3px #aaa;
+        margin: 10vmin auto;
+        box-shadow: 0 0px 10px #e33661;
         overflow: hidden;
         animation: Appear 0.5s linear;
+        color: #FFF;
+        min-width: 350px;
+        border-radius: 5px;
+        border: 1px solid #e33661;
     }
 
     @@keyframes Appear {
@@ -53,25 +73,29 @@
 
     input {
         max-width: 100%;
+        font-weight: bold;
+        color: #47354f;
     }
 
     input[type="submit"] {
         width: 100%;
         font-weight: bold;
         font-size: 1.1em;
-        background-color: #74f2b7;
-        border: 1px solid #6fe4a3;
+        background-color: #e33661;
+        border: 1px solid #fa6f91;
     }
 
     input[type="submit"]:hover {
-        background-color: #93ffcd;
-        border: 1px solid #6fe4a3;
+        background-color: #d53a60;
+        border: 1px solid #fe3868;
+        color:#653878;
     }
 
     input[type="submit"]:active,
     input[type="submit"]:focus {
-        background-color: #50dc9a !important;
-        border: 1px solid #57b983 !important;
+        background-color: #de305b !important;
+        border: 1px solid #ea2556 !important;
+        color:#653878;
     }
 
     .AccountHelperLinks {
@@ -88,12 +112,10 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div style="
-    height: 100px;
-    width: 110%;
-    background: #b8dff5;
-    margin: -15px 0 30px -15px;
-"> <h2 style="text-align:center;margin: 0;padding: 40px; font-weight:bold;">Login</h2></div>
+        <div style="height: 200px;width: 110%; text-align:center; padding:20px; margin: -15px 0 30px -15px;"> 
+            <img style="max-height:100%;" src="~/Content/images/SpartaLogin.png" />
+            <h2 style="text-align:center;margin: 0;font-weight:bold;">Login</h2>
+        </div>
 
         @if (ViewBag.Message != null && ViewBag.Message != "")
         {
@@ -114,24 +136,24 @@
 
         <div style="padding:0 50px;">
             <div class="form-group">
-                @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-12" style="padding:0">
+                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserEmail) } })
                     @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-12" style="padding:0">
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserPassword) } })
                     @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group check">
-                @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div style="display:inline-block;vertical-align:sub" class="col-md-3">
+                @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2", style="padding-left:0; padding-right:0; text-align:left;" })
+                <div style="display:inline-block;vertical-align:sub; padding:0;" class="col-md-3">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.RememberMe)
                         @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
@@ -140,7 +162,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-12">
+                <div class="col-md-12" style="padding:0">
                     <input type="submit" value="Login" class="btn" />
                 </div>
             </div>
