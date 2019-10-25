@@ -35,7 +35,7 @@ namespace Sparta_Online_Shop
         [MetadataType(typeof(UserMetadata))]
         public partial class User
         {
-        [NotMapped]
+            [NotMapped]
             public string ConfirmPassword { get; set; }
         }
 
@@ -63,7 +63,7 @@ namespace Sparta_Online_Shop
 
             [Display(Name = "Confirm Password")]
             [DataType(DataType.Password)]
-            [Compare("Password", ErrorMessage = "The passwords you entered do not match")]
+            [Compare("UserPassword", ErrorMessage = "The passwords you entered do not match")]
             public string ConfirmPassword { get; set; }
 
         }

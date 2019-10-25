@@ -82,6 +82,8 @@ namespace Sparta_Online_Shop.Controllers
             bool Status = false;
             string message = "";
 
+
+
             if (ModelState.IsValid)
             {
                 #region Check If Email Exists
@@ -97,7 +99,7 @@ namespace Sparta_Online_Shop.Controllers
                 #endregion
 
                 #region Generate Activation Code
-               
+
                 user.IsVerified = false;
                 user.ActivationCode = Guid.NewGuid().ToString();
                 #endregion
@@ -116,7 +118,7 @@ namespace Sparta_Online_Shop.Controllers
                     dbc.Users.Add(user);
                     dbc.SaveChanges();
 
-                    SendVerificationLinkEmail(user.UserEmail, user.ActivationCode.ToString());
+                    //SendVerificationLinkEmail(user.UserEmail, user.ActivationCode.ToString());
 
                     //Set success message for web output
                     message = $"You have successfully registered to MiniBank!" +
@@ -125,7 +127,7 @@ namespace Sparta_Online_Shop.Controllers
                     Status = true;
                 }
 
-                var AccName = $"{user.FirstName.Substring(0, 1)}{user.LastName}";
+
                 #endregion
             }
             else
