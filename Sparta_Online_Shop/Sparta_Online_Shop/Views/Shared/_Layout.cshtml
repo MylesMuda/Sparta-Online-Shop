@@ -70,9 +70,10 @@
 
                 @if (!Request.IsAuthenticated)
                 {
-                    <ul style="float:right; padding-right:4vmin" class="nav navbar-nav">
-                        <li id="SignUp">@Html.ActionLink("Login", "Login", "Home")</li>
-                    </ul>
+            <ul style="float:right; padding-right:4vmin" class="nav navbar-nav">
+                <li id="Login">@Html.ActionLink("Login", "Login", "Home")</li>
+                <li id="SignUp">@Html.ActionLink("SignUp", "SignUp", "Home")</li>
+            </ul>
                 }
             </div>
         </div>
