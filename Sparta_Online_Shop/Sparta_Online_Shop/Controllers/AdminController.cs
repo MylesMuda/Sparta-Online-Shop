@@ -8,6 +8,7 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class AdminController : Controller
     {
+        [Authorize(Roles="Admin")]
         // GET: Admin
         public ActionResult Index()
         {

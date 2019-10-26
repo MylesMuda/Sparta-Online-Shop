@@ -10,6 +10,7 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             List<Product> products = new List<Product>();
@@ -99,8 +100,18 @@ namespace Sparta_Online_Shop.Controllers
                     {
                         if (ExisitingUser.IsVerified == true)
                         {
+                            //ID 1 == Customer
+                            //ID 2 == Admin
+                            string roles = "";
+                            if(ExisitingUser.UserTypeID != null && ExisitingUser.UserTypeID > 1)
+                            {
+                                roles = "Admin";
+                                ReturnURL = ReturnURL == "" ? "/Admin/" : ReturnURL;
+                            }
+
                             int timeout = login.RememberMe ? 525600 : 30;
-                            var ticket = new FormsAuthenticationTicket(login.UserEmail, login.RememberMe, timeout);
+                            var ticket = new FormsAuthenticationTicket(1, login.UserEmail, DateTime.Now, DateTime.Now.AddMinutes(timeout), login.RememberMe, roles);
+                            //var ticket = new FormsAuthenticationTicket(login.UserEmail, login.RememberMe, timeout);
                             string encrypted = FormsAuthentication.Encrypt(ticket);
                             FormsAuthentication.SetAuthCookie(login.UserEmail, login.RememberMe);
                             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
@@ -108,9 +119,7 @@ namespace Sparta_Online_Shop.Controllers
                             cookie.HttpOnly = true;
                             Response.Cookies.Add(cookie);
 
-                            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, login.UserEmail, DateTime.Now,
-                            //    DateTime.Now.AddMinutes(timeout), login.RememberMe, null, FormsAuthentication.FormsCookiePath);
-
+                            
                             if (Url.IsLocalUrl(ReturnURL))
                             {
                                 return Redirect(ReturnURL);
