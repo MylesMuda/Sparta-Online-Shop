@@ -14,7 +14,7 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+
         public ActionResult Index()
         {
             List<Product> products = new List<Product>();

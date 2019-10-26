@@ -3,116 +3,17 @@
 @{
     ViewBag.Title = "Login";
 }
-<style>
-    @@media only screen and (max-width: 750px) {
-        form {
-            min-width: 350px;
-            margin: 10vmin auto !important;
-        }
-    }
 
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: #807185 !important;
-      opacity:0.6;
-    }
-
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: #807185 !important;
-      opacity:0.6;
-    }
-
-    ::-ms-input-placeholder { /* Microsoft Edge */
-      color: #807185 !important;
-      opacity:0.6;
-    }
-
-    body {
-        font-family: 'Helvetica';
-        background: url(/Content/images/mb_background2.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        max-height: 100vmin;
-        background-position: right bottom;
-        background-attachment: fixed;
-        background: #01181b;
-    }
-
-    form {    
-        width: fit-content;
-        background: #01181b;
-        padding: 1vmin 2vmin;
-        margin: 10vmin auto;
-        box-shadow: 0 0px 10px #e33661;
-        overflow: hidden;
-        animation: Appear 0.5s linear;
-        color: #FFF;
-        min-width: 350px;
-        border-radius: 5px;
-        border: 1px solid #e33661;
-    }
-
-    @@keyframes Appear {
-        0% {
-            opacity: 0;
-            margin-top: 13vmin;
-        }
-
-        100% {
-            opacity: 1;
-            margin-top: 10vmin;
-        }
-    }
-
-    label {
-        min-width: 60px;
-    }
-
-    .check > label {
-        min-width: 127px;
-    }
-
-    input {
-        max-width: 100%;
-        font-weight: bold;
-        color: #47354f;
-    }
-
-    input[type="submit"] {
-        width: 100%;
-        font-weight: bold;
-        font-size: 1.1em;
-        background-color: #e33661;
-        border: 1px solid #fa6f91;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #d53a60;
-        border: 1px solid #fe3868;
-        color:#653878;
-    }
-
-    input[type="submit"]:active,
-    input[type="submit"]:focus {
-        background-color: #de305b !important;
-        border: 1px solid #ea2556 !important;
-        color:#653878;
-    }
-
-    .AccountHelperLinks {
-        clear: both;
-        text-align: right;
-        font-size: 0.9em;
-    }
-</style>
 
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div id="LoginForm" >
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div style="height: 200px;width: 110%; text-align:center; padding:20px; margin: -15px 0 30px -15px;"> 
+        <div style="height: 200px; text-align:center; padding:20px; margin: -15px 15px 30px 15px;">
             <img style="max-height:100%;" src="~/Content/images/SpartaLogin.png" />
             <h2 style="text-align:center;margin: 0;font-weight:bold;">Login</h2>
         </div>
@@ -132,43 +33,44 @@
                 </div>
             }
         }
-        @*<h2 style="text-align:center">Login</h2>*@
 
-        <div style="padding:0 50px;">
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-12" style="padding:0">
-                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserEmail) } })
-                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
-                </div>
+    <div style="padding:0 30px;">
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-12" style="padding:0">
+                @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserEmail) } })
+                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-12" style="padding:0">
-                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserPassword) } })
-                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-12" style="padding:0">
+                @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserPassword) } })
+                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group check">
-                @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2", style="padding-left:0; padding-right:0; text-align:left;" })
-                <div style="display:inline-block;vertical-align:sub; padding:0;" class="col-md-3">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.RememberMe)
-                        @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-12" style="padding:0">
-                    <input type="submit" value="Login" class="btn" />
+        <div class="form-group check">
+            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2", style = "padding-left:0; padding-right:0; text-align:left;" })
+            <div style="display:inline-block;vertical-align:sub; padding:0;" class="col-md-3">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.RememberMe)
+                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-12" style="padding:0">
+                <input type="submit" value="Login" class="btn" />
+            </div>
+        </div>
+        <p style="text-align:right;">Not a member? <a href="~/Home/SignUp/">Sign up</a></p>
     </div>
-}
+    </div>
+    }
+</div>
 
 @section Scripts{
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
