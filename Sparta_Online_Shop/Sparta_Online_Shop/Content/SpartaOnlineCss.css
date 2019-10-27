@@ -49,6 +49,48 @@ body {
     color: #ef2727 !important;
 }
 
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle::after {
+    transition: transform 0.15s linear;
+}
+
+.dropdown:hover .dropdown-toggle::after,
+.show.dropdown .dropdown-toggle::after {
+    transform: translateY(3px);
+}
+
+.dropdown:hover .dropdown-toggle,
+.show.dropdown .dropdown-toggle {
+    color: #e33661 !important;
+}
+
+.dropdown-menu{
+    right:0;
+    left:initial;
+}
+
+.dropdown-item {
+    color: #f6f9fc;
+}
+
+.dropdown-item:hover{
+    background-color: transparent !important;
+}
+
+.dropdown-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(227, 54, 97, 0.75);
+    background: linear-gradient(to right, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -moz-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -webkit-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -o-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -ms-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+}
+
 #LoginForm form,
 #SignUpForm form {
     width: fit-content;

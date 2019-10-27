@@ -168,46 +168,77 @@ namespace Sparta_Online_Shop.Controllers
                 {
                     if (string.Compare(ExisitingUser.UserPassword, Crypto.Hash(login.UserPassword)) == 0)
                     {
-                        if (ExisitingUser.IsVerified == true)
-                        {
-                            //ID 1 == Customer
-                            //ID 2 == Admin
-                            string roles = "";
-                            if(ExisitingUser.UserTypeID != null && ExisitingUser.UserTypeID > 1)
+                        if (ExisitingUser.Locked == null || (bool)!ExisitingUser.Locked) { 
+                            if (ExisitingUser.IsVerified == true)
                             {
-                                roles = "Admin";
-                                ReturnURL = ReturnURL == "" ? "/Admin/" : ReturnURL;
-                            }
+                                //ID 1 == Customer
+                                //ID 2 == Admin
+                                string roles = "";
+                                if(ExisitingUser.UserTypeID != null && ExisitingUser.UserTypeID > 1)
+                                {
+                                    roles = "Admin";
+                                    ReturnURL = ReturnURL == "" ? "/Admin/" : ReturnURL;
+                                }
 
-                            int timeout = login.RememberMe ? 525600 : 30;
-                            var ticket = new FormsAuthenticationTicket(1, login.UserEmail, DateTime.Now, DateTime.Now.AddMinutes(timeout), login.RememberMe, roles);
-                            //var ticket = new FormsAuthenticationTicket(login.UserEmail, login.RememberMe, timeout);
-                            string encrypted = FormsAuthentication.Encrypt(ticket);
-                            FormsAuthentication.SetAuthCookie(login.UserEmail, login.RememberMe);
-                            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
-                            cookie.Expires = DateTime.Now.AddMinutes(timeout);
-                            cookie.HttpOnly = true;
-                            Response.Cookies.Add(cookie);
-
+                                int timeout = login.RememberMe ? 525600 : 30;
+                                var ticket = new FormsAuthenticationTicket(1, login.UserEmail, DateTime.Now, DateTime.Now.AddMinutes(timeout), login.RememberMe, roles);
+                                //var ticket = new FormsAuthenticationTicket(login.UserEmail, login.RememberMe, timeout);
+                                string encrypted = FormsAuthentication.Encrypt(ticket);
+                                FormsAuthentication.SetAuthCookie(login.UserEmail, login.RememberMe);
+                                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                                cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                                cookie.HttpOnly = true;
+                                Response.Cookies.Add(cookie);
+                                Session["AttemptFrom"] = null;
+                                Session["Attempts"] = null;
+                                Session["LoggedIn"] = true;
                             
-                            if (Url.IsLocalUrl(ReturnURL))
-                            {
-                                return Redirect(ReturnURL);
+                                if (Url.IsLocalUrl(ReturnURL))
+                                {
+                                    return Redirect(ReturnURL);
+                                }
+                                else
+                                {
+                                    return RedirectToAction("Index", "Home");
+                                }
                             }
                             else
                             {
-                                return RedirectToAction("Index", "Home");
+                                ViewBag.Warning = true;
+                                message = "This email address has not yet been verified, please check your inbox and junk folder.";
                             }
                         }
                         else
                         {
-                            ViewBag.Warning = true;
-                            message = "This email address has not yet been verified, please check your inbox and junk folder.";
+                            message = "This account has been temporarily blocked, " +
+                                "the password has been entered incorrectly too many times.";
                         }
                     }
                     else
                     {
-                        message = "Invalid password and/or email provided";
+                        if(Session["AttemptFrom"] == null || (int)Session["AttemptFrom"] != ExisitingUser.UserID)
+                        {
+                            Session["AttemptFrom"] = ExisitingUser.UserID;
+                            Session["Attempts"] = 1; 
+                            message = "Invalid password and/or email provided";
+                        }
+                        else if ((int)Session["AttemptFrom"] == ExisitingUser.UserID)
+                        {
+                            int Attempts = (int)Session["Attempts"];
+                            if (Attempts < 2) {
+                                Attempts++;
+                                Session["Attempts"] = Attempts;
+                                message = "Invalid password and/or email provided";
+                            }
+                            else
+                            {
+                                ExisitingUser.Locked = true;
+                                ExisitingUser.ConfirmPassword = ExisitingUser.UserPassword;
+                                dbc.SaveChanges();
+                                message = "This account has been temporarily blocked, " +
+                                "the password has been entered incorrectly too many times.";
+                            }
+                        }
                     }
                 }
                 else
@@ -306,6 +337,7 @@ namespace Sparta_Online_Shop.Controllers
         {
             //Logout user from the web application and redirect to homepage
             FormsAuthentication.SignOut();
+            Session["LoggedIn"] = false;
             return RedirectToAction("Login", "Home");
         }
 

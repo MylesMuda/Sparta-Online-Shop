@@ -15,7 +15,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand" href="/" >
-                    <img style="max-height:40px;" src="~/Content/images/SpartaGlobal-Logo.png" />
+                    <img style="max-height:40px; margin:0 15px;" src="~/Content/images/SpartaGlobal-Logo.png" />
                 </a>
                 @*@Html.ActionLink("Sparta Online Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
@@ -44,9 +44,9 @@
                 @if (Request.IsAuthenticated)
                 {
                 <ul style="float:right; padding-right:4vmin" class="nav navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" style="text-align:right;">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account</a>
-                        <div class="dropdown-menu" style="font-size: 0.9em;">
+                        <div class="bg-dark dropdown-menu" style="font-size: 0.9em; border-radius:0; margin:0;">
                             @if (User.IsInRole("Admin"))
                             {
                                 <a href="~/Admin/" class="dropdown-item">Admin Home</a>
