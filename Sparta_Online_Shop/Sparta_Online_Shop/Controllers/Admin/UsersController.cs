@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Sparta_Online_Shop;
 
+// ReSharper disable once CheckNamespace
 namespace Sparta_Online_Shop.Controllers
 {
     public class UsersController : Controller
@@ -41,52 +39,17 @@ namespace Sparta_Online_Shop.Controllers
 
             foreach (var order in orders)
             {
-                List<OrderStatu> matchingOrderStatuses = db.OrderStatus
+                var matchingOrderStatuses = db.OrderStatus
                     .Where(orderStatus => orderStatus.OrderStatusID == order.OrderStatusID)
-                    .ToList()
-                    ;
-                foreach (var item in matchingOrderStatuses)
-                {
-                    orderStatuses.Add(item);
-                }
+                    .ToList();
+                orderStatuses.AddRange(matchingOrderStatuses);
             }
 
             userOrderStatusOrder.user = db.Users.Find(id);
             userOrderStatusOrder.orders = orders;
             userOrderStatusOrder.orderStatuses = orderStatuses;
 
-
-            if (userOrderStatusOrder == null)
-            {
-                return HttpNotFound();
-            }
-
             return View(userOrderStatusOrder);
-        }
-
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeName");
-            return View();
-        }
-
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserTypeID,FirstName,LastName,UserPassword,UserEmail,IsVerified,ActivationCode,LastLogin,Locked")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeName", user.UserTypeID);
-            return View(user);
         }
 
         // GET: Users/Edit/5
@@ -96,7 +59,7 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -120,32 +83,6 @@ namespace Sparta_Online_Shop.Controllers
             }
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeName", user.UserTypeID);
             return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

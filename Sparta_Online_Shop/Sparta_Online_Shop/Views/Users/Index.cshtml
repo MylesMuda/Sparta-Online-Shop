@@ -7,7 +7,7 @@
 <h2>Users</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="Users/Create">Create</a>
 </p>
 
 <table class="table">
@@ -67,15 +67,9 @@
                 @Html.DisplayFor(modelItem => item.Locked)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                <a href="/Users/Details/@item.UserID">Details</a> | 
+                <a href="/Users/Delete/@item.UserID">Delete</a>
             </td>
         </tr>
     }
 </table>
-
-<div>
-    <h2>@Html.ActionLink("Admin Home", "Index", "Admin")</h2>
-    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
-    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
-</div>

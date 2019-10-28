@@ -29,6 +29,28 @@
         <th></th>
     </tr>
 
+    <div>
+        <div>Product Description: @ViewBag.ProductDescription</div>
+        <div>Product Reviews: @ViewBag.ProductReview</div>
+        <div>Flag Reviews</div>
+    </div>
+
+    <div>
+        <h2>
+            <a href="/Users/Index">Users</a>
+        </h2>
+        <h2>
+            <a href="/Users/Index">Users</a>
+        </h2>
+        <h2>@Html.ActionLink("Stock Orders", "Index", "StockOrders")</h2>
+    </div>
+
+    <p>
+        <h2>
+            <a href="Create.cshtml">Create</a>
+        </h2>
+    </p>
+    <table class="table">
     @foreach (var item in Model)
     {
         <tr>
@@ -53,8 +75,29 @@
     }
 </table>
 
-<div>
-    <h2>@Html.ActionLink("Admin Home", "Index", "Admin")</h2>
-    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
-    <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
-</div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a href="/Products/Edit/@item.ProductID">Edit</a> |
+                    <a href="/Products/Details/@item.ProductID">Details</a> |
+                    <a href="/Products/Delete/@item.ProductID">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>

@@ -1,0 +1,80 @@
+﻿@model List<OrderPageModel>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Orders</title>
+</head>
+<body>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Order ID
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Order Date
+            </th>
+        </tr>
+
+        @foreach (var model in Model)
+        {
+            <tr>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Product Name
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Price Per Unit
+                        </th>
+                    </tr>
+
+                    @foreach (var orderDetail in model.orderDetails)
+                    {
+                        <tr>
+                            @Html.DisplayFor(modelItem => orderDetail.Product.ProductName)
+                        </tr>
+                        <tr>
+                            @Html.DisplayFor(modelItem => orderDetail.Quantity)
+                        </tr>
+                        <tr>
+                            @Html.DisplayFor(modelItem => orderDetail.ProductPrice)
+                        </tr>
+                    }
+                </table>
+                <td>
+                    @Html.DisplayFor(modelItem => model.order.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => model.orderStatus.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => $"{model.user.FirstName} {model.user.LastName}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => model.order.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => model.order.TotalCost)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+</body>
+</html>

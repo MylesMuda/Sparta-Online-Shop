@@ -114,7 +114,7 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            db.Products.Remove(product ?? throw new InvalidOperationException());
             db.SaveChanges();
             return RedirectToAction("Index");
         }

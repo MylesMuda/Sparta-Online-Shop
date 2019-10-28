@@ -75,7 +75,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.user.UserID }) |
+    @* @Html.ActionLink("Edit", "Edit", new { id = Model.user.UserID }) | *@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
@@ -119,9 +119,7 @@
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+                <a href="Users/OrderDetails/">Details</a> | <a href="Users/Delete">Delete</a>
             </td>
         </tr>
     }

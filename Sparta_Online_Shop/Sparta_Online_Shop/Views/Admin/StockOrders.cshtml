@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "StockOrders";
+}
+<style>
+
+</style>
+<h1>Order Stock</h1>
+
+<body>
+    <div>
+        <h2>Product Name:</h2>
+        <p>@ViewBag.ProductName</p>
+
+        <h2>Stock Left:</h2> 
+        <p>@ViewBag.StockLevel</p>
+
+        <h2>Order Amount:</h2>
+        <p>@ViewBag.SetStockLevel</p>
+        
+        <h2>Order Amount</h2>
+        <p>@Html.Editor("Stock")</p>
+    </div>
+</body>
+
+<div>
+    <h4>@Html.ActionLink("Index", "Index", "Admin")</h4>
+    <h4>@Html.ActionLink("Products", "Index", "Products")</h4>
+    <h4>@Html.ActionLink("Users", "Index", "Users")</h4>
+</div>

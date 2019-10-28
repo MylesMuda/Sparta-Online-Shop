@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Net;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Sparta_Online_Shop;
 
 namespace Sparta_Online_Shop.Controllers
 {
     public class AdminController : Controller
     {
-        private SpartaShopModel db = new SpartaShopModel();
-
         private int? totalSales = 0;
         private decimal? Profit = 0;
         private decimal? ProfitDay= 0;
         private decimal? ProfitMonth = 0;
         private decimal? ProfitYear = 0;
+        private string ProductName = "";
+        private decimal? StockLevel = 0;
+        private decimal? SetStockLevel = 10;
         public ActionResult Index()
         {
             using (var db = new SpartaShopModel())
@@ -66,9 +63,29 @@ namespace Sparta_Online_Shop.Controllers
 
             return View();
         }
+
         public ActionResult StockOrders()
+        {
+            using(var db = new SpartaShopModel())
+            {
+                var products = new List<Product>();
+                products = db.Products.ToList();
+
+                foreach(Product p in products)
+                {
+                    ProductName = p.ProductName;
+                    StockLevel = p.Stock;
+                }
+            }
+            ViewBag.ProductName = ProductName;
+            ViewBag.StockLevel = StockLevel;
+            return View();
+        }
+
+        public ActionResult Users()
         {
             return View();
         }
+
     }
 }

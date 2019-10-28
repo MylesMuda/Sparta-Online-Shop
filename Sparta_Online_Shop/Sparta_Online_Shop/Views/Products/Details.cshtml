@@ -44,8 +44,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.product.ProductID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/Products/Edit/@Model.product.ProductID">Edit</a>
+    <a href="/Products/Index">Back to List</a>
 </p>
 
 <h2>Reviews</h2>
@@ -80,11 +80,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfReview)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
             </td>
         </tr>
     }
