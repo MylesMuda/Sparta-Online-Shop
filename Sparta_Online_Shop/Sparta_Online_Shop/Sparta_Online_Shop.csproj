@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
@@ -59,6 +59,9 @@
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -200,10 +203,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Crypto.cs" />
+    <Compile Include="Controllers\Admin\StockOrdersController.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\ProductsController.cs" />
+    <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketItem.cs" />
     <Compile Include="Controllers\AccountManagementController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Creator.cs" />
@@ -213,9 +219,12 @@
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderPageModel.cs" />
     <Compile Include="Models\OrderStatu.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\ProductReview.cs" />
+    <Compile Include="Models\UserOrderStatusOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SpartaShopModel.cs" />
@@ -232,6 +241,88 @@
     <Content Include="Content\images\SpartaGlobal-Logo.png" />
     <Content Include="Content\images\SpartaLogin.png" />
     <Content Include="Content\SpartaOnlineCss.css" />
+    <Content Include="Content\css\addons\datatables-select.css" />
+    <Content Include="Content\css\addons\datatables-select.min.css" />
+    <Content Include="Content\css\addons\datatables.css" />
+    <Content Include="Content\css\addons\datatables.min.css" />
+    <Content Include="Content\css\addons\directives.css" />
+    <Content Include="Content\css\addons\directives.min.css" />
+    <Content Include="Content\css\addons\flag.css" />
+    <Content Include="Content\css\addons\flag.min.css" />
+    <Content Include="Content\css\addons\rating.css" />
+    <Content Include="Content\css\addons\rating.min.css" />
+    <Content Include="Content\css\addons\zmd.hierarchical-display.css" />
+    <Content Include="Content\css\addons\zmd.hierarchical-display.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\mdb.css" />
+    <Content Include="Content\css\mdb.lite.css" />
+    <Content Include="Content\css\mdb.lite.min.css" />
+    <Content Include="Content\css\mdb.min.css" />
+    <Content Include="Content\css\modules\animations-extended.css" />
+    <Content Include="Content\css\modules\animations-extended.min.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style.min.css" />
+    <Content Include="Content\images\Brownies_1.jpg" />
+    <Content Include="Content\images\Fuat_1.jpg" />
+    <Content Include="Content\images\KeyChain_1.jpg" />
+    <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\Mary_1.jpg" />
+    <Content Include="Content\images\Mary_2.jpg" />
+    <Content Include="Content\images\Miguel_1.jpg" />
+    <Content Include="Content\images\Myles_1%28happy%29.jpg" />
+    <Content Include="Content\images\Myles_2%28sad%29.jpg" />
+    <Content Include="Content\images\Myles_3%28happy%29.jpg" />
+    <Content Include="Content\images\Notepad_1.jpg" />
+    <Content Include="Content\images\team1.PNG" />
+    <Content Include="Content\images\Umbrella_1.jpg" />
+    <Content Include="Content\img\flags.png" />
+    <Content Include="Content\img\lightbox\default-skin.png" />
+    <Content Include="Content\img\lightbox\default-skin.svg" />
+    <Content Include="Content\img\lightbox\preloader.gif" />
+    <Content Include="Content\img\overlays\01.png" />
+    <Content Include="Content\img\overlays\02.png" />
+    <Content Include="Content\img\overlays\03.png" />
+    <Content Include="Content\img\overlays\04.png" />
+    <Content Include="Content\img\overlays\05.png" />
+    <Content Include="Content\img\overlays\06.png" />
+    <Content Include="Content\img\overlays\07.png" />
+    <Content Include="Content\img\overlays\08.png" />
+    <Content Include="Content\img\overlays\09.png" />
+    <Content Include="Content\img\sample.jpg" />
+    <Content Include="Content\img\svg\arrow_left.svg" />
+    <Content Include="Content\img\svg\arrow_right.svg" />
+    <Content Include="Content\img\svg\flags.png" />
+    <Content Include="Content\js\addons\datatables-select.js" />
+    <Content Include="Content\js\addons\datatables-select.min.js" />
+    <Content Include="Content\js\addons\datatables.js" />
+    <Content Include="Content\js\addons\datatables.min.js" />
+    <Content Include="Content\js\addons\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\js\addons\jquery.zmd.hierarchical-display.js" />
+    <Content Include="Content\js\addons\jquery.zmd.hierarchical-display.min.js" />
+    <Content Include="Content\js\addons\masonry.pkgd.min.js" />
+    <Content Include="Content\js\addons\progressBar.js" />
+    <Content Include="Content\js\addons\progressBar.min.js" />
+    <Content Include="Content\js\addons\rating.js" />
+    <Content Include="Content\js\addons\rating.min.js" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery-3.4.1.min.js" />
+    <Content Include="Content\js\mdb.js" />
+    <Content Include="Content\js\mdb.min.js" />
+    <Content Include="Content\js\modules\bs-custom-file-input.js" />
+    <Content Include="Content\js\modules\chart.js" />
+    <Content Include="Content\js\modules\default-file-input.js" />
+    <Content Include="Content\js\modules\enhanced-modals.js" />
+    <Content Include="Content\js\modules\forms-free.js" />
+    <Content Include="Content\js\modules\jquery.easing.js" />
+    <Content Include="Content\js\modules\scrolling-navbar.js" />
+    <Content Include="Content\js\modules\treeview.js" />
+    <Content Include="Content\js\modules\velocity.js" />
+    <Content Include="Content\js\modules\velocity.min.js" />
+    <Content Include="Content\js\modules\waves.js" />
+    <Content Include="Content\js\modules\wow.js" />
+    <Content Include="Content\js\popper.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -315,6 +406,17 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\VerifyAccount.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\StockOrders\Index.cshtml" />
+    <Content Include="Views\StockOrders\Edit.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

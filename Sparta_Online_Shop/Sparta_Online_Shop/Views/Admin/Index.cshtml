@@ -1,7 +1,39 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Overview";
+    var totalSales = (int?)ViewBag.TotalSales;
+    var income = (decimal?)ViewBag.Income;
+    var incomeDay = (decimal?)ViewBag.IncomeDay;
+    var incomeMonth = (decimal?)ViewBag.IncomeMonth;
+    var incomeYear = (decimal?)ViewBag.IncomeYear;
 }
+<style>
+</style>
+<h1>Overview</h1>
+<p>This is the admin page</p>
 
-<h2>Index</h2>
+<body>
+    <div>
+        <h2>Total Sales</h2>
+        <p>@totalSales.Value</p>
+    </div>
+    <div>
+        <h3>Total Income:</h3>
+        <p>£@income.Value</p>
 
+        <h4>Day:</h4>
+        <p>£@incomeDay.Value</p>
+
+        <h4>Month:</h4>
+        <p>£@incomeMonth.Value</p>
+
+        <h4>Year:</h4>
+        <p>£@incomeYear.Value</p>
+    </div>
+</body>
+
+<div>
+    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
+    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
+    <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
+</div>

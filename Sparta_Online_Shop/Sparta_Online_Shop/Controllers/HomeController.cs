@@ -387,5 +387,11 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.Status = Status;
             return View();
         }
+
+        public ActionResult Credits()
+        {
+            //ViewBag.Message = "Your TermsAndConditions page.";
+            return View();
+        }
     }
 }

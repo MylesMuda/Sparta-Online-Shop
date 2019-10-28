@@ -1,0 +1,86 @@
+﻿@model Sparta_Online_Shop.ProductReview
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.product.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.ProductDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.ProductDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="/Products/Edit/@Model.product.ProductID">Edit</a>
+    <a href="/Products/Index">Back to List</a>
+</p>
+
+<h2>Reviews</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            User's Name
+        </th>
+        <th>
+            Rating
+        </th>
+        <th>
+            ReviewText
+        </th>
+        <th>
+            Date Of Review
+        </th>
+    </tr>
+
+    @foreach (var item in Model.reviews)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfReview)
+            </td>
+        </tr>
+    }
+</table>
