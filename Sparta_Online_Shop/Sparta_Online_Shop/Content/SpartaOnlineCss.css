@@ -1,0 +1,190 @@
+body {
+    font-family: 'Helvetica';
+    max-height: 100vmin;
+    background: #01181b;
+}
+
+.nav a:hover {
+    color: #e33661 !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #807185 !important;
+    opacity: 0.6;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #807185 !important;
+    opacity: 0.6;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #807185 !important;
+    opacity: 0.6;
+}
+
+.nav > li > a {
+    color: #eee !important;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.nav > #Logout > li:hover a {
+    color: #fa7878 !important;
+}
+
+.nav > #Login:hover a,
+.nav > #SignUp:hover a {
+    color: #74f2b7 !important;
+}
+
+#LogoutLink {
+    display: block;
+    font-weight: bold;
+    color: #f38888
+}
+
+#LogoutLink:hover {
+    color: #ef2727 !important;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle::after {
+    transition: transform 0.15s linear;
+}
+
+.dropdown:hover .dropdown-toggle::after,
+.show.dropdown .dropdown-toggle::after {
+    transform: translateY(3px);
+}
+
+.dropdown:hover .dropdown-toggle,
+.show.dropdown .dropdown-toggle {
+    color: #e33661 !important;
+}
+
+.dropdown-menu{
+    right:0;
+    left:initial;
+}
+
+.dropdown-item {
+    color: #f6f9fc;
+}
+
+.dropdown-item:hover{
+    background-color: transparent !important;
+}
+
+.dropdown-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(227, 54, 97, 0.75);
+    background: linear-gradient(to right, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -moz-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -webkit-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -o-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+    background: -ms-linear-gradient(left, rgba(101, 56, 120, 0), rgba(227, 54, 97, 0.75), rgba(101, 56, 120, 0));
+}
+
+#LoginForm form,
+#SignUpForm form {
+    width: fit-content;
+    background: #01181b;
+    padding: 1vmin 2vmin;
+    margin: 10vmin auto;
+    box-shadow: 0 0px 10px #e33661;
+    overflow: hidden;
+    animation: Appear 0.5s linear;
+    color: #FFF;
+    min-width: 350px;
+    border-radius: 5px;
+    border: 1px solid #e33661;
+}
+
+#LoginForm form-horizontal form-group:nth-child(1),
+#SignUpForm form-horizontal form-group:nth-child(1) {
+    margin-top: 20px;
+}
+
+#LoginForm label,
+#SignUpForm label {
+    min-width: 60px;
+}
+
+#LoginForm .check > label,
+#SignUpForm .check > label {
+    min-width: 127px;
+}
+
+#LoginForm input,
+#SignUpForm input {
+    max-width: 100%;
+    font-weight: bold;
+    color: #47354f;
+}
+
+#LoginForm input[type="submit"],
+#SignUpForm input[type="submit"] {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: #e33661;
+    border: 1px solid #fa6f91;
+}
+
+#LoginForm input[type="submit"]:hover,
+#SignUpForm input[type="submit"]:hover {
+    background-color: #d53a60;
+    border: 1px solid #fe3868;
+    color: #653878;
+}
+
+#LoginForm input[type="submit"]:active,
+#LoginForm input[type="submit"]:focus,
+#SignUpForm input[type="submit"]:active,
+#SignUpForm input[type="submit"]:focus {
+    background-color: #de305b !important;
+    border: 1px solid #ea2556 !important;
+    color: #653878;
+}
+
+#LoginForm .AccountHelperLinks {
+    clear: both;
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.text-danger {
+    width: 100%;
+    display: block;
+    background-color: #ff5959;
+    border-radius: 3px;
+    color: #7c0b0b !important;
+    font-size: 0.9em;
+    padding: 0 10px;
+}
+
+@media only screen and (max-width: 750px) {
+    #LoginForm form,
+    #SignUpForm form {
+        min-width: 350px;
+        margin: 10vmin auto !important;
+    }
+}
+
+@keyframes Appear {
+    0% {
+        opacity: 0;
+        margin-top: 13vmin;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 10vmin;
+    }
+}

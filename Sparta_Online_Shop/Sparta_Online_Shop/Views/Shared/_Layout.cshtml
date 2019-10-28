@@ -3,23 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>SOS - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="/" >
+                    <img style="max-height:40px; margin:0 15px;" src="~/Content/images/SpartaGlobal-Logo.png" />
+                </a>
+                @*@Html.ActionLink("Sparta Online Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div class="navbar-collapse collapse w-100" id="navbarSupportedContent">
+                @*<ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -31,7 +32,7 @@
                     <li>@Html.ActionLink("Search Results", "SearchResults", "Home")</li>
                     <li>@Html.ActionLink("Sign Up", "SignUp", "Home")</li>
                     <li>@Html.ActionLink("Terms & Conditions", "TermsAndConditions", "Home")</li>
-                    
+
                     <li>@Html.ActionLink("Account Management", "Index", "AccountManagement")</li>
                     <li>@Html.ActionLink("Last Orders", "LastOrders", "AccountManagement")</li>
 
@@ -39,11 +40,49 @@
 
                     <li>@Html.ActionLink("Basket", "Basket", "Checkout")</li>
                     <li>@Html.ActionLink("Checkout", "Checkout", "Checkout")</li>
+                </ul>*@
+                @if (Request.IsAuthenticated)
+                {
+                <ul style="float:right; padding-right:4vmin" class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown" style="text-align:right;">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account</a>
+                        <div class="bg-dark dropdown-menu" style="font-size: 0.9em; border-radius:0; margin:0;">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a href="~/Admin/" class="dropdown-item">Admin Home</a>
+                            }
+                            else
+                            {
+                                <a href="~/AccountManagement/" class="dropdown-item">Account Home</a>
+                                <a href="~/AccountManagement/LastOrders/" class="dropdown-item">Orders</a>
+                            }
+                            <div class="dropdown-divider"></div>
+                            @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a id="LogoutLink" class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            }
+                        </div>
+                    </li>
+                    @*<li class="nav-item">
+                        @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <a style="height: 50px;vertical-align: super; display: block;line-height: 50px;" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                        }
+                    </li>*@
                 </ul>
+                }
+
+                @if (!Request.IsAuthenticated)
+                {
+                    <ul style="float:right; padding-right:4vmin" class="nav navbar-nav ml-auto" >
+                        <li id="Login" class="nav-item" >@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li id="SignUp" class="nav-item" >@Html.ActionLink("Sign up", "SignUp", "Home")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="padding:20px" >
         @RenderBody()
         <hr />
         <footer>
