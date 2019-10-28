@@ -251,6 +251,7 @@
     <Content Include="Content\images\Myles_2%28sad%29.jpg" />
     <Content Include="Content\images\Myles_3%28happy%29.jpg" />
     <Content Include="Content\images\Notepad_1.jpg" />
+    <Content Include="Content\images\team1.PNG" />
     <Content Include="Content\images\Umbrella_1.jpg" />
     <Content Include="Content\img\flags.png" />
     <Content Include="Content\img\lightbox\default-skin.png" />
@@ -343,6 +344,7 @@
     <Content Include="Views\Home\FAQs.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
