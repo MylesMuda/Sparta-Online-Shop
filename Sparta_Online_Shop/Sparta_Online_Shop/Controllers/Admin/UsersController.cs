@@ -12,6 +12,7 @@ namespace Sparta_Online_Shop.Controllers
     {
         private SpartaShopModel db = new SpartaShopModel();
 
+        [Authorize(Roles = "Admin")]
         // GET: Users
         public ActionResult Index()
         {
@@ -19,6 +20,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(users.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
@@ -52,6 +54,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(userOrderStatusOrder);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -71,6 +74,7 @@ namespace Sparta_Online_Shop.Controllers
         // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,UserTypeID,FirstName,LastName,UserPassword,UserEmail,IsVerified,ActivationCode,LastLogin,Locked")] User user)

@@ -14,12 +14,14 @@ namespace Sparta_Online_Shop.Controllers
     {
         private SpartaShopModel db = new SpartaShopModel();
 
+        [Authorize(Roles = "Admin")]
         // GET: Products
         public ActionResult Index()
         {
             return View(db.Products.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,15 +41,18 @@ namespace Sparta_Online_Shop.Controllers
             return View(productReview);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Products/Create
         public ActionResult Create()
         {
             return View();
         }
 
+
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")] Product product)
@@ -62,6 +67,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -80,6 +86,7 @@ namespace Sparta_Online_Shop.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")] Product product)
@@ -93,6 +100,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -108,6 +116,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
