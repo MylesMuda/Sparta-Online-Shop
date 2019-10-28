@@ -350,5 +350,42 @@ namespace Sparta_Online_Shop.Controllers
             }
             return false;
         }
+
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool Status = false;
+            if (id != null)
+            {
+                using (var dbc = new SpartaShopModel())
+                {
+                    dbc.Configuration.ValidateOnSaveEnabled = false;
+
+                    //Find user with the matching activation code
+                    var userToValidate = dbc.Users.Where(u => u.ActivationCode == new Guid(id).ToString()).FirstOrDefault();
+
+                    //if a user is found verify their account otherwise send error message to the user as invalid activation attempt
+                    if (userToValidate != null)
+                    {
+                        userToValidate.IsVerified = true;
+                        dbc.SaveChanges();
+                        Status = true;
+                    }
+                    else
+                    {
+                        ViewBag.message = "Verification failed, the activation key does not exist";
+                    }
+                }
+            }
+            else
+            {
+                //If user somehow gets to this page directly, redirect them to the home page
+                ViewBag.message = "Invalid Request";
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Status = Status;
+            return View();
+        }
     }
 }
