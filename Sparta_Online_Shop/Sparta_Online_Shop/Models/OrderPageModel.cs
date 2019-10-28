@@ -7,7 +7,7 @@ namespace Sparta_Online_Shop
         public Order order { get; set; }
         public User user { get; set; }
         public OrderStatu orderStatus { get; set; }
-        public List<OrderDetail> orderDetails { get; set; }
-        public List<Product> orderProducts { get; set; }
+        public IEnumerable<OrderDetail> orderDetails { get; set; }
+        public IEnumerable<Product> orderProducts { get; set; }
     }
 }
