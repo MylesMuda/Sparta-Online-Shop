@@ -4,15 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div>
-    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
-    <h2>@Html.ActionLink("Stock Orders", "StockOrders", "Admin")</h2>
-    <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
-</div>
-
 <h2>Users</h2>
-
-
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -81,3 +73,9 @@
         </tr>
     }
 </table>
+
+<div>
+    <h2>@Html.ActionLink("Admin Home", "Index", "Admin")</h2>
+    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
+    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
+</div>

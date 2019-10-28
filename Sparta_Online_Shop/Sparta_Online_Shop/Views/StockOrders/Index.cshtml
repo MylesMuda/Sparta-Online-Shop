@@ -4,14 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<style>
-</style>
+<h2>Update Stock</h2>
 
-<h1>Products</h1>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -22,9 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
     </tr>
@@ -42,19 +33,14 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID })
             </td>
         </tr>
     }
-</table>
 
+</table>
 <div>
     <h2>@Html.ActionLink("Admin Home", "Index", "Admin")</h2>
-    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
+    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
     <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
 </div>
