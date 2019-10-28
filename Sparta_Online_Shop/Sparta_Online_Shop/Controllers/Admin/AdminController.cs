@@ -15,6 +15,8 @@ namespace Sparta_Online_Shop.Controllers
         private string _productName = "";
         private decimal? _stockLevel = 0;
         private decimal? _setStockLevel = 10;
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             using (var db = new SpartaShopModel())
@@ -59,6 +61,7 @@ namespace Sparta_Online_Shop.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Orders()
         {
             var ordersToAdd = new List<OrderPageModel>();

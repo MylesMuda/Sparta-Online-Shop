@@ -23,17 +23,20 @@ body {
     opacity: 0.6;
 }
 
-.nav > li > a {
-    color: #eee !important;
-    font-weight: bold;
+.nav > li > a,
+.navbar-nav > li > a {
+    color: #fff !important;
     text-decoration: none;
     margin: 0 5px;
 }
 
+.navbar-nav > #Logout > li:hover a,
 .nav > #Logout > li:hover a {
     color: #fa7878 !important;
 }
 
+.navbar-nav > #Login:hover a,
+.navbar-nav > #SignUp:hover a,
 .nav > #Login:hover a,
 .nav > #SignUp:hover a {
     color: #74f2b7 !important;

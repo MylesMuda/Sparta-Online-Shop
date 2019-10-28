@@ -24,6 +24,15 @@ namespace Sparta_Online_Shop.Controllers
             }
             return View(products);
         }
+        public ActionResult Index2()
+        {
+            List<Product> products = new List<Product>();
+            using(var dbc = new SpartaShopModel())
+            {
+                products = dbc.Products.ToList();
+            }
+            return View(products);
+        }
 
         public ActionResult About()
         {
