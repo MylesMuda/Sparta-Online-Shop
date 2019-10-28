@@ -80,5 +80,12 @@ namespace Sparta_Online_Shop.Controllers
 
             return View();
         }
+
+        public ActionResult Credits()
+        {
+            //ViewBag.Message = "Your TermsAndConditions page.";
+
+            return View();
+        }
     }
 }
