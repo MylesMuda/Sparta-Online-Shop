@@ -125,8 +125,8 @@ namespace Sparta_Online_Shop.Controllers
 
                     orderToAdd.orderProducts = orderToAdd.orderDetails.
                         Select(detail => detail.Product).
-                        ToList();;
-                    
+                        ToList();
+
                     orderToAdd.orderStatus = order.OrderStatu;
                     orderToAdd.user = order.User;
                     ordersToAdd.Add(orderToAdd);
