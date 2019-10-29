@@ -31,15 +31,8 @@
             onApprove: function (data, actions) {
                 // Capture the funds from the transaction
                 return actions.order.capture().then(function (details) {
+
                     // Call your server to save the transaction
-
-                    // Show a success message to your buyer
-                    //var msg = 'thank you for your cooporation ' + details.payer.name.given_name;
-                    //var theDiv = document.getElementById("transaction-result");
-                    //theDiv.innerHTML += msg;
-
-                    //DoPost(data.orderID);
-
                     return fetch('/Checkout/PaypalPost', {
                         method: 'post',
                         redirect: 'follow',
@@ -69,3 +62,9 @@
     <input type="text" id="Amount" name="Amount" value="" />
     <input type="submit" value="Checkout" />
 }*@
+
+
+@*// Show a success message to your buyer
+//var msg = 'thank you for your cooporation ' + details.payer.name.given_name;
+//var theDiv = document.getElementById("transaction-result");
+//theDiv.innerHTML += msg;*@

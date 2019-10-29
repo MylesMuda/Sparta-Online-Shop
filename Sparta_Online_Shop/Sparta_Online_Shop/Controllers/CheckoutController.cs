@@ -26,6 +26,8 @@ namespace Sparta_Online_Shop.Controllers
 
         public ActionResult CheckoutSuccessful()
         {
+            //TODO: clear basket in database
+
             return View();
         }
 
@@ -41,15 +43,12 @@ namespace Sparta_Online_Shop.Controllers
                 return View("Checkout");
             }
 
-            return View("CheckoutSuccessful");
+            return View("CheckoutError");
         }
 
         [HttpPost]
         public ActionResult PaypalPost(string orderID)
         {
-            //clear basket if successful
-
-            ViewBag.Message = orderID;
             Session["orderID"] = orderID;
 
             // return View("CheckoutSuccessful");
