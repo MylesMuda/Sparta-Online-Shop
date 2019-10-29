@@ -32,14 +32,20 @@
         .carousel {
             height: 100vh;
         }
+        
+        .card > .view{
+            height:350px;
+        }
+
+        .card-body{
+            min-height: 200px;
+        }
     }
 </style>
 
     <!-- Navbar -->
     <!--Carousel Wrapper-->
     <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
-
-
 
         <!--Indicators-->
         <ol class="carousel-indicators">
@@ -48,6 +54,7 @@
             <li data-target="#carousel-example-1z" data-slide-to="2"></li>
         </ol>
         <!--/.Indicators-->
+
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
 
@@ -130,8 +137,6 @@
                                 <strong>A comfortable hoodie</strong>
                             </p>
 
-
-
                             <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">
                                 More Info
                                 <!-- <i class="fas fa-graduation-cap ml-2"></i> -->
@@ -148,6 +153,7 @@
 
         </div>
         <!--/.Slides-->
+
         <!--Controls-->
         <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -574,7 +580,7 @@
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="~/Content/js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>*@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
     <!-- Initializations -->

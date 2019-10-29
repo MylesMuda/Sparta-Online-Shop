@@ -24,15 +24,6 @@ namespace Sparta_Online_Shop.Controllers
             }
             return View(products);
         }
-        public ActionResult Index2()
-        {
-            List<Product> products = new List<Product>();
-            using(var dbc = new SpartaShopModel())
-            {
-                products = dbc.Products.ToList();
-            }
-            return View(products);
-        }
 
         public ActionResult About()
         {
@@ -66,12 +57,38 @@ namespace Sparta_Online_Shop.Controllers
 
             return View();
         }
-        public ActionResult ProductPage()
+        
+        [HttpGet]
+        public ActionResult Products(int? id)
         {
-            ViewBag.Message = "Your ProductPage page.";
+            List<Product> products = new List<Product>();
+            if (id == null)
+            {
+                using (var dbc = new SpartaShopModel())
+                {
+                    products = dbc.Products.ToList();
+                }
+            }
+            else
+            {
+                using (var dbc = new SpartaShopModel())
+                {
+                    Product product = dbc.Products.Find(id);
 
-            return View();
+                    if (product != null)
+                    {
+                        products.Add(product);
+                    }
+                    else
+                    {
+                        products = null;
+                    }
+                }
+            }
+
+            return View(products);
         }
+
         public ActionResult SearchResults()
         {
             ViewBag.Message = "Your SearchResults page.";
@@ -400,7 +417,12 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult Credits()
         {
             //ViewBag.Message = "Your TermsAndConditions page.";
-            return View();
+            List<Creator> creators = new List<Creator>();
+            using(var dbc = new SpartaShopModel())
+            {
+                creators = dbc.Creators.ToList();
+            }
+            return View(creators);
         }
     }
 }

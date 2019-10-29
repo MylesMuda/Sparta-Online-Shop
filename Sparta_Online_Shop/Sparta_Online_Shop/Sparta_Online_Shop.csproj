@@ -242,6 +242,7 @@
     <Content Include="Content\images\icons\favicon.png" />
     <Content Include="Content\images\SpartaGlobal-Logo.png" />
     <Content Include="Content\images\SpartaLogin.png" />
+    <Content Include="Content\images\team2.PNG" />
     <Content Include="Content\SpartaOnlineCss.css" />
     <Content Include="Content\css\addons\datatables-select.css" />
     <Content Include="Content\css\addons\datatables-select.min.css" />
@@ -388,7 +389,7 @@
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
     <Content Include="Views\Home\SearchResults.cshtml" />
-    <Content Include="Views\Home\ProductPage.cshtml" />
+    <Content Include="Views\Home\ProductPageOld.cshtml" />
     <Content Include="Views\Checkout\Basket.cshtml" />
     <Content Include="Views\AccountManagement\Index.cshtml" />
     <Content Include="Views\AccountManagement\LastOrders.cshtml" />
@@ -417,8 +418,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\StockOrders\Index.cshtml" />
     <Content Include="Views\StockOrders\Edit.cshtml" />
-    <Content Include="Views\Home\Credits.cshtml" />
+    <Content Include="Views\Home\CreditsOld.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
+    <Content Include="Views\Home\ContactOld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
