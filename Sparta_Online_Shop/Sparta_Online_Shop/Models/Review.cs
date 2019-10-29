@@ -19,6 +19,8 @@ namespace Sparta_Online_Shop
         public string ReviewText { get; set; }
 
         public DateTime DateOfReview { get; set; }
+        
+        public bool? Flagged { get; set; }
 
         public virtual Product Product { get; set; }
 
