@@ -1,0 +1,236 @@
+﻿@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sparta Online Shop</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="~/Content/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="~/Content/css/style.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #36393F;">
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light spartaPurple scrolling-navbar">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="home-page.html" target="_blank">
+                <img src="~/Content/images/Logo.png" alt="" style="width:100px;height:45px;">
+                <!-- <strong class="spartaPink-text">Sparta Store</strong> -->
+            </a>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link waves-effect" href="~/Home" style="color: white;">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="https://www.spartaglobal.com/?gclid=CjwKCAjwusrtBRBmEiwAGBPgE_YW0DMlGuHtcL5auN4C3PX2yba8Q0yU8RbrRKl8c3lYIlt7oQN4JxoCab0QAvD_BwE" target="_blank" style="color: white;">Website</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" style="color: white;">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Contact" class="nav-link waves-effect" style="color: white;">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Credits" class="nav-link waves-effect" style="color: white;">Credits</a>
+                    </li>
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect">
+                            <!-- <span class="badge red z-depth-1 mr-1"> 1 </span> -->
+                            <i class="fas fa-shopping-cart" style="color: white;"></i>
+                            <span class="clearfix d-none d-sm-inline-block" style="color: white;"> Cart </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.facebook.com/spartaglobal" class="nav-link waves-effect" target="_blank">
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+                    <!-- Main product image -->
+                    <img src="~/Content/images/Umbrella_1.jpg" class="img-fluid" alt="" style="width: 80%;">
+
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Content-->
+                    <div class="p-4">
+
+                        <div class="mb-3">
+                            <a href="">
+                                <span class="badge red mr-1">Bestseller</span>
+                            </a>
+                            <a>
+                                <p style="font-size: 2em; color: white;">Product Name</p>
+                            </a>
+                        </div>
+
+                        <p class="lead">
+                            <span class="mr-1">
+                                <del style="color: white;">$999</del>
+                            </span>
+                            <span style="color: white;">$9999</span>
+                        </p>
+
+                        <p class="lead font-weight-bold" style="color: white;">Description</p>
+
+                        <p style="color: white;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
+                            sint voluptatibus!
+                            Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.
+                        </p>
+
+                        <form class="d-flex justify-content-left">
+                            <!-- Default input -->
+                            <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                            <button class="btn btn-primary btn-md my-0 p" type="submit">
+                                Add to cart
+                                <i class="fas fa-shopping-cart ml-1"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
+                    <!--Content-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <hr>
+
+            <div>
+                <a style="color: white;">NO REFUNDS</a>
+            </div>
+
+        </div>
+    </main>
+    <!--Main layout-->
+    <!--Footer-->
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+        <!--Call to action-->
+        <!-- <div class="pt-4">
+          <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank"
+            role="button">Download MDB
+            <i class="fas fa-download ml-2"></i>
+          </a>
+          <a class="btn btn-outline-white" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">Start
+            free tutorial
+            <i class="fas fa-graduation-cap ml-2"></i>
+          </a>
+        </div> -->
+        <!--/.Call to action-->
+
+        <hr class="my-4">
+
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="https://www.facebook.com/spartaglobal/" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+
+            <!-- <a href="https://twitter.com/MDBootstrap" target="_blank">
+              <i class="fab fa-twitter mr-3"></i>
+            </a> -->
+
+            <a href="https://www.youtube.com/channel/UCLL-3SO5bUE1q6JRgFzjBrA/featured" target="_blank">
+                <i class="fab fa-youtube mr-3"></i>
+            </a>
+
+            <!-- <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+              <i class="fab fa-google-plus-g mr-3"></i>
+            </a> -->
+            <!-- <a href="https://dribbble.com/mdbootstrap" target="_blank">
+              <i class="fab fa-dribbble mr-3"></i>
+            </a>
+
+            <a href="https://pinterest.com/mdbootstrap" target="_blank">
+              <i class="fab fa-pinterest mr-3"></i>
+            </a> -->
+
+            <a href="https://github.com/MylesMuda/Sparta-Online-Shop" target="_blank">
+                <i class="fab fa-github mr-3"></i>
+            </a>
+
+            <!-- <a href="http://codepen.io/mdbootstrap/" target="_blank">
+              <i class="fab fa-codepen mr-3"></i>
+            </a> -->
+        </div>
+        <!-- Social icons -->
+        <!--Copyright-->
+        <div class="footer-copyright py-3" id="#section2">
+            © 2019 Copyright
+            <a> Engineering 41 </a>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="~/Content/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+    </script>
+</body>
+
+</html>

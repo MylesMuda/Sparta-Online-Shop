@@ -3,54 +3,123 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.png" />
+    <title>Sparta Online Store - @ViewBag.Title</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light spartaPurple scrolling-navbar">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("FAQs", "FAQs", "Home")</li>
-                    <li>@Html.ActionLink("Forgot Password", "ForgotPassword", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                    <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")</li>
-                    <li>@Html.ActionLink("Product Page", "ProductPage", "Home")</li>
-                    <li>@Html.ActionLink("Search Results", "SearchResults", "Home")</li>
-                    <li>@Html.ActionLink("Sign Up", "SignUp", "Home")</li>
-                    <li>@Html.ActionLink("Terms & Conditions", "TermsAndConditions", "Home")</li>
-                    
-                    <li>@Html.ActionLink("Account Management", "Index", "AccountManagement")</li>
-                    <li>@Html.ActionLink("Last Orders", "LastOrders", "AccountManagement")</li>
 
-                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="/" >
+                <img src="~/Content/images/Logo.png" alt="" style="width:100px;height:45px;">
+                <!-- <strong class="spartaPink-text">Sparta Store</strong> -->
+            </a>
 
-                    <li>@Html.ActionLink("Basket", "Basket", "Checkout")</li>
-                    <li>@Html.ActionLink("Checkout", "Checkout", "Checkout")</li>
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="~/Home" style="color: white;">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Products" class="nav-link waves-effect" style="color: white;">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.spartaglobal.com/" target="_blank" class="nav-link waves-effect" style="color: white;">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Contact" class="nav-link waves-effect" style="color: white;">Contact</a>
+                    </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect">
+                            <!-- <span class="badge red z-depth-1 mr-1"> 1 </span> -->
+                            <i class="fas fa-shopping-cart" style="color: white;"></i>
+                            <span class="clearfix d-none d-sm-inline-block" style="color: white;"> Cart </span>
+                        </a>
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown" style="text-align:right;">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account</a>
+                            <div class="bg-dark dropdown-menu" style="font-size: 0.9em; width:150px; border-radius:0; margin:0;">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="~/Admin/" class="dropdown-item">Admin Home</a>
+                                }
+                                else
+                                {
+                                    <a href="~/AccountManagement/" class="dropdown-item">Account Home</a>
+                                    <a href="~/AccountManagement/LastOrders/" class="dropdown-item">Orders</a>
+                                }
+                                <div class="dropdown-divider"></div>
+                                @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    <a id="LogoutLink" class="nav-link dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                                }
+                            </div>
+                        </li>
+                    }
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li id="Login" class="nav-link">@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li id="SignUp" class="nav-link">@Html.ActionLink("Sign up", "SignUp", "Home")</li>
+                    }
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    @*<div class="container body-content" style="padding:20px">
+
+    </div>*@
+    @RenderBody()
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+        <hr class="my-4">
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="https://www.facebook.com/spartaglobal/" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+            <a href="https://www.youtube.com/channel/UCLL-3SO5bUE1q6JRgFzjBrA/featured" target="_blank">
+                <i class="fab fa-youtube mr-3"></i>
+            </a>
+
+            <a href="https://github.com/MylesMuda/Sparta-Online-Shop" target="_blank">
+                <i class="fab fa-github mr-3"></i>
+            </a>
+        </div>
+        <!-- Social icons -->
+        <!--Copyright-->
+        <div class="footer-copyright py-3" id="#section2">
+            &copy; @DateTime.Now.Year Copyright
+            <a href="https://www.spartaglobal.com/" target="_blank" style="color: white;">Company Website</a> | 
+            <a href="/Home/Credits/" target="_blank"> Engineering 41 </a>
+        </div>
+        <!--/.Copyright-->
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

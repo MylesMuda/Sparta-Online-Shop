@@ -24,6 +24,9 @@ namespace Sparta_Online_Shop
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/css/style.min.css",
+                      "~/Content/css/mdb.min.css",
+                      "~/Content/SpartaOnlineCss.css",
                       "~/Content/site.css"));
         }
     }

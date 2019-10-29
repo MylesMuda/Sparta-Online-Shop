@@ -1,7 +1,107 @@
-﻿
+﻿@model Sparta_Online_Shop.User
+
 @{
     ViewBag.Title = "SignUp";
 }
 
-<h2>SignUp</h2>
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    if (ViewBag.Message != null)
+    {
+        <div style="margin:50px;" class="alert alert-success">
+            <strong>Success!</strong>@ViewBag.Message
+        </div>
+    }
+}
+else
+{
+    <div id="SignUpForm">
 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div style="height: 200px; text-align:center; padding:20px; margin: -15px 10px 30px 10px;">
+                <img style="max-height:70%;" src="~/Content/images/SpartaLogin.png" />
+                <h2 style="text-align:center;margin: 0;font-weight:bold;">Welcome</h2>
+                <p style="font-size:0.9em;">Fill out the form below to get started, <br />and gain access to the most amazing merch on the web!</p>
+            </div>
+
+            @if (TempData["EmailExists"] != null && TempData["EmailExists"] != "")
+            {
+                <div class="alert alert-danger">
+                    <strong>Ooops! </strong>@TempData["EmailExists"]
+                </div>
+            }
+
+            @if (ViewBag.Message != null && ViewBag.Message != "")
+            {
+                if (ViewBag.Warning != null)
+                {
+                    <div class="alert alert-warning">
+                        <strong>Ooops! </strong>@ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        <strong>Ooops! </strong>@ViewBag.Message
+                    </div>
+                }
+            }
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.FirstName) } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.LastName) } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserEmail) } })
+                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.UserPassword) } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.ConfirmPassword) } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Sign Up" class="btn" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <p style="text-align:right; font-size:0.9em;">Already a member? <a href="~/Home/Login/">Login</a></p>
+            </div>
+            
+        </div>
+        }
+    </div>
+}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

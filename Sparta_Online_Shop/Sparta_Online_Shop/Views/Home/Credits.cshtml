@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Sparta_Online_Shop.Creator>
+@{ 
+    ViewBag.Title = "Credits";
+}
+
+<style type="text/css">
+body{
+    background-color: #36393F;
+}
+
+html,
+body,
+header,
+.carousel {
+    height: 90vh;
+}
+
+@@media (max-width: 740px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+    height: 100vh;
+    }
+}
+
+@@media (min-width: 800px) and (max-width: 850px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+    height: 100vh;
+    }
+}
+
+</style>
+
+    <!--Main layout-->
+<main>
+    
+    <div style="width: 100%;max-height: 500px;overflow: hidden;">
+        <img src="/Content/images/team2.PNG" alt="" style="width: 100%;margin-top: -10%;">
+    </div>
+    <div style="text-align: left; height: 50%; padding:0 10%;">
+        <h2 style="padding:20px 0; color: #c41541; font-weight: bold;">
+            MEET THE TEAM<span style="font-size:0.8em; color:#fff; font-weight:normal"> - Engineering 41</span>
+        </h2>
+
+        @if(@Model != null)
+        {
+            <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+                @foreach(Creator creator in @Model)
+                {
+                    <div class="col-sm-6 col-md-3 mb-5">
+                        <a href="https://www.github.com/aesmailsparta" target="_blank">
+                            <div style="margin:auto; background:url(/Content/images/Miguel_1.jpg); height:150px; width:150px; border-radius:100%; background-size: cover; background-position: center; border: 2px solid rgba(0,0,0,0.5);"></div>
+
+                            <div>@creator.CreatorName</div>
+                        </a>
+                    </div>
+                 }
+            </div>
+        }
+
+    </div>
+</main>
+    <!--Main layout-->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="~/Content/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    @*<script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>*@
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+    </script>
