@@ -235,6 +235,7 @@
     <Compile Include="Models\SpartaShopModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -433,6 +434,9 @@
     <Content Include="Views\Home\ContactOld.cshtml" />
     <Content Include="Views\Checkout\CheckoutSuccessful.cshtml" />
     <Content Include="Views\Checkout\CheckoutError.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
