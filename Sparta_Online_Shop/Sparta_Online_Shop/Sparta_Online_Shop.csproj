@@ -101,6 +101,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -222,6 +225,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderPageModel.cs" />
     <Compile Include="Models\OrderStatu.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\ProductReview.cs" />
@@ -420,9 +424,14 @@
     <Content Include="Views\StockOrders\Edit.cshtml" />
     <Content Include="Views\Home\CreditsOld.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\ContactOld.cshtml" />
+    
+    <Content Include="Views\Checkout\CheckoutSuccessful.cshtml" />
+    <Content Include="Views\Checkout\CheckoutError.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
