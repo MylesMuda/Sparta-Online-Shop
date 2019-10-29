@@ -34,6 +34,8 @@ namespace Sparta_Online_Shop
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<PayPalTransaction> PayPalTransactions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -93,6 +95,11 @@ namespace Sparta_Online_Shop
             modelBuilder.Entity<UserType>()
                 .Property(e => e.TypeDescription)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PayPalTransaction>()
+                .Property(e => e.Amount)
+                .HasPrecision(10, 2);
+
         }
     }
 }
