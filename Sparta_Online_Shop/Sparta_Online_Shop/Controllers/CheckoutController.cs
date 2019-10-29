@@ -73,7 +73,7 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult Checkout(string Amount)
         {
             //float price;
-            //ViewBag.Message = Amount;
+            ////ViewBag.Message = Amount;
 
             //if (float.TryParse(Amount, out price))
             //{
