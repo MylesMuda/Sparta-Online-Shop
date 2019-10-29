@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Stripe;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
@@ -18,6 +20,7 @@ namespace Sparta_Online_Shop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            StripeConfiguration.ApiKey = "sk_test_Ow8dkF3XXosMcsvTpCp4Jfls00jdyE5bCf";
         }
         public override void Init()
         {

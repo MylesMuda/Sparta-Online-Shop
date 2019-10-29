@@ -5,3 +5,9 @@
 
 <h2>Checkout</h2>
 
+<p>You successfully paid: <strong id="demo"></strong> </p>
+
+<script>
+        var amount = @ViewBag.testAmount;
+        document.getElementById("demo").innerHTML = amount.toString();
+</script>
