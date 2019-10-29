@@ -14,10 +14,13 @@ namespace Sparta_Online_Shop.Controllers
     {
         private SpartaShopModel db = new SpartaShopModel();
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Products.ToList());
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -32,6 +35,7 @@ namespace Sparta_Online_Shop.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")] Product product)

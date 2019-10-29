@@ -17,6 +17,9 @@ namespace Sparta_Online_Shop.Controllers
         private string ProductName = "";
         private decimal? StockLevel = 0;
         private decimal? SetStockLevel = 10;
+        
+[Authorize(Roles="Admin")]
+        // GET: Admin
         public ActionResult Index()
         {
             using (var db = new SpartaShopModel())
