@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "CheckoutSuccessful";
+}
+
+<h2>Checkout Successful</h2>
+<h2>Order ID: @Session["orderID"]</h2>
+
+@{ Session["orderID"] = "";  }

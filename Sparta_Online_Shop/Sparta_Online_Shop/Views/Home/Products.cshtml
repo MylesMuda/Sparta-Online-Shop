@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Sparta_Online_Shop.Product>
+
+@{
+    ViewBag.Title = "Product Name";
+}
+<style>
+    body {
+        background-color: #36393F;
+    }
+</style>
+<p>@ViewBag.Norm</p>
+@if (Model != null && Model.Count() == 1)
+{
+    //SingleProduct
+    foreach (Product product in Model)
+    {
+        <!--Main layout-->
+<main class="pt-4">
+    <div class="container dark-grey-text mt-5">
+
+        <a href="/Home/Products" style="display:block; margin:10px 0;">back to all products</a>
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4" style="text-align:center;">
+                <!-- Main product image -->
+                <img src="/Content/images/Mary_1.jpg" class="img-fluid" alt="@product.ProductName" style="width: 80%;">
+
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <!--Content-->
+                <div class="p-4">
+
+                    <div class="mb-3">
+                        <a href="">
+                            <span class="badge red mr-1">Bestseller</span>
+                        </a>
+                        <a>
+                            <p style="font-size: 2em; color: white;">@product.ProductName</p>
+                        </a>
+                    </div>
+
+                    <p class="lead">
+                        <span style="color: white;">&pound;@product.Price</span>
+                    </p>
+
+                    <p style="color: white;">
+                        @product.ProductDescription
+                    </p>
+
+                    <form class="d-flex justify-content-left">
+                        <!-- Default input -->
+                        @{ int available = Math.Min((int)@product.Stock, 10); }
+                        <select aria-label="Search" class="form-control" style="width: 100px">
+                            @for(int i = 1; i < available; i++){
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <button class="btn btn-primary btn-md my-0 p" type="submit">
+                            Add to cart
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+                <!--Content-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </div>
+</main>
+        <!--Main layout-->
+     }
+}
+else if (Model != null && Model.Count() > 0)
+{
+<main>
+<div class="container" style="padding-top:10vmin;">
+<section class="text-center mb-4">
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+@foreach(Product product in Model)
+{
+    <!--Grid column-->
+
+     <div class="col-lg-3 col-md-6 mb-4">
+        <!--Card-->
+        <div class="card">
+            <!--Card image-->
+            <div class="view overlay">
+                <img src = "/Content/images/Miguel_1.jpg" class="card-img-top"
+                     alt="@product.ProductName">
+                <a href="/Home/Products/@product.ProductID">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <!--Card image-->
+            <!--Card content-->
+            <div class="card-body text-center">
+                <!--Category & Title-->
+                <a href = "/Home/Products/@product.ProductID" class="grey-text">
+                    <h5>@product.ProductName</h5>
+                </a>
+                <h5 style = "max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap" >
+                    <strong>
+                        <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
+                            @product.ProductDescription
+                        </a>
+                    </strong>
+                </h5>
+
+                <span class="badge badge-pill primary-color">bestseller</span>
+
+                <h4 class="font-weight-bold purple-text">
+                    <strong>&pound;@product.Price</strong>
+                </h4>
+
+            </div>
+            <!--Card content-->
+        </div>
+        <!--Card-->
+    </div>
+    <!--Grid column-->
+}
+</div>
+</section>
+</div>
+</main>
+}
+else
+{
+<h3 style = "color: #8d223d; /* Old browsers */
+color: -moz-linear-gradient(-90deg, #3a1338 0%, #93233d 100%); /* FF3.6-15 */
+color: -webkit-linear-gradient(-90deg, #3a1338 0%,#93233d 100%); /* Chrome10-25,Safari5.1-6 */
+color: linear-gradient(135deg, #3a1338 0%,#93233d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#3a1338',
+endColorstr= '#93233d', GradientType= 1); font-weight: bold; padding:10vmin;">
+Product not found
+</h3>
+}
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type = "text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type = "text/javascript" src="~/Content/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+@*<script type = "text/javascript" src="~/Content/js/bootstrap.min.js"></script>*@
+<!-- MDB core JavaScript -->
+<script type = "text/javascript" src="~/Content/js/mdb.min.js"></script>
+<!-- Initializations -->
+<script type = "text/javascript" >
+// Animations initialization
+new WOW().init();
+</script>
