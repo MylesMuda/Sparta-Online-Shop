@@ -1,4 +1,4 @@
-﻿@model Sparta_Online_Shop.ProductReview
+﻿@model Sparta_Online_Shop.ProductReviews
 
 @{
     ViewBag.Title = "Details";
@@ -10,41 +10,41 @@
     <h4>Product</h4>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.product.ProductName)
+            @Html.DisplayNameFor(model => model.Product.ProductName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.product.ProductName)
+            @Html.DisplayFor(model => model.Product.ProductName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.product.ProductDescription)
+            @Html.DisplayNameFor(model => model.Product.ProductDescription)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.product.ProductDescription)
+            @Html.DisplayFor(model => model.Product.ProductDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.product.Stock)
+            @Html.DisplayNameFor(model => model.Product.Stock)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.product.Stock)
+            @Html.DisplayFor(model => model.Product.Stock)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.product.Price)
+            @Html.DisplayNameFor(model => model.Product.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.product.Price)
+            @Html.DisplayFor(model => model.Product.Price)
         </dd>
 
     </dl>
 </div>
 <p>
-    <a href="/Products/Edit/@Model.product.ProductID">Edit</a>
+    <a href="/Products/Edit/@Model.Product.ProductID">Edit</a>
     <a href="/Products/Index">Back to List</a>
 </p>
 
@@ -64,9 +64,12 @@
         <th>
             Date Of Review
         </th>
+        <th>
+            Flagged
+        </th>
     </tr>
 
-    @foreach (var item in Model.reviews)
+    @foreach (var item in Model.Reviews)
     {
         <tr>
             <td>
@@ -80,6 +83,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfReview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flagged)
+            </td>
+            <td>
+                <a href="/Products/FlagReview/@item.ReviewID">Edit</a>
             </td>
         </tr>
     }
