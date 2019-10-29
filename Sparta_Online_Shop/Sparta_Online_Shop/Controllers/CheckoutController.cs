@@ -50,8 +50,10 @@ namespace Sparta_Online_Shop.Controllers
             //clear basket if successful
 
             ViewBag.Message = orderID;
+            Session["orderID"] = orderID;
 
-            return RedirectToAction("CheckoutSuccessful");
+            // return View("CheckoutSuccessful");
+            return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
     }
 }

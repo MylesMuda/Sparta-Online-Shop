@@ -1,17 +1,13 @@
-﻿@Model Sparta_Online_Shop.Models.PaymentModel
-
+﻿
 @{
     ViewBag.Title = "Basket";
 }
 
 <h2>Basket</h2>
-<h2>.</h2>
-<h2>.</h2>
-<h2>.</h2>
 
 @using (Html.BeginForm("BasketPost", "Checkout", FormMethod.Post))
 {
-    <input type="text" id="Amount" name="Amount" value="5.78" />
+    <input type="text" id="Amount" name="Amount" value="2.49" />
     <input type="submit" value="Checkout" />
 }
 

@@ -212,7 +212,6 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderStatu.cs" />
     <Compile Include="Models\PaymentModel.cs" />
-    <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Review.cs" />
@@ -271,7 +270,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Checkout\CheckoutSuccessful.cshtml" />
     <Content Include="Views\Checkout\CheckoutError.cshtml" />
-    <Content Include="Views\Checkout\PaypalPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
