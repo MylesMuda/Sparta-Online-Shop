@@ -9,6 +9,7 @@ namespace Sparta_Online_Shop.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
+        [Authorize]
         public ActionResult Checkout()
         {
             return View();
@@ -19,20 +20,25 @@ namespace Sparta_Online_Shop.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult CheckoutError()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult CheckoutSuccessful()
         {
+            //TODO: This page should NOT be available directly, only via code
             //TODO: clear basket in database
-
-            return View();
+            if ((string)Session["checkout-successful"] == "yes")
+                return View();
+            else
+                return View("Basket");
         }
 
         [HttpPost]
-        public ActionResult BasketPost(string Amount)
+        public ActionResult Checkout(string Amount)
         {
             float price;
             ViewBag.Message = Amount;
@@ -51,7 +57,8 @@ namespace Sparta_Online_Shop.Controllers
         {
             Session["orderID"] = orderID;
 
-            // return View("CheckoutSuccessful");
+            Session["checkout-successful"] = "yes";
+
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
     }
