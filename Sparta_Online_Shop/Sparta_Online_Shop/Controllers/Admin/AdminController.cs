@@ -63,6 +63,16 @@ namespace Sparta_Online_Shop.Controllers
 
         public ActionResult Orders()
         {
+            return View(GetAllOrders());
+        }
+
+        public ActionResult OpenOrders()
+        {
+            return View(GetAllOrders().Where(order => order.orderStatus.OrderStatusID != 4).ToList());
+        }
+
+        public List<OrderPageModel> GetAllOrders()
+        {
             var ordersToAdd = new List<OrderPageModel>();
             using (var db = new SpartaShopModel())
             {
@@ -84,12 +94,7 @@ namespace Sparta_Online_Shop.Controllers
                     ordersToAdd.Add(orderToAdd);
                 }
             }
-            return View(ordersToAdd);
-        }
-
-        public ActionResult OpenOrders()
-        {
-            throw new NotImplementedException();
+            return ordersToAdd;
         }
     }
 }
