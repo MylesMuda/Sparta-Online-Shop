@@ -1,0 +1,61 @@
+﻿@model Sparta_Online_Shop.Review
+@{
+    ViewBag.Title = "Write a review";
+}
+<style>
+    textarea {
+        resize: none;
+    }
+</style>
+<div id="review-form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="color:white">
+            <div style="height: 80vh;">
+                <div style="padding:0 30px;">
+                    <h2 style="margin-top: 8vh; font-weight:bold;">Review @ViewBag.SelectedProductName</h2>
+                </div>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div style="padding:0 30px;">
+                    @Html.HiddenFor(model => model.UserID)
+
+                    @Html.HiddenFor(model => model.ProductID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("Rating", new SelectList(ViewBag.Rating, "Text", "Value"), htmlAttributes: new { @class = "control-label col-md-offset-2 col-md-2" })
+                            @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReviewText,"Content", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.ReviewText, 3, 100, new { htmlAttributes = new { @class = "control-label col-md-offset-2 col-md-2" } })
+                            @Html.ValidationMessageFor(model => model.ReviewText, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="padding:0;">
+                            <input type="submit" value="Create" class="btn btn-default"/>
+                        </div>
+                    </div>
+
+                    @*TODO: RETURN TO PRODUCT PAGE INSTEAD*@
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
