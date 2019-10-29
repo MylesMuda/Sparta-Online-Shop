@@ -12,13 +12,13 @@ namespace Sparta_Online_Shop.Controllers
     {
         // GET: Checkout
         [HttpPost]
-        public ActionResult Checkout(string stripeEmail, string stripeToken)
+        public ActionResult Checkout(string stripeEmail, string stripeToken, float amount)
         {
             var customers = new CustomerService();
             var charges = new ChargeService();
 
-            ViewBag.testAmount = 50;//amount;
-            //long newAmount = (long)(amount * 100);
+            ViewBag.testAmount = amount;
+            long newAmount = (long)(amount * 100);
 
             var customer = customers.Create(new CustomerCreateOptions
             {
@@ -29,7 +29,7 @@ namespace Sparta_Online_Shop.Controllers
 
             var charge = charges.Create(new ChargeCreateOptions
             {
-                Amount = 50,
+                Amount = newAmount,
                 Description = "Sample Charge",
                 Currency = "gbp",
                 Customer = customer.Id
