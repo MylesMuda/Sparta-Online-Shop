@@ -45,7 +45,7 @@ body {
 #LogoutLink {
     display: block;
     font-weight: bold;
-    color: #f38888
+    color: #f38888!important;
 }
 
 #LogoutLink:hover {
@@ -76,7 +76,7 @@ body {
 }
 
 .dropdown-item {
-    color: #f6f9fc;
+    color: #f6f9fc !important;
 }
 
 .dropdown-item:hover{
@@ -131,14 +131,15 @@ body {
     color: #47354f;
 }
 
-#LoginForm input[type="submit"],
-#SignUpForm input[type="submit"] {
-    width: 100%;
-    font-weight: bold;
-    font-size: 1.1em;
-    background-color: #e33661;
-    border: 1px solid #fa6f91;
-}
+    #LoginForm input[type="submit"],
+    #SignUpForm input[type="submit"] {
+        width: 100%;
+        font-weight: bold;
+        font-size: 1.1em;
+        background-color: #e33661;
+        border: 1px solid #fa6f91;
+        margin: 0;
+    }
 
 #LoginForm input[type="submit"]:hover,
 #SignUpForm input[type="submit"]:hover {
@@ -156,10 +157,19 @@ body {
     color: #653878;
 }
 
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #e33661 !important;
+    background-color: #e33661 !important;
+}
+
 #LoginForm .AccountHelperLinks {
     clear: both;
     text-align: right;
     font-size: 0.9em;
+}
+
+.field-validation-error {
+    color: #7c0b0b !important;
 }
 
 .text-danger {
@@ -177,6 +187,16 @@ body {
     #SignUpForm form {
         min-width: 350px;
         margin: 10vmin auto !important;
+    }
+}
+
+@media (min-width: 900px) {
+    .card > .view {
+        height: 400px;
+    }
+
+    .card-body {
+        min-height: 200px;
     }
 }
 

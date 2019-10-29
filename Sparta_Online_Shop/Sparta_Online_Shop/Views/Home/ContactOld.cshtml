@@ -1,0 +1,147 @@
+﻿@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sparta Online Shop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="~/Content/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="~/Content/css/style.min.css" rel="stylesheet">
+    <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 90vh;
+    }
+    @@media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+    @@media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+    </style>
+</head>
+<body style="background-color: #36393F;">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light spartaPurple scrolling-navbar">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="~/Home">
+                <img src="~/Content/images/Logo.png" alt="" style="width:100px;height:45px;">
+                <!-- <strong class="spartaPink-text">Sparta Store</strong> -->
+            </a>
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link waves-effect" href="~/Home" style="color: white;">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="https://www.spartaglobal.com/?gclid=CjwKCAjwusrtBRBmEiwAGBPgE_YW0DMlGuHtcL5auN4C3PX2yba8Q0yU8RbrRKl8c3lYIlt7oQN4JxoCab0QAvD_BwE" target="_blank" style="color: white;">Website</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/ProductPage" class="nav-link waves-effect" style="color: white;">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Contact" class="nav-link waves-effect" style="color: white;">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Home/Credits" class="nav-link waves-effect" style="color: white;">Credits</a>
+                    </li>
+                </ul>
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect">
+                            <!-- <span class="badge red z-depth-1 mr-1"> 1 </span> -->
+                            <i class="fas fa-shopping-cart" style="color: white;"></i>
+                            <span class="clearfix d-none d-sm-inline-block" style="color: white;"> Cart </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.facebook.com/spartaglobal" class="nav-link waves-effect" target="_blank">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!--Main layout-->
+    <main>
+        <div style="text-align: center; height: 50%;">
+            <p style="padding-top: 15%;">
+                <h1 style="color: #8d223d; /* Old browsers */
+            color: -moz-linear-gradient(-90deg, #3a1338 0%, #93233d 100%); /* FF3.6-15 */
+            color: -webkit-linear-gradient(-90deg, #3a1338 0%,#93233d 100%); /* Chrome10-25,Safari5.1-6 */
+            color: linear-gradient(135deg, #3a1338 0%,#93233d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a1338', endColorstr='#93233d',GradientType=1 );font-weight: bold;">
+                    CONTACT US
+                </h1>
+            </p>
+            <p>
+                <h2 style="color: rgb(199, 199, 199);">
+                    spartaglobalstore@admin.com
+                    <a href="https://www.google.com/maps?q=sparta+global&rlz=1C1CHBF_enGB864GB864&um=1&ie=UTF-8&sa=X&ved=0ahUKEwiZpbaOzbflAhWNEMAKHa9oBMsQ_AUIEygC">
+                        <p style="padding-top: 5%;"> 6th Floor, 125 London Wall, Barbican, London EC2Y 5AS</p>
+                    </a>
+                </h2>
+            </p>
+            <p style="padding-top: 5%;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.76786385924!2d-0.09590368422968161!3d51.51747467963682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761caca65115b7%3A0xff0dc8f530c744ee!2sSparta%20Global!5e0!3m2!1sen!2suk!4v1572014167291!5m2!1sen!2suk" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </p>
+
+        </div>
+    </main>
+    <!--Main layout-->
+    <!--Footer-->
+    <!--/.Footer-->
+    <!-- SCRIPTS -->
+    <!-- GoogleMaps -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="~/Content/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">// Animations initialization
+    new WOW().init();</script>
+</body>
+</html>
+
+

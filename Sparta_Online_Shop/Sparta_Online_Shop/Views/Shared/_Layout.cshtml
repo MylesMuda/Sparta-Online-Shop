@@ -4,20 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.png" />
     <title>Sparta Online Store - @ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    @*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet">*@
-    <!-- Material Design Bootstrap -->
-    <link href="~/Content/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="~/Content/css/style.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.png" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <!-- Navbar -->
@@ -41,23 +34,19 @@
 
                 <!-- Left -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link waves-effect" href="~/Home" style="color: white;">
                             Home
-                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="https://www.spartaglobal.com/?gclid=CjwKCAjwusrtBRBmEiwAGBPgE_YW0DMlGuHtcL5auN4C3PX2yba8Q0yU8RbrRKl8c3lYIlt7oQN4JxoCab0QAvD_BwE" target="_blank" style="color: white;">Website</a>
+                        <a href="~/Home/Products" class="nav-link waves-effect" style="color: white;">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a href="~/Home/ProductPage" class="nav-link waves-effect" style="color: white;">Products</a>
+                        <a href="https://www.spartaglobal.com/" target="_blank" class="nav-link waves-effect" style="color: white;">About</a>
                     </li>
                     <li class="nav-item">
                         <a href="~/Home/Contact" class="nav-link waves-effect" style="color: white;">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="~/Home/Credits" class="nav-link waves-effect" style="color: white;">Credits</a>
                     </li>
                 </ul>
 
@@ -74,7 +63,7 @@
                     {
                         <li class="nav-item dropdown" style="text-align:right;">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">My Account</a>
-                            <div class="bg-dark dropdown-menu" style="font-size: 0.9em; border-radius:0; margin:0;">
+                            <div class="bg-dark dropdown-menu" style="font-size: 0.9em; width:150px; border-radius:0; margin:0;">
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a href="~/Admin/" class="dropdown-item">Admin Home</a>
@@ -126,7 +115,8 @@
         <!--Copyright-->
         <div class="footer-copyright py-3" id="#section2">
             &copy; @DateTime.Now.Year Copyright
-            <a href="" target="_blank"> Engineering 41 </a>
+            <a href="https://www.spartaglobal.com/" target="_blank" style="color: white;">Company Website</a> | 
+            <a href="/Home/Credits/" target="_blank"> Engineering 41 </a>
         </div>
         <!--/.Copyright-->
     </footer>
