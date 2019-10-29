@@ -3,5 +3,86 @@
     ViewBag.Title = "Checkout";
 }
 
-<h2>Checkout</h2>
 
+<h1>Basket Total: £@ViewBag.Message</h1>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP">
+</script>
+
+<div id="transaction-successful">
+    <h1 id=transaction-result> </h1>
+</div>
+
+
+<div><h1>.</h1></div>
+<h1>Total: @ViewBag.Message</h1>
+
+
+@using (Html.BeginForm("PaypalPost", "Checkout", FormMethod.Post))
+{
+    <input type="text" id="Amount" name="Amount" value="5.78" />
+    <input type="submit" value="Checkout" />
+}
+
+<div id="paypal-button-container"></div>
+
+//<div asp-action="Index" asp-controller="Form">
+    <script>
+        function DoPost(orderID) {
+            return fetch('/Checkout/PaypalPost', {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderID: orderID
+                        })
+                    });
+        }
+
+        function DoPostSuccessDelayed(orderID) {
+            setTimeout(DoPost, orderID);
+        }
+
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                // Set up the transaction
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '@ViewBag.Message'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // Capture the funds from the transaction
+                return actions.order.capture().then(function (details) {
+                    // Call your server to save the transaction
+
+                   DoPost(data.orderID);
+
+                    //return fetch('/Checkout/PaypalPost', {
+                    //    method: 'post',
+                    //    headers: {
+                    //        'content-type': 'application/json'
+                    //    },
+                    //    body: JSON.stringify({
+                    //        orderID: data.orderID
+                    //    })
+                    //});
+
+                    // Show a success message to your buyer
+                    var msg = 'thank you for your cooporation ' + details.payer.name.given_name;
+                    var theDiv = document.getElementById("transaction-result");
+                    theDiv.innerHTML += msg;
+                });
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+    //
+
+
+    <button onclick="DoPost('123456')">Click me</button>
+</div>
