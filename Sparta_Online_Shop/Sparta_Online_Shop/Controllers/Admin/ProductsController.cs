@@ -27,16 +27,45 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductReview productReview = new ProductReview();
-            Product product = db.Products.Find(id);
-            List<Review> reviews = db.Reviews.Where(review => review.ProductID == id).ToList();
-            productReview.product = product;
-            productReview.reviews = reviews;
+
+            var productReview = new ProductReviews();
+            var product = db.Products.Find(id);
+            var reviews = db.Reviews.Where(review => review.ProductID == id).ToList();
+            productReview.Product = product;
+            productReview.Reviews = reviews;
             if (product == null)
             {
                 return HttpNotFound();
             }
+
             return View(productReview);
+        }
+
+        public ActionResult FlagReview(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var review = db.Reviews.Find(id);
+            if (review == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(review);
+        }
+
+        // POST: Products/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FlagReview(Review review)
+        {
+            var reviewToUpdate = db.Reviews.Find(review.ReviewID);
+            reviewToUpdate.Flagged = review.Flagged;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Create
@@ -46,11 +75,10 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")]
+            Product product)
         {
             if (ModelState.IsValid)
             {
@@ -69,20 +97,21 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
+
             return View(product);
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,SKU,ProductName,ProductDescription,Stock,Price")]
+            Product product)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +119,7 @@ namespace Sparta_Online_Shop.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(product);
         }
 
@@ -100,11 +130,13 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Product product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
+
             return View(product);
         }
 
@@ -125,6 +157,7 @@ namespace Sparta_Online_Shop.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

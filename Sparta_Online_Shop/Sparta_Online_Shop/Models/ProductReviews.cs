@@ -6,9 +6,9 @@ using System.Web;
 
 namespace Sparta_Online_Shop
 {
-    public class ProductReview
+    public class ProductReviews
     {
-        public Product product { get; set; }
-        public List<Review> reviews { get; set; }    
+        public Product Product { get; set; }
+        public List<Review> Reviews { get; set; }    
     }
 }

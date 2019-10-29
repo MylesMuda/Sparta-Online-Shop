@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 // ReSharper disable once CheckNamespace
@@ -59,6 +60,39 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.IncomeYear = _incomeYear;
 
             return View();
+        }
+
+        public ActionResult UpdateOrderStatus(int? id)
+        {
+            Order order;
+            using (var db = new SpartaShopModel())
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                order = db.Orders.Find(id);
+                
+                if (order == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            return View(order);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateOrderStatus(Order order)
+        {
+            using (var db = new SpartaShopModel())
+            {
+                var orderToUpdate = db.Orders.Find(order.OrderID);
+                orderToUpdate.OrderStatusID = order.OrderStatusID;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Orders()

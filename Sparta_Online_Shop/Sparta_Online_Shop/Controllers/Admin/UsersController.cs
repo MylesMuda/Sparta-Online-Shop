@@ -53,7 +53,7 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult LockOutUser(int? id)
         {
             if (id == null)
             {
@@ -64,25 +64,18 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeName", user.UserTypeID);
             return View(user);
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserTypeID,FirstName,LastName,UserPassword,UserEmail,IsVerified,ActivationCode,LastLogin,Locked")] User user)
+        public ActionResult LockOutUser([Bind(Include = "UserID,UserTypeID,Locked")] User user)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeName", user.UserTypeID);
-            return View(user);
+            var userToUpdate = db.Users.Find(user.UserID);
+            userToUpdate.Locked = user.Locked;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

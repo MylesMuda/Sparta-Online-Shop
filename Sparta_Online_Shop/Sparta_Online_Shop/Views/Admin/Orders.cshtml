@@ -37,7 +37,8 @@
                     @Html.DisplayFor(modelItem => order.order.OrderID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => order.orderStatus.StatusName)
+                    @Html.DisplayFor(modelItem => order.orderStatus.StatusName)<br/>
+                    <a href="/Admin/UpdateOrderStatus/@order.order.OrderID">Update</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => order.user.FirstName)
@@ -47,7 +48,6 @@
                     @Html.DisplayFor(modelItem => order.order.OrderDate)
                 </td>
             </tr>
-
             <tr>
                 <table class="table">
 
@@ -82,8 +82,8 @@
                         </td>
                     </tr>
                 </table>
-            <br>
-            <br>
+                <br>
+                <br>
             </tr>
         </table>
     }
