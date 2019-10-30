@@ -50,6 +50,7 @@ namespace Sparta_Online_Shop.Controllers
 
                 int newOrderID = CreateAndSaveOrder();
                 CreateAndSaveOrderDetails(newOrderID);
+                SaveOrderIDFromPayment(newOrderID, (string)Session["OrderID"]);
                 ClearBasket();
 
                 return View();
@@ -158,6 +159,19 @@ namespace Sparta_Online_Shop.Controllers
             db.SaveChanges();
 
             return order.OrderID;
+        }
+
+        [NonAction]
+        public void SaveOrderIDFromPayment(int orderIDFromDB, string paypalOrderID)
+        {
+            PayPalTransaction transaction = new PayPalTransaction();
+            transaction.CaptureID = paypalOrderID;
+            transaction.Amount = GetCartAndTotalPrice().totalPrice;
+            transaction.PayPalOrderID = "1234567890";
+            transaction.OrderID = orderIDFromDB;
+            transaction.PaymentTypeID = 1;
+            db.PayPalTransactions.Add(transaction);
+            db.SaveChanges();
         }
 
         [NonAction]
