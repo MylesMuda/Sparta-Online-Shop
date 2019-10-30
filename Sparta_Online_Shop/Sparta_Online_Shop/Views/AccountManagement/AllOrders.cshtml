@@ -22,7 +22,7 @@
     <div>
         @foreach (var order in Model)
         {
-            <table class="table" style="color: white;">
+            <table class="table border" style="color: white;">
                 <tr>
                     <th>
                         Status
@@ -73,8 +73,8 @@
                                 </td>
                             </tr>
                         }
-                        <tr>
-                            <td>
+                        <tr >
+                            <td colspan="3">
                                 Total Cost : @Html.DisplayFor(modelItem => order.order.TotalCost)
                             </td>
                         </tr>

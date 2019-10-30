@@ -1,36 +1,44 @@
-﻿
-@model Sparta_Online_Shop.Models.PasswordConfirmationModel
+﻿@model Sparta_Online_Shop.Models.PasswordConfirmationModel
 
 @{
     ViewBag.Title = "Account Management";
 }
 
 <style type="text/css">
-    body {
+    body{
         background-color: #36393F;
+    }
+
+    form{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div.PasswordForm {
+        align-content: center;
+    }
+    main{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 
-<main>
-    <div style="height: 50%; padding:0 15%; max-width:900px; margin:auto">
+<main style="margin: auto; width: 500px; text-align: center">
+    <div style="height: 50%; padding:0 15%; max-width:900px; margin:auto;">
 
         <h1 style="padding-top:50px; color: #c41541; font-weight: bold;">
-            Account Management
+            Change Password
         </h1>
 
-        <div style="text-align:left;padding:10px 0;">
-            <h3 href="/AccountManagement/AllOrders">
-                Change Password
-            </h3>
-        </div>
     </div>
-    <div style="text-align: left; padding: 10px 0;">
-        <div style="padding: 0 30px;" id="PasswordForm">
+    <div style="text-align: left; padding: 10px 0;" id="PasswordForm">
+        <div style="padding: 0 30px;">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-group">
+                <div class="form-group align-content-center">
                     <div class="col-md-12" style="padding: 0">
                         @Html.EditorFor(model => model.OldPassword, new
                         {
@@ -80,18 +88,6 @@
 
             }
         </div>
-
-        <div style="text-align: left; padding: 10px 0;">
-            <a href="/AccountManagement/AllOrders">
-                Orders
-            </a>
-        </div>
-
-        <div style="text-align: left; padding: 10px 0;">
-            <a href="/AccountManagement/AllReviews">
-                Reviews
-            </a>
-        </div>
     </div>
 </main>
 
@@ -103,6 +99,5 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
 <!-- Initializations -->
-<script type="text/javascript">
-    // Animations initialization
+<script type="text/javascript"> // Animations initialization
     new WOW().init();</script>
