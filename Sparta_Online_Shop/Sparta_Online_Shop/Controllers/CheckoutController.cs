@@ -12,6 +12,7 @@ namespace Sparta_Online_Shop.Controllers
 
         private BasketItem BasketItemDb = new BasketItem();
         private Basket BasketDb = new Basket();
+
         // GET: Checkout
         public ActionResult Checkout()
         {
