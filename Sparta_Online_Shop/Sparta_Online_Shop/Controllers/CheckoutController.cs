@@ -43,11 +43,15 @@ namespace Sparta_Online_Shop.Controllers
         [Authorize]
         public ActionResult CheckoutSuccessful()
         {
-
             //TODO: clear basket in database
             if ((string)Session[checkoutSuccessfulFlag] == "yes")
             {
                 Session[checkoutSuccessfulFlag] = "";
+
+                SaveOrder((string)Session["orderID"]);
+
+                ClearBasket();
+
                 return View();
             }
             else
@@ -118,6 +122,25 @@ namespace Sparta_Online_Shop.Controllers
                 }
             }
             return id;
+        }
+
+        [NonAction]
+        public void ClearBasket()
+        {
+            var basketItems = GetItemsInBasket();
+            foreach (BasketItem item in basketItems)
+            {
+                db.BasketItems.Remove(item);
+            }
+            db.SaveChanges();
+        }
+
+        [NonAction]
+        public void SaveOrder(string orderID)
+        {
+            int UserID = GetUserID();
+
+            
         }
 
         [NonAction]
