@@ -16,28 +16,21 @@ namespace Sparta_Online_Shop.Controllers
         [Authorize]
         public ActionResult Checkout()
         {
-            var userID = GetUserID();
+            var cart = GetCartAndTotalPrice();
 
-            List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
+            ViewBag.TotalPrice = cart.totalPrice.ToString();
+            ViewBag.BasketItems = cart.basketItems;
 
-            float totalPrice = 0;
-            foreach(BasketItem item in itemsInBasket)
-            {
-                float itemPrice = (float)db.Products.Find(item.ProductID).Price;
-                totalPrice += itemPrice * ((item.Quantity != null) ? (float)item.Quantity : 1);
-            }
-
-            ViewBag.Message = Math.Round(totalPrice, 2).ToString();
             return View();
         }
 
         public ActionResult Basket()
         {
-            var userID = GetUserID();
+            var cart = GetCartAndTotalPrice();
 
-            List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
+            ViewBag.TotalPrice = cart.totalPrice.ToString();
+            ViewBag.BasketItems = cart.basketItems;
 
-            ViewBag.BasketItems = itemsInBasket;
             return View();
         }
 
@@ -125,6 +118,23 @@ namespace Sparta_Online_Shop.Controllers
                 }
             }
             return id;
+        }
+
+        [NonAction]
+        public (List<BasketItem> basketItems, double totalPrice) GetCartAndTotalPrice()
+        {
+            var userID = GetUserID();
+
+            List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
+
+            float totalPrice = 0;
+            foreach (BasketItem item in itemsInBasket)
+            {
+                float itemPrice = (float)db.Products.Find(item.ProductID).Price;
+                totalPrice += itemPrice * ((item.Quantity != null) ? (float)item.Quantity : 1);
+            }
+
+            return (itemsInBasket, (double)Math.Round(totalPrice, 2));
         }
     }
 }
