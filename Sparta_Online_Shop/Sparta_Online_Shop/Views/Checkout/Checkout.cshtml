@@ -52,128 +52,46 @@
             <div class="row">
 
                 <!--Grid column-->
-                <div class="col-md-8 mb-4" style="padding: 1rem;
-        background: linear-gradient(to right, #f31b4e, #3a1338);
-        padding: 1.5px; border-radius: .4em;">
+                <div class="col-md-4 mb-4">
 
-                    <!--Card-->
-                    <div class="card" style="background-color:#1f2124">
+                    <!-- Heading -->
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Your cart</span>
+                        <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
+                    </h4>
 
-                        <!--Card content-->
-                        <form class="card-body">
-
-                            <!--Grid row-->
-                            <div class="row">
-
-                                <!--Grid column-->
-                                <div class="col-md-6 mb-2">
-
-                                    <!--firstName-->
-                                    <div class="md-form ">
-                                        <input type="text" id="firstName" class="form-control">
-                                        <label for="firstName" class="">First name</label>
-                                    </div>
-
+                    <!-- Cart -->
+                    <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
+                        background: linear-gradient(to right, #f31b4e, #3a1338);
+                        padding: 1.5px; border-radius: .2em;">
+                        @foreach (BasketItem item in ViewBag.BasketItems)
+                        {
+                            <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                                <div>
+                                    <h6 class="my-0" style="color: white; text-anchor: end">
+                                        @item.Product.ProductName
+                                        <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                                    </h6>
+                                    <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
                                 </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-md-6 mb-2">
+                                <span class="text-muted">@item.Product.Price</span>
+                            </li>
+                        }
+                        <div id="transaction-successful">
+                            <h1 id=transaction-result> </h1>
+                        </div>
 
-                                    <!--lastName-->
-                                    <div class="md-form">
-                                        <input type="text" id="lastName" class="form-control">
-                                        <label for="lastName" class="">Last name</label>
-                                    </div>
+                        <div id="paypal-button-container"></div>
 
-                                </div>
-                                <!--Grid column-->
-
-                            </div>
-                            <!--Grid row-->
-                            <!--Username-->
-                            <div class="md-form input-group pl-0 mb-5">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"></span>
-                                </div>
-                                <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
-                            </div>
-
-                            <!--email-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
-                            </div>
-
-                            <!--address-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="address" class="form-control" placeholder="1234 Main St">
-                            </div>
-
-                            <!--address-2-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
-                            </div>
-
-                            <!--Grid row-->
-                            <div class="row">
-
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-12 mb-4">
-
-                                    <label for="country" style="color: #6C757D;">Country</label>
-                                    <select class="custom-select d-block w-100" id="country" required>
-                                        <option value="">Choose...</option>
-                                        <option>United Kingdom</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-6 mb-4">
-
-                                    <label for="state" style="color: #6C757D;">Building</label>
-                                    <select class="custom-select d-block w-100" id="state" required>
-                                        <option value="">Choose...</option>
-                                        <option>125 London Wall</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-6 mb-4">
-
-                                    <label for="zip" style="color: #6C757D;">Company</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Building name required.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-
-                            </div>
-                            <!--Grid row-->
-
-                            <div id="transaction-successful">
-                                <h1 id=transaction-result> </h1>
-                            </div>
-
-                            <div id="paypal-button-container"></div>
-
-                            <div asp-action="Index" asp-controller="Form">
-                                <script>
+                        <div asp-action="Index" asp-controller="Form">
+                            <script>
                                 paypal.Buttons({
                                     createOrder: function (data, actions) {
                                         // Set up the transaction
                                         return actions.order.create({
                                            purchase_units: [{
                                               amount: {
-                                                 value: '@ViewBag.Message'
+                                                 value: '@ViewBag.TotalPrice'
                                               }
                                            }]
                                         });
@@ -200,40 +118,8 @@
                                        });
                                    }
                                 }).render('#paypal-button-container');
-                                </script>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!--/.Card-->
-
-                </div>
-                <!--Grid column-->
-                <div class="col-md-4 mb-4">
-
-                    <!-- Heading -->
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
-                        <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
-                    </h4>
-
-                    <!-- Cart -->
-                    <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
-                        background: linear-gradient(to right, #f31b4e, #3a1338);
-                        padding: 1.5px; border-radius: .2em;">
-                        @foreach (BasketItem item in ViewBag.BasketItems)
-                        {
-                            <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                                <div>
-                                    <h6 class="my-0" style="color: white; text-anchor: end">
-                                        @item.Product.ProductName
-                                        <span class="badge spartaPurple badge-pill">@item.Quantity</span>
-                                    </h6>
-                                    <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
-                                </div>
-                                <span class="text-muted">@item.Product.Price</span>
-                            </li>
-                        }
+                            </script>
+                        </div>
                     </ul>
                     <!-- Cart -->
 
