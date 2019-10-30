@@ -221,36 +221,17 @@
                     <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
                         background: linear-gradient(to right, #f31b4e, #3a1338);
                         padding: 1.5px; border-radius: .2em;">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-
-                    </ul>
+                        @foreach (BasketItem item in ViewBag.BasketItems)
+                        {
+                            <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                                <div>
+                                    <h6 class="my-0" style="color: white;">@item.Product.ProductName X @item.Quantity</h6>
+                                    <small class="text-muted">@item.Product.ProductDescription</small>
+                                </div>
+                                <span class="text-muted">@item.Product.Price</span>
+                            </li>
+                        }
+                        </ul>
                     <!-- Cart -->
 
                 </div>
