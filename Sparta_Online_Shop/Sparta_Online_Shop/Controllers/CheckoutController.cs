@@ -144,20 +144,30 @@ namespace Sparta_Online_Shop.Controllers
         [NonAction]
         public void ClearBasket()
         {
-            var basketItems = GetItemsInBasket();
-            foreach (BasketItem item in basketItems)
-            {
-                db.BasketItems.Remove(item);
-            }
+            Order order = null;
+            int UserID = GetUserID();
+
+            order = new Order();
+            order.UserID = UserID;
+            order.OrderStatusID = 1;
+            order.TotalCost = GetCartAndTotalPrice().totalPrice;
+            order.OrderDate = DateTime.Now;
+            order.ShipDate = null;
+            db.Orders.Add(order);
             db.SaveChanges();
+
+            return order.OrderID;
         }
 
         [NonAction]
         public List<Basket> GetBasket()
         {
-            int UserID = GetUserID();
-
-            return db.Baskets.Where(item => item.UserID == UserID).ToList();
+            var BasketItems = GetItemsInBasket();
+            foreach (BasketItem item in BasketItems)
+            {
+                db.BasketItems.Remove(item);
+            }
+            db.SaveChanges();
         }
 
         [NonAction]
