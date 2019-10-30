@@ -57,9 +57,24 @@ namespace Sparta_Online_Shop.Controllers
         }
         public ActionResult AddItem(int Quantity, int Product)
         {
+            GetUserID();
+
 
             return RedirectToAction("Products", "Home");
         }
-
+        [NonAction]
+        public int GetUserID()
+        {
+            int id = 0;
+            string email = User.Identity.Name;
+            if (User.Identity.IsAuthenticated)
+            {
+                using (var dbc = new SpartaShopModel())
+                {
+                    id = dbc.Users.Where(u => u.UserEmail == email).Select(u => u.UserID).FirstOrDefault();
+                }
+            }
+            return id;
+        }
     }
 }
