@@ -13,9 +13,23 @@ namespace Sparta_Online_Shop.Controllers
         private BasketItem BasketItemDb = new BasketItem();
         private Basket BasketDb = new Basket();
 
+        static string checkoutSuccessfulFlag = "checkout-successful";
         // GET: Checkout
+        [Authorize]
         public ActionResult Checkout()
         {
+            var userID = GetUserID();
+
+            List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
+
+            float totalPrice = 0;
+            foreach(BasketItem item in itemsInBasket)
+            {
+                float itemPrice = (float)db.Products.Find(item.ProductID).Price;
+                totalPrice += itemPrice * ((item.Quantity != null) ? (float)item.Quantity : 1);
+            }
+
+            ViewBag.Message = Math.Round(totalPrice, 2).ToString();
             return View();
         }
 
@@ -23,31 +37,43 @@ namespace Sparta_Online_Shop.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult CheckoutError()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult CheckoutSuccessful()
         {
             //TODO: clear basket in database
-
-            return View();
+            if ((string)Session[checkoutSuccessfulFlag] == "yes")
+            {
+                Session[checkoutSuccessfulFlag] = "";
+                return View();
+            }
+            else
+                return View("Basket");
         }
 
+
+        //function not needed anymore. keep until basket page fully working and redirecting properly
         [HttpPost]
-        public ActionResult BasketPost(string Amount)
+        public ActionResult Checkout(string Amount)
         {
-            float price;
-            ViewBag.Message = Amount;
+            //float price;
+            ////ViewBag.Message = Amount;
 
-            if (float.TryParse(Amount, out price))
-            {
-                ViewBag.Message = Amount;
-                return View("Checkout");
-            }
+            //if (float.TryParse(Amount, out price))
+            //{
+            //    ViewBag.Message = Amount;
+            //    return View("Checkout");
+            //}
 
-            return View("CheckoutError");
+            //return View("CheckoutError");
+
+            return View("Checkout");
         }
 
         [HttpPost]
@@ -55,7 +81,8 @@ namespace Sparta_Online_Shop.Controllers
         {
             Session["orderID"] = orderID;
 
-            // return View("CheckoutSuccessful");
+            Session[checkoutSuccessfulFlag] = "yes";
+
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
 
