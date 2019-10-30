@@ -1,7 +1,14 @@
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Helvetica';
-    max-height: 100vmin;
+    /*max-height: 100vmin;*/
     background: #01181b;
+    background: #36393F;
+    background:url(/Content/images/background_pattern.png);
+
 }
 
 .nav a:hover {
@@ -131,15 +138,15 @@ body {
     color: #47354f;
 }
 
-    #LoginForm input[type="submit"],
-    #SignUpForm input[type="submit"] {
-        width: 100%;
-        font-weight: bold;
-        font-size: 1.1em;
-        background-color: #e33661;
-        border: 1px solid #fa6f91;
-        margin: 0;
-    }
+#LoginForm input[type="submit"],
+#SignUpForm input[type="submit"] {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: #e33661;
+    border: 1px solid #fa6f91;
+    margin: 0;
+}
 
 #LoginForm input[type="submit"]:hover,
 #SignUpForm input[type="submit"]:hover {
@@ -152,6 +159,60 @@ body {
 #LoginForm input[type="submit"]:focus,
 #SignUpForm input[type="submit"]:active,
 #SignUpForm input[type="submit"]:focus {
+    background-color: #de305b !important;
+    border: 1px solid #ea2556 !important;
+    color: #653878;
+}
+
+.SpartaForm form {
+    width: fit-content;
+    background: #01181b;
+    padding: 1vmin 2vmin;
+    margin: 10vmin auto;
+    box-shadow: 0 0px 10px #e33661;
+    overflow: hidden;
+    animation: Appear 0.5s linear;
+    color: #FFF;
+    min-width: 350px;
+    border-radius: 5px;
+    border: 1px solid #e33661;
+}
+
+.SpartaForm form-horizontal form-group:nth-child(1) {
+    margin-top: 20px;
+}
+
+.SpartaForm label {
+    min-width: 60px;
+}
+
+.SpartaForm .check > label {
+    min-width: 127px;
+}
+
+.SpartaForm input {
+    max-width: 100%;
+    font-weight: bold;
+    color: #47354f;
+}
+
+.SpartaForm input[type="submit"] {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: #e33661!important;
+    border: 1px solid #fa6f91!important;
+    margin: 0;
+}
+
+.SpartaForm input[type="submit"]:hover {
+    background-color: #d53a60!important;
+    border: 1px solid #fe3868!important;
+    color: #653878;
+}
+
+.SpartaForm input[type="submit"]:active,
+.SpartaForm input[type="submit"]:focus {
     background-color: #de305b !important;
     border: 1px solid #ea2556 !important;
     color: #653878;
@@ -182,12 +243,295 @@ body {
     padding: 0 10px;
 }
 
+.SpartaDeleteCancel {
+    padding: 5px;
+}
+
+.SpartaDeleteCancel .Delete,
+.SpartaDeleteCancel .Cancel {
+    display: inline-block;
+    height: 50px !important;
+    width: 100px;
+    padding: 5px 10px;
+    color: #FFF;
+    margin: 5px;
+    line-height:35px;
+}
+
+.SpartaDeleteCancel .Delete {
+    background-color: #58b68a  !important;
+    border: 1px solid #e33661;
+}
+
+.SpartaDeleteCancel .Cancel {
+    background-color: #e56a6a !important;
+    border: 1px solid #e33661;
+}
+
+.SpartaDeleteCancel .Cancel:hover ,
+.SpartaDeleteCancel .Cancel:focus,
+.SpartaDeleteCancel .Cancel:active {
+    background-color: #a72525 !important;
+}
+
+.SpartaDeleteCancel .Delete:hover,
+.SpartaDeleteCancel .Delete:focus,
+.SpartaDeleteCancel .Delete:active  {
+    background-color: #3c825c !important;
+}
+
+.SpartaStoreButton a:active,
+.SpartaStoreButton input[type=submit]:active,
+.SpartaStoreButton button:active {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+.SpartaStoreButton {
+    padding: 5px;
+    text-align: center;
+    max-width: 215px;
+}
+
+.SpartaStoreButton a,
+.SpartaStoreButton button,
+.SpartaStoreButton input[type=submit] {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #3e1438 !important;
+    border: 1px solid #e33661;
+    color: #FFF;
+    margin: 5px;
+}
+
+.SpartaStoreButton a:hover,
+.SpartaStoreButton input[type=submit]:hover,
+.SpartaStoreButton button:hover {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+.SpartaStoreButton a:focus,
+.SpartaStoreButton input[type=submit]:focus,
+.SpartaStoreButton button:focus {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+.SpartaStoreButton a:active,
+.SpartaStoreButton input[type=submit]:active,
+.SpartaStoreButton button:active {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+/*Admin Dashboard*/
+.GreenStats {
+    box-shadow: 2px 2px 2px #7fe5ce;
+    background-color: #48c2a6;
+}
+
+.BlueStats {
+    box-shadow: 2px 2px 2px #8ea6eb;
+    background-color: #4867c2;
+}
+
+.AdminDashboardStats {
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+}
+
+.AdminDashboardStats .StatsData,
+.AdminDashboardStats .StatsDataSmall {
+    margin: 0;
+    height: 70%;
+    font-weight: bold;
+    line-height: 75px;
+}
+
+.AdminDashboardStats .StatsLabel {
+    font-size: 0.9em;
+    height: 20%;
+    margin: 0;
+    font-weight: bold;
+}
+
+.AdminDashboardButton {
+    width: 90%;
+    height: 100px;
+    background-color: #721F46;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #e33661;
+}
+
+.AdminDashboardButton:hover {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+.AdminDashboardButton a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: #fff !important;
+}
+
+.AdminDashboardButton p {
+    margin: 0;
+}
+
+.AdminDashboardButton img {
+    height: 60%;
+    margin: 5px 0;
+}
+
+/*Admin user management*/
+.UserCard {
+    width: 85%;
+    margin: auto;
+    background-color: #3a1338;
+}
+
+.UserCard .UserCardName,
+.UserCard .UserCardEmail,
+.UserCard .UserCardLastLogin {
+    overflow: hidden;
+}
+
+
+.UserCard .UserCardName {
+    width: 100%;
+    height: 100px;
+    line-height: 1;
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFf;
+    background-color: #721F46;
+    padding: 10px;
+}
+
+.UserCard .UserCardEmail {
+    padding: 5px 15px;
+}
+
+.UserCard .UserCardEmail a {
+    color: #FFF;
+    font-size: 0.9em;
+}
+
+.UserCard .UserCardDetails {
+    padding: 10px;
+    text-align: right;
+}
+
+.UserCard .UserCardDetails a {
+    padding: 5px;
+    background-color: #a82a51;
+    border: 1px solid #e33661;
+    color: #FFF;
+}
+
+.UserCard .UserCardDetails a:hover {
+    background-color: #e33661;
+    border: 1px solid #a82a51;
+}
+
+/*Admin General*/
+.SpartaStoreTable {
+    color: #FFF !important;
+}
+
+.SpartaStoreTable th {
+    font-weight: bold;
+}
+
+.SpartaStoreTable thead {
+    background: #e33661;
+}
+
+.SpartaStoreTable tbody {
+    background: #3e1438;
+}
+
+.SpartaStoreTable .SpartaStoreButton a{
+    color: #FFF !important;
+    margin: 5px !important;
+}
+
+/*FAQs*/
+.FAQ {
+    color: #FFF;
+}
+
+.FAQTitle {
+    background-color: #e33661;
+}
+
+.FAQBody {
+    background-color: #390d26;
+    min-height: unset !important;
+}
+
+@media screen and (min-width: 751px) {
+    .AdminDashboardStats .StatsData {
+        font-size: 4.5em;
+    }
+
+    .AdminDashboardStats .StatsDataSmall {
+        font-size: 3em;
+    }
+}
+
 @media only screen and (max-width: 750px) {
     #LoginForm form,
     #SignUpForm form {
         min-width: 350px;
         margin: 10vmin auto !important;
     }
+
+    .AdminDashboardButton {
+        font-size: 0.9em;
+        height: 75px;
+    }
+
+    .AdminDashboardButton img {
+        height: 50%;
+        margin: 5px 0;
+    }
+
+    .AdminDashboardStats .StatsData {
+        font-size: 4em;
+    }
+
+    .AdminDashboardStats .StatsDataSmall {
+        font-size: 2.3em;
+    }
+}
+
+/*Footer*/
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -124px;
+}
+
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+
+.site-footer, .page-wrap:after {
+    /* .push must be the same height as footer */
+    height: 124px;
 }
 
 @media (min-width: 900px) {

@@ -16,16 +16,17 @@
     {
         <!--Main layout-->
 <main class="pt-4">
-    <div class="container dark-grey-text mt-5">
-
-        <a href="/Home/Products" style="display:block; margin:10px 0;">back to all products</a>
+    <div class="container dark-grey-text mt-3">
+        <div class="SpartaStoreButton">
+            <a class="btn btn-primary btn-md my-0 p" href="/Home/Products" style="display:block; margin:10px 0;">&lt; back to all products</a>
+        </div>
         <!--Grid row-->
         <div class="row wow fadeIn">
 
             <!--Grid column-->
             <div class="col-md-6 mb-4" style="text-align:center;">
                 <!-- Main product image -->
-                <img src="/Content/images/Mary_1.jpg" class="img-fluid" alt="@product.ProductName" style="width: 80%;">
+                <img src="/Content/images/@product.ImageLink" class="img-fluid" alt="@product.ProductName" style="width: 95%;">
 
             </div>
             <!--Grid column-->
@@ -44,15 +45,14 @@
                         </a>
                     </div>
 
-                    <p class="lead">
-                        <span style="color: white;">&pound;@product.Price</span>
-                    </p>
-
                     <p style="color: white;">
                         @product.ProductDescription
                     </p>
 
 
+                    <h3 class="font-weight-bold purple-text">
+                        <span style="color: white;">&pound;@product.Price</span>
+                    </h3>
 
                     @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                     {
@@ -63,11 +63,13 @@
                         <option value=@i>@i</option>
                     }
                 </select>
+                      <div class="SpartaStoreButton" style="padding: 0 10px;">
                         <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
 
                             Add to cart
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
+                        </div>
 
                     </form>
                     <!--Product rating-->
@@ -78,6 +80,7 @@
                     </div>
                     <!--Product rating-->
                     }
+              
                 </div>
                 <!--Content-->
 
@@ -122,7 +125,7 @@ else if (Model != null && Model.Count() > 0)
 <div class="container" style="padding-top:10vmin;">
 <section class="text-center mb-4">
 <!--Grid row-->
-<div class="row wow fadeIn">
+<div class="row wow fadeIn" style="justify-content:center">
 
 @foreach(Product product in Model)
                     {
@@ -133,7 +136,7 @@ else if (Model != null && Model.Count() > 0)
         <div class="card">
             <!--Card image-->
             <div class="view overlay">
-                <img src = "/Content/images/Miguel_1.jpg" class="card-img-top"
+                <img src = "/Content/images/@product.ImageLink" class="card-img-top"
                      alt="@product.ProductName">
                 <a href="/Home/Products/@product.ProductID">
                     <div class="mask rgba-white-slight"></div>
@@ -143,16 +146,9 @@ else if (Model != null && Model.Count() > 0)
             <!--Card content-->
             <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href = "/Home/Products/@product.ProductID" class="grey-text">
-                    <h5>@product.ProductName</h5>
+                <a href="/Home/Products/@product.ProductID" class="grey-text">
+                    <h5 style="min-height: 50px;">@product.ProductName</h5>
                 </a>
-                <h5 style = "max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap" >
-                    <strong>
-                        <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
-                            @product.ProductDescription
-                        </a>
-                    </strong>
-                </h5>
 
                 <span class="badge badge-pill primary-color">bestseller</span>
 
@@ -160,6 +156,12 @@ else if (Model != null && Model.Count() > 0)
                     <strong>&pound;@product.Price</strong>
                 </h4>
 
+                <div class="SpartaStoreButton" style="max-width: none;">
+                    <button class="btn btn-primary btn-md my-0 p" type="button">
+                        Add to cart
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                    </button>
+                </div>
             </div>
             <!--Card content-->
         </div>
