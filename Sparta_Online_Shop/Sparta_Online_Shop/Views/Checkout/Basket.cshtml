@@ -1,10 +1,7 @@
-﻿
+﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
 @{
     ViewBag.Title = "Basket";
 }
-
-<h2>Cart</h2>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,66 +28,33 @@
 
             <!-- Heading -->
             <h2 class="my-5 h2 text-center" style="color: white;">Cart</h2>
-
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-md-4 mb-4">
-
                     <!-- Heading -->
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
-                        <span class="badge spartaPurple badge-pill">4</span>
+                        <span class="badge spartaPurple badge-pill">@ViewBag.CartSize</span>
                     </h4>
 
                     <!-- Cart -->
                     <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
                         background: linear-gradient(to right, #f31b4e, #3a1338);
                         padding: 1.5px; border-radius: .2em;">
+                        @foreach (BasketItem item in ViewBag.BasketItems)
+                        {
                         <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
                             <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
+                                <h6 class="my-0" style="color: white; text-anchor: end">@item.Product.ProductName X @item.Quantity</h6>
+                                <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
                             </div>
-                            <span class="text-muted">£12</span>
+                            <span class="text-muted">@item.Product.Price</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-
+                        }
                     </ul>
                     <!-- Cart -->
 
-                    @using (Html.BeginForm("BasketPost", "Checkout", FormMethod.Post))
+                    @using (Html.BeginForm("Checkout", "Checkout"))
                     {
-                        <input type="text" id="Amount" name="Amount" value="2.49" />
                         <input type="submit" value="Checkout" />
                     }
-
-                </div>
-                <!--Grid column-->
-
-            </div>
-            <!--Grid row-->
-
         </div>
     </main>
     <!--Main layout-->

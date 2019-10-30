@@ -35,6 +35,17 @@ namespace Sparta_Online_Shop.Controllers
 
         public ActionResult Basket()
         {
+            var userID = GetUserID();
+            int counter = 0;
+
+            List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
+            foreach(BasketItem item in itemsInBasket)
+            {
+                 counter++;
+            }
+
+            ViewBag.CartSize = counter;
+            ViewBag.BasketItems = itemsInBasket;
             return View();
         }
 
