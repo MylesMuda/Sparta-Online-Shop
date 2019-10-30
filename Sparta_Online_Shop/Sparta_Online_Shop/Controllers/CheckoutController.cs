@@ -43,6 +43,7 @@ namespace Sparta_Online_Shop.Controllers
         [Authorize]
         public ActionResult CheckoutSuccessful()
         {
+
             //TODO: clear basket in database
             if ((string)Session[checkoutSuccessfulFlag] == "yes")
             {
@@ -117,6 +118,14 @@ namespace Sparta_Online_Shop.Controllers
                 }
             }
             return id;
+        }
+
+        [NonAction]
+        public List<Basket> GetBasket()
+        {
+            int UserID = GetUserID();
+
+            return db.Baskets.Where(item => item.UserID == UserID).ToList();
         }
 
         [NonAction]
