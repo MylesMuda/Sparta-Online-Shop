@@ -48,8 +48,7 @@ namespace Sparta_Online_Shop.Controllers
             {
                 Session[checkoutSuccessfulFlag] = "";
 
-                SaveOrder((string)Session["orderID"]);
-
+                CreateAndSaveOrder();
                 ClearBasket();
 
                 return View();
@@ -125,6 +124,24 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         [NonAction]
+        public void CreateAndSaveOrderDetails(int newlyCreatedOrder)
+        {
+            int UserID = GetUserID();
+
+            List<BasketItem> items = GetItemsInBasket();
+            foreach(BasketItem item in items)
+            {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.OrderID = 1;
+                orderDetail.ProductID = item.ProductID;
+                orderDetail.ProductPrice = item.Product.Price;
+                orderDetail.Quantity = item.Quantity;
+                db.OrderDetails.Add(orderDetail);
+            }
+            db.SaveChanges();
+        }
+
+        [NonAction]
         public void ClearBasket()
         {
             var basketItems = GetItemsInBasket();
@@ -133,14 +150,6 @@ namespace Sparta_Online_Shop.Controllers
                 db.BasketItems.Remove(item);
             }
             db.SaveChanges();
-        }
-
-        [NonAction]
-        public void SaveOrder(string orderID)
-        {
-            int UserID = GetUserID();
-
-            
         }
 
         [NonAction]
@@ -159,7 +168,7 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         [NonAction]
-        public (List<BasketItem> basketItems, double totalPrice) GetCartAndTotalPrice()
+        public (List<BasketItem> basketItems, decimal totalPrice) GetCartAndTotalPrice()
         {
             var userID = GetUserID();
 
@@ -172,7 +181,7 @@ namespace Sparta_Online_Shop.Controllers
                 totalPrice += itemPrice * ((item.Quantity != null) ? (float)item.Quantity : 1);
             }
 
-            return (itemsInBasket, (double)Math.Round(totalPrice, 2));
+            return (itemsInBasket, (decimal)Math.Round(totalPrice, 2));
         }
     }
 }
