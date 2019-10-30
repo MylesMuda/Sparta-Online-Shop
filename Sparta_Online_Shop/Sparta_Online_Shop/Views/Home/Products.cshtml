@@ -93,7 +93,7 @@ else if (Model != null && Model.Count() > 0)
 <div class="container" style="padding-top:10vmin;">
 <section class="text-center mb-4">
 <!--Grid row-->
-<div class="row wow fadeIn">
+<div class="row wow fadeIn" style="justify-content:center">
 
 @foreach(Product product in Model)
 {
@@ -114,16 +114,9 @@ else if (Model != null && Model.Count() > 0)
             <!--Card content-->
             <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href = "/Home/Products/@product.ProductID" class="grey-text">
-                    <h5>@product.ProductName</h5>
+                <a href="/Home/Products/@product.ProductID" class="grey-text">
+                    <h5 style="min-height: 50px;">@product.ProductName</h5>
                 </a>
-                <h5 style = "max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap" >
-                    <strong>
-                        <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
-                            @product.ProductDescription
-                        </a>
-                    </strong>
-                </h5>
 
                 <span class="badge badge-pill primary-color">bestseller</span>
 
@@ -131,6 +124,12 @@ else if (Model != null && Model.Count() > 0)
                     <strong>&pound;@product.Price</strong>
                 </h4>
 
+                <div class="SpartaStoreButton" style="max-width: none;">
+                    <button class="btn btn-primary btn-md my-0 p" type="button">
+                        Add to cart
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                    </button>
+                </div>
             </div>
             <!--Card content-->
         </div>
