@@ -8,12 +8,10 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class CheckoutController : Controller
     {
+        static string checkoutSuccessfulFlag = "checkout-successful";
+
         private readonly SpartaShopModel db = new SpartaShopModel();
 
-        private BasketItem BasketItemDb = new BasketItem();
-        private Basket BasketDb = new Basket();
-
-        static string checkoutSuccessfulFlag = "checkout-successful";
         // GET: Checkout
         [Authorize]
         public ActionResult Checkout()
@@ -60,25 +58,6 @@ namespace Sparta_Online_Shop.Controllers
             }
             else
                 return View("Basket");
-        }
-
-
-        //function not needed anymore. keep until basket page fully working and redirecting properly
-        [HttpPost]
-        public ActionResult Checkout(string Amount)
-        {
-            //float price;
-            ////ViewBag.Message = Amount;
-
-            //if (float.TryParse(Amount, out price))
-            //{
-            //    ViewBag.Message = Amount;
-            //    return View("Checkout");
-            //}
-
-            //return View("CheckoutError");
-
-            return View("Checkout");
         }
 
         [HttpPost]
@@ -132,6 +111,7 @@ namespace Sparta_Online_Shop.Controllers
 
             return RedirectToAction("Products", "Home");
         }
+
         [NonAction]
         public int GetUserID()
         {
