@@ -55,8 +55,9 @@ namespace Sparta_Online_Shop.Controllers
             // return View("CheckoutSuccessful");
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
-        public ActionResult AddItem(Product product)
+        public ActionResult AddItem(int Quantity, int Product)
         {
+
             return RedirectToAction("Products", "Home");
         }
 

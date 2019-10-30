@@ -53,16 +53,16 @@
                     </p>
 
 
-                    @using (Html.BeginForm("AddItem", "Checkout"))
+                    @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                     {
-                    <select aria-label="Search" class="form-control" style="width: 100px">
+                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
                     @{ int available = Math.Min((int)@product.Stock, 10); }
                     @for (int i = 1; i < available; i++)
                     {
-                        <option value="i">@i</option>
+                        <option value=@i>@i</option>
                     }
-                    </select>
-                        <button class="btn btn-primary btn-md my-0 p" type="submit">
+                </select>
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="Product" value="@product.ProductID">
                             Add to cart
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
