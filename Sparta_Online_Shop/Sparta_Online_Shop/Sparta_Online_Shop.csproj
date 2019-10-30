@@ -226,6 +226,8 @@
     <Compile Include="Models\OrderPageModel.cs" />
     <Compile Include="Models\OrderStatu.cs" />
     <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\PayPalTransaction.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductReviews.cs" />
     <Compile Include="Models\UserLogin.cs" />
