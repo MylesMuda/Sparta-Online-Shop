@@ -13,7 +13,7 @@ namespace Sparta_Online_Shop.Controllers
     public class ReviewsController : Controller
     {
         private SpartaShopModel db = new SpartaShopModel();
-
+        
         // GET
         // List of current user's reviews
         [Authorize]
@@ -26,42 +26,41 @@ namespace Sparta_Online_Shop.Controllers
             return PartialView(userReviews);
         }
 
-        //GET
-        // List of a specific product's reviews
+        // GET
+        // return a list of a specific product's reviews
         public ActionResult ProductReviews(int? productID)
         {
             if(productID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Ambiguous);
             }
-            var reviews = (from r in db.Reviews
-                           where r.ProductID == productID && r.Flagged != true
-                           select r).ToList();
-            float avgRating = 0;
-            foreach(var r in reviews)
+            var reviews = GetUserReviews(productID);
+            
+            return PartialView(reviews);
+        }
+
+        // Get overall rating of a product
+        public ActionResult ProductRating(int? productID)
+        {
+            var reviews = GetUserReviews(productID);
+            decimal avgRating = 0;
+            foreach (var r in reviews)
             {
                 avgRating += r.Rating;
             }
             avgRating /= reviews.Count;
+            avgRating = Decimal.Round(avgRating, 2);
             ViewBag.AvgRating = avgRating;
             ViewBag.NumOfReviews = reviews.Count;
-            return PartialView(reviews);
+            return PartialView();
         }
 
-        // GET: Reviews/Details/5
-        [Authorize]
-        public ActionResult Details(int? id)
+        // List of one product's reviews
+        List<Review> GetUserReviews(int? productID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Review review = db.Reviews.Find(id);
-            if (review == null)
-            {
-                return HttpNotFound();
-            }
-            return View(review);
+            return (from r in db.Reviews
+                    where r.ProductID == productID && r.Flagged != true
+                    select r).ToList();
         }
 
         // GET: Reviews/Create?ProductID=5

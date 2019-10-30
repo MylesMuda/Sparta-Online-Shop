@@ -438,6 +438,7 @@
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\UserReviews.cshtml" />
     <Content Include="Views\Reviews\ProductReviews.cshtml" />
+    <Content Include="Views\Reviews\ProductRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

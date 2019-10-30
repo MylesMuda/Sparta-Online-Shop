@@ -67,7 +67,13 @@
                         </button>
 
                     </form>
-
+                    <!--Product rating-->
+                    <div>
+                        @{
+                            Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
+                        }
+                    </div>
+                    <!--Product rating-->
                 </div>
                 <!--Content-->
 
@@ -95,13 +101,13 @@
     }
     <!--Create review-->
 
-    <!--List Reviews-->
+    <!--List all reviews-->
     <div>
         @{ 
             Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
         }
     </div>
-    <!--List Reviews-->
+    <!--List all reviews-->
 </main>
         <!--Main layout-->
      }
