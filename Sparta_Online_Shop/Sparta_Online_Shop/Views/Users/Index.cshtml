@@ -1,75 +1,65 @@
 ﻿@model IEnumerable<Sparta_Online_Shop.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Member Management";
 }
 
-<h2>Users</h2>
+<div style="width:80%; margin:60px auto;">
 
-<p>
-    <a href="Users/Create">Create</a>
-</p>
+    <!--Admin Nav Links-->
+    <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton" style="">
+                <a href="/Admin/" target="_blank">
+                    <p>Dashboard</p>
+                    <img src="~/Content/images/icons/dashboard_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/Products/" target="_blank">
+                    <p>Products</p>
+                    <img src="~/Content/images/icons/product_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/StockOrders/" target="_blank">
+                    <p>Stock</p>
+                    <img src="~/Content/images/icons/stock_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/Orders/" target="_blank">
+                    <p>Orders</p>
+                    <img src="~/Content/images/icons/orders_icon.png" />
+                </a>
+            </div>
+        </div>
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserType.TypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsVerified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivationCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastLogin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Locked)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserType.TypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsVerified)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActivationCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastLogin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Locked)
-            </td>
-            <td>
-                <a href="/Users/Details/@item.UserID">Details</a> | 
-                <a href="/Users/Delete/@item.UserID">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+    <h2 style="padding:50px 25px 0 25px; color: #ba294d; font-weight: bold;">
+        Sparta E-Store Members
+    </h2>
+
+    <div class="row wow fadeIn">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-3 mb-2">
+                <div class="UserCard">
+                    <div class="UserCardName" title="@item.FirstName @item.LastName">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</div>
+                    <div class="UserCardEmail" title="@item.UserEmail">@Html.DisplayFor(modelItem => item.UserEmail)</div>
+                    <div class="UserCardLastLogin" title="@item.LastLogin">@Html.DisplayFor(modelItem => item.LastLogin)</div>
+                    <div class="UserCardDetails"><a href="/Users/Details/@item.UserID">Details</a></div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

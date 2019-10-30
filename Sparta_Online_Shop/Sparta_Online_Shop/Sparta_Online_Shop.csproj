@@ -239,7 +239,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\background_pattern.png" />
+    <Content Include="Content\images\icons\dashboard_icon.png" />
     <Content Include="Content\images\icons\favicon.png" />
+    <Content Include="Content\images\icons\orders_icon.png" />
+    <Content Include="Content\images\icons\product_icon.png" />
+    <Content Include="Content\images\icons\stock_icon.png" />
+    <Content Include="Content\images\icons\users_icon.png" />
+    <Content Include="Content\images\DefaultProduct.jpg" />
     <Content Include="Content\images\SpartaGlobal-Logo.png" />
     <Content Include="Content\images\SpartaLogin.png" />
     <Content Include="Content\images\team2.PNG" />
@@ -423,6 +430,7 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\ContactOld.cshtml" />
+    <Content Include="Views\Home\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

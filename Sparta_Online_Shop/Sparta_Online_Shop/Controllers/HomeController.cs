@@ -140,15 +140,15 @@ namespace Sparta_Online_Shop.Controllers
                 using (var dbc = new SpartaShopModel())
                 {
                     //user.UserID = null;
-
+                    user.UserTypeID = '1';
                     //Commit user to database
                     dbc.Users.Add(user);
                     dbc.SaveChanges();
 
-                    //SendVerificationLinkEmail(user.UserEmail, user.ActivationCode.ToString());
+                    SendVerificationLinkEmail(user.UserEmail, user.ActivationCode.ToString());
 
                     //Set success message for web output
-                    message = $"You have successfully registered to MiniBank!" +
+                    message = $"Congratulations, You have successfully set up your Sparta Global Account!" +
                         $" Welcome {user.FirstName}. An account verfication email" +
                         $" has been sent to : {user.UserEmail}";
                     Status = true;

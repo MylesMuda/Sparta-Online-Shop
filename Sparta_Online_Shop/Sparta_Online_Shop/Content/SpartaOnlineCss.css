@@ -1,7 +1,14 @@
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Helvetica';
-    max-height: 100vmin;
+    /*max-height: 100vmin;*/
     background: #01181b;
+    background: #36393F;
+    background:url(/Content/images/background_pattern.png);
+
 }
 
 .nav a:hover {
@@ -182,12 +189,213 @@ body {
     padding: 0 10px;
 }
 
+.SpartaStoreButton {
+    padding: 5px;
+    text-align: center;
+    max-width: 215px;
+}
+
+.SpartaStoreButton a,
+.SpartaStoreButton button {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #3e1438 !important;
+    border: 1px solid #e33661;
+    color: #FFF;
+    margin: 0;
+}
+
+.SpartaStoreButton:hover a,
+.SpartaStoreButton:hover button {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+/*Admin Dashboard*/
+.GreenStats {
+    box-shadow: 2px 2px 2px #7fe5ce;
+    background-color: #48c2a6;
+}
+
+.BlueStats {
+    box-shadow: 2px 2px 2px #8ea6eb;
+    background-color: #4867c2;
+}
+
+.AdminDashboardStats {
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+}
+
+.AdminDashboardStats .StatsData,
+.AdminDashboardStats .StatsDataSmall {
+    margin: 0;
+    height: 70%;
+    font-weight: bold;
+    line-height: 75px;
+}
+
+.AdminDashboardStats .StatsLabel {
+    font-size: 0.9em;
+    height: 20%;
+    margin: 0;
+    font-weight: bold;
+}
+
+.AdminDashboardButton {
+    width: 90%;
+    height: 100px;
+    background-color: #721F46;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #e33661;
+}
+
+.AdminDashboardButton:hover {
+    background-color: #e33661 !important;
+    border: 1px solid #3e1438 !important;
+}
+
+.AdminDashboardButton a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: #fff !important;
+}
+
+.AdminDashboardButton p {
+    margin: 0;
+}
+
+.AdminDashboardButton img {
+    height: 60%;
+    margin: 5px 0;
+}
+
+/*Admin user management*/
+.UserCard {
+    width: 85%;
+    margin: auto;
+    background-color: #3a1338;
+}
+
+.UserCard .UserCardName,
+.UserCard .UserCardEmail,
+.UserCard .UserCardLastLogin {
+    overflow: hidden;
+}
+
+
+.UserCard .UserCardName {
+    width: 100%;
+    height: 100px;
+    line-height: 1;
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFf;
+    background-color: #721F46;
+    padding: 10px;
+}
+
+.UserCard .UserCardEmail {
+    padding: 5px 15px;
+}
+
+.UserCard .UserCardEmail a {
+    color: #FFF;
+    font-size: 0.9em;
+}
+
+.UserCard .UserCardDetails {
+    padding: 10px;
+    text-align: right;
+}
+
+.UserCard .UserCardDetails a {
+    padding: 5px;
+    background-color: #a82a51;
+    border: 1px solid #e33661;
+    color: #FFF;
+}
+
+.UserCard .UserCardDetails a:hover {
+    background-color: #e33661;
+    border: 1px solid #a82a51;
+}
+
+/*FAQs*/
+.FAQ {
+    color: #FFF;
+}
+
+.FAQTitle {
+    background-color: #e33661;
+}
+
+.FAQBody {
+    background-color: #390d26;
+    min-height: unset !important;
+}
+
+@media screen and (min-width: 751px) {
+    .AdminDashboardStats .StatsData {
+        font-size: 4.5em;
+    }
+
+    .AdminDashboardStats .StatsDataSmall {
+        font-size: 3em;
+    }
+}
+
 @media only screen and (max-width: 750px) {
     #LoginForm form,
     #SignUpForm form {
         min-width: 350px;
         margin: 10vmin auto !important;
     }
+
+    .AdminDashboardButton {
+        font-size: 0.9em;
+        height: 75px;
+    }
+
+    .AdminDashboardButton img {
+        height: 50%;
+        margin: 5px 0;
+    }
+
+    .AdminDashboardStats .StatsData {
+        font-size: 4em;
+    }
+
+    .AdminDashboardStats .StatsDataSmall {
+        font-size: 2.3em;
+    }
+}
+
+/*Footer*/
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -124px;
+}
+
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+
+.site-footer, .page-wrap:after {
+    /* .push must be the same height as footer */
+    height: 124px;
 }
 
 @media (min-width: 900px) {
