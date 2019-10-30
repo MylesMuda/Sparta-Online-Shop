@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        h1,h2,h3,h4,h5{
+            color:bisque !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -55,7 +60,7 @@
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect">
+                        <a class="nav-link waves-effect" href="~/Checkout/Basket">
                             <!-- <span class="badge red z-depth-1 mr-1"> 1 </span> -->
                             <i class="fas fa-shopping-cart" style="color: white;"></i>
                             <span class="clearfix d-none d-sm-inline-block" style="color: white;"> Cart </span>
@@ -94,13 +99,14 @@
 
         </div>
     </nav>
-    @*<div class="container body-content" style="padding:20px">
+    <div class="container body-content" style="padding-top:50px">
 
         </div>*@ 
     <div class="page-wrap">
         @RenderBody()
     </div>
     <footer class="site-footer page-footer text-center font-small mt-4 wow fadeIn">
+
         <hr class="my-4">
         <!-- Social icons -->
         <div class="pb-4">

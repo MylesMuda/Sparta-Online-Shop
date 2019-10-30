@@ -41,8 +41,6 @@
             </div>
         </div>
     </div>
-
-
     <h2 style="padding:50px 25px 0 25px; color: #ba294d; font-weight: bold;">
         Sparta E-Store Members
     </h2>
@@ -57,9 +55,11 @@
                     <div class="UserCardEmail" title="@item.UserEmail">@Html.DisplayFor(modelItem => item.UserEmail)</div>
                     <div class="UserCardLastLogin" title="@item.LastLogin">@Html.DisplayFor(modelItem => item.LastLogin)</div>
                     <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/Details/@item.UserID">Details</a></div>
+                   <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/LockOutUser/@item.UserID">Lock User</a></div>
                 </div>
             </div>
 
         }
     </div>
 </div>
+   

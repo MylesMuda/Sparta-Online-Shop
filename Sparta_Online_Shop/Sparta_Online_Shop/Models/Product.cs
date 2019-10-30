@@ -29,6 +29,8 @@ namespace Sparta_Online_Shop
         public int? Stock { get; set; }
 
         public decimal Price { get; set; }
+        
+        public string ImageLink { get; set; }
 
         public string ImageLink { get; set; }
 

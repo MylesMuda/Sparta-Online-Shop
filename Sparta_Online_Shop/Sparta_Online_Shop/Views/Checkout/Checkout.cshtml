@@ -1,7 +1,120 @@
-﻿
+﻿﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
+
 @{
     ViewBag.Title = "Checkout";
 }
 
-<h2>Checkout</h2>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sparta Global Store</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #36393F;">
+
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container wow fadeIn">
+
+            <!-- Heading -->
+            <h2 class="my-5 h2 text-center" style="color: white;">Checkout</h2>
+            <!-- Heading -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span style="color: white">Your cart - £@ViewBag.TotalPrice</span>
+                <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
+            </h4>
+            <!-- Cart -->
+            <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
+                    background: linear-gradient(to right, #f31b4e, #3a1338);
+                    padding: 1.5px; border-radius: .2em;">
+                @foreach (BasketItem item in ViewBag.BasketItems)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                        <div>
+                            <h6 class="my-0" style="color: white; text-anchor: end">
+                                @item.Product.ProductName
+                                <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                            </h6>
+                            <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
+                        </div>
+                        <span class="text-muted">@item.Product.Price</span>
+                    </li>
+                 }
+            </ul>
+            <div id="transaction-successful">
+                <h1 id=transaction-result> </h1>
+            </div>
+
+            <div id="paypal-button-container"></div>
+
+                        <div asp-action="Index" asp-controller="Form">
+                            <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
+                                <script>
+                                paypal.Buttons({
+                                    createOrder: function (data, actions) {
+                                        // Set up the transaction
+                                        return actions.order.create({
+                                           purchase_units: [{
+                                              amount: {
+                                                 value: '@ViewBag.TotalPrice'
+                                              }
+                                           }]
+                                        });
+                                    },
+                                   onApprove: function (data, actions) {
+                                        // Capture the funds from the transaction
+                                       return actions.order.capture().then(function (details) {
+
+                                        // Call your server to save the transaction
+                                        return fetch('/Checkout/PaypalPost', {
+                                            method: 'post',
+                                            redirect: 'follow',
+                                            headers: {
+                                                'content-type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                               orderID: data.orderID
+                                            })
+                                        }).then(function (response) {
+                                            return response.json();
+                                        }).then(function (data) {
+                                            window.location.replace(data.redirectUrl)
+                                        });
+                                    });
+                               }
+                            }).render('#paypal-button-container');
+                </script>
+            </div>
+            <!-- Cart -->
+        </div>
+    </main>
+    <!--Main layout-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+</body>
+
+</html>

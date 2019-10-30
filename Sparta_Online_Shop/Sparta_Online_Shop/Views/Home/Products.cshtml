@@ -49,30 +49,29 @@
                         @product.ProductDescription
                     </p>
 
+
                     <h3 class="font-weight-bold purple-text">
                         <span style="color: white;">&pound;@product.Price</span>
                     </h3>
 
+                    @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+                    {
+                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
+                    @{ int available = Math.Min((int)@product.Stock, 10); }
+                    @for (int i = 1; i < available; i++)
+                    {
+                        <option value=@i>@i</option>
+                    }
+                </select>
+                      <div class="SpartaStoreButton" style="padding: 0 10px;">
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
 
-                    <form class="d-flex justify-content-left">
-                        <!-- Default input -->
-                        @{ int available = Math.Min((int)@product.Stock, 10); }
-                        <select aria-label="Search" class="form-control" style="width: 100px">
-                            @for (int i = 1; i < available; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
-
-                        <div class="SpartaStoreButton" style="padding: 0 10px;">
-                            <button class="btn btn-primary btn-md my-0 p" type="submit">
-                                Add to cart
-                                <i class="fas fa-shopping-cart ml-1"></i>
-                            </button>
+                            Add to cart
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
                         </div>
-
-                    </form>
-
+                    }
+              
                 </div>
                 <!--Content-->
 
@@ -81,8 +80,32 @@
 
         </div>
         <!--Grid row-->
-
     </div>
+
+    <!--Create review-->
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            @{
+                Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+            }
+        </div>
+    }
+    @if (!Request.IsAuthenticated)
+    {
+        <div style="color:white">
+            @Html.ActionLink("Login", "Login", "Home") to review this product
+        </div>
+    }
+    <!--Create review-->
+
+    <!--List Reviews-->
+    <div>
+        @{ 
+            Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
+        }
+    </div>
+    <!--List Reviews-->
 </main>
         <!--Main layout-->
      }
@@ -96,7 +119,7 @@ else if (Model != null && Model.Count() > 0)
 <div class="row wow fadeIn" style="justify-content:center">
 
 @foreach(Product product in Model)
-{
+                    {
     <!--Grid column-->
 
      <div class="col-lg-3 col-md-6 mb-4">
