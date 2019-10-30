@@ -27,7 +27,8 @@ namespace Sparta_Online_Shop.Controllers
                 totalPrice += itemPrice * ((item.Quantity != null) ? (float)item.Quantity : 1);
             }
 
-            ViewBag.Message = Math.Round(totalPrice, 2).ToString();
+            ViewBag.TotalPrice = Math.Round(totalPrice, 2).ToString();
+            ViewBag.BasketItems = itemsInBasket;
             return View();
         }
 
