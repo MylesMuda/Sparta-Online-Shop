@@ -52,21 +52,21 @@
                         @product.ProductDescription
                     </p>
 
-                    <form class="d-flex justify-content-left">
-                        <!-- Default input -->
-                        @{ int available = Math.Min((int)@product.Stock, 10); }
-                        <select aria-label="Search" class="form-control" style="width: 100px">
-                            @for(int i = 1; i < available; i++){
-                                <option value="@i">@i</option>
-                            }
-                        </select>
-                        <button class="btn btn-primary btn-md my-0 p" type="submit">
+
+                    @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+                    {
+                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
+                    @{ int available = Math.Min((int)@product.Stock, 10); }
+                    @for (int i = 1; i < available; i++)
+                    {
+                        <option value=@i>@i</option>
+                    }
+                </select>
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
                             Add to cart
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
-
-                    </form>
-
+                    }
                 </div>
                 <!--Content-->
 
@@ -90,7 +90,7 @@ else if (Model != null && Model.Count() > 0)
 <div class="row wow fadeIn">
 
 @foreach(Product product in Model)
-{
+                    {
     <!--Grid column-->
 
      <div class="col-lg-3 col-md-6 mb-4">

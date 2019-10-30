@@ -3,13 +3,111 @@
     ViewBag.Title = "Basket";
 }
 
-<h2>Basket</h2>
+<h2>Cart</h2>
 
-@using (Html.BeginForm("BasketPost", "Checkout", FormMethod.Post))
-{
-    <input type="text" id="Amount" name="Amount" value="2.49" />
-    <input type="submit" value="Checkout" />
-}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sparta Global Store</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
 
+<body style="background-color: #36393F;">
 
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container wow fadeIn">
+
+            <!-- Heading -->
+            <h2 class="my-5 h2 text-center" style="color: white;">Cart</h2>
+
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+
+                    <!-- Heading -->
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Your cart</span>
+                        <span class="badge spartaPurple badge-pill">4</span>
+                    </h4>
+
+                    <!-- Cart -->
+                    <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
+                        background: linear-gradient(to right, #f31b4e, #3a1338);
+                        padding: 1.5px; border-radius: .2em;">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                            <div>
+                                <h6 class="my-0" style="color: white;">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">£12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                            <div>
+                                <h6 class="my-0" style="color: white;">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">£12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                            <div>
+                                <h6 class="my-0" style="color: white;">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">£12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                            <div>
+                                <h6 class="my-0" style="color: white;">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">£12</span>
+                        </li>
+
+                    </ul>
+                    <!-- Cart -->
+
+                    @using (Html.BeginForm("BasketPost", "Checkout", FormMethod.Post))
+                    {
+                        <input type="text" id="Amount" name="Amount" value="2.49" />
+                        <input type="submit" value="Checkout" />
+                    }
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+</body>
+
+</html>
