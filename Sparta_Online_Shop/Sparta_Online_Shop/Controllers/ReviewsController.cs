@@ -87,6 +87,7 @@ namespace Sparta_Online_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             review.ProductID = productID;
+            review.Rating = 3;
             ViewBag.SelectedProductName = db.Products.Find(productID).ProductName;
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName");

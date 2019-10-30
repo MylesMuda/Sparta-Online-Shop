@@ -61,6 +61,9 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+        <div>
+            @Html.ActionLink("Back to previous page", null, null, null, new { href = Request.UrlReferrer })
+        </div>
     </div>
 }
 <script>
@@ -78,7 +81,6 @@
                 cur.className = "fa fa-star checked"
             }
         }
-
     }
 </script>
 @section Scripts {
