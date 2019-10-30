@@ -8,8 +8,10 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class CheckoutController : Controller
     {
+        private readonly SpartaShopModel db = new SpartaShopModel();
         private BasketItem BasketItemDb = new BasketItem();
         private Basket BasketDb = new Basket();
+
         // GET: Checkout
         public ActionResult Checkout()
         {
@@ -55,10 +57,35 @@ namespace Sparta_Online_Shop.Controllers
             // return View("CheckoutSuccessful");
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
-        public ActionResult AddItem(int Quantity, int Product)
+        public ActionResult AddItem(int Quantity, int ProductID)
         {
-            GetUserID();
+            Basket userBasket = null;
+            int userID = GetUserID();
 
+            List<Basket> baskets = db.Baskets.Where(b => b.UserID == userID).ToList();
+            // if(baskets != null)
+            // {
+            if (baskets.Count > 0)
+            {
+                //user has a basket
+                userBasket = baskets[0];
+            }
+            else
+            {
+                userBasket = new Basket();
+                userBasket.UserID = userID;
+
+                db.Baskets.Add(userBasket);
+                db.SaveChanges();
+            }
+            // }
+
+            BasketItem basketItem = new BasketItem();
+            basketItem.BasketID = userBasket.BasketID;
+            basketItem.ProductID = ProductID;
+            basketItem.Quantity = Quantity;
+            db.BasketItems.Add(basketItem);
+            db.SaveChanges();
 
             return RedirectToAction("Products", "Home");
         }
