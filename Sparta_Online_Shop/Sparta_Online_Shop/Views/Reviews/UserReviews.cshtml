@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Sparta_Online_Shop.Review>
+
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+
+<table class="table" style="color:white">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfReview)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flagged)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </td>
+            <td>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= item.Rating)
+                    {
+                        <span class="fa fa-star checked"></span>
+                    }
+                    else
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfReview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flagged)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReviewID }, new { }) |
+            </td>
+        </tr>
+    }
+
+</table>
