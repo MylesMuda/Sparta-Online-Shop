@@ -56,7 +56,8 @@
                         <!-- Default input -->
                         @{ int available = Math.Min((int)@product.Stock, 10); }
                         <select aria-label="Search" class="form-control" style="width: 100px">
-                            @for(int i = 1; i < available; i++){
+                            @for (int i = 1; i < available; i++)
+                            {
                                 <option value="@i">@i</option>
                             }
                         </select>
@@ -75,8 +76,32 @@
 
         </div>
         <!--Grid row-->
-
     </div>
+
+    <!--Create review-->
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            @{
+                Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+            }
+        </div>
+    }
+    @if (!Request.IsAuthenticated)
+    {
+        <div style="color:white">
+            @Html.ActionLink("Login", "Login", "Home") to review this product
+        </div>
+    }
+    <!--Create review-->
+
+    <!--List Reviews-->
+    <div>
+        @{ 
+            Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
+        }
+    </div>
+    <!--List Reviews-->
 </main>
         <!--Main layout-->
      }

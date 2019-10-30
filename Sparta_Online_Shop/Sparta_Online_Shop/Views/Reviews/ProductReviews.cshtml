@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Sparta_Online_Shop.Review>
+
+
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+
+<div style="color:white">
+    @for (int i = 1; i <= 5; i++)
+    {
+        if (i <= ViewBag.AvgRating)
+        {
+            <span class="fa fa-star checked"></span>
+        }
+        else
+        {
+            <span class="fa fa-star"></span>
+        }
+    }
+    <p>@ViewBag.AvgRating average based on @ViewBag.NumOfReviews reviews.</p>
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <div>
+                <div>
+                    @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+                </div>
+                <div>
+                    Rating: @Html.DisplayFor(modelItem => item.Rating)
+                </div>
+                <div>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= item.Rating)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    }
+                </div>
+            </div>
+            <div>
+                <p>@Html.DisplayFor(modelItem => item.ReviewText)</p>
+            </div>
+        </div>
+
+    }
+</div>
