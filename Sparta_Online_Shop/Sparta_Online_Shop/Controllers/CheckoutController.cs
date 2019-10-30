@@ -69,6 +69,8 @@ namespace Sparta_Online_Shop.Controllers
                 return View("Basket");
         }
 
+
+        //function not needed anymore. keep until basket page fully working and redirecting properly
         [HttpPost]
         public ActionResult Checkout(string Amount)
         {
