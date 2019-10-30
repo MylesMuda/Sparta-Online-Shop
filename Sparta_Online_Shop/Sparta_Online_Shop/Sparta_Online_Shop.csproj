@@ -240,6 +240,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\background_pattern.png" />
+    <Content Include="Content\images\creators\Alykhan.jpg" />
+    <Content Include="Content\images\creators\Fuat.jpg" />
+    <Content Include="Content\images\creators\Mary.jpg" />
+    <Content Include="Content\images\creators\Miguel.jpg" />
+    <Content Include="Content\images\creators\Mohssin.jpg" />
+    <Content Include="Content\images\creators\Myles.jpg" />
+    <Content Include="Content\images\creators\Ruoyi.jpg" />
+    <Content Include="Content\images\creators\Ryan.jpg" />
+    <Content Include="Content\images\creators\Samuel.jpg" />
+    <Content Include="Content\images\creators\team.jpg" />
     <Content Include="Content\images\icons\dashboard_icon.png" />
     <Content Include="Content\images\icons\favicon.png" />
     <Content Include="Content\images\icons\orders_icon.png" />

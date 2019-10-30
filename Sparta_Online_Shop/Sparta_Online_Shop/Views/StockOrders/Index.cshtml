@@ -3,87 +3,82 @@
 @{
     ViewBag.Title = "Stock Management";
 }
-<div style="width:80%; margin:60px auto;">
+    <div style="width:80%; margin:60px auto;">
 
-    <!--Admin Nav Links-->
-    <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
-        <div class="col-3 col-sm-3 col-md-3 mb-2">
-            <div class="AdminDashboardButton" style="">
-                <a href="/Admin/" target="_blank">
-                    <p>Dashboard</p>
-                    <img src="~/Content/images/icons/dashboard_icon.png" />
-                </a>
+        <!--Admin Nav Links-->
+        <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton" style="">
+                    <a href="/Admin/">
+                        <p>Dashboard</p>
+                        <img src="~/Content/images/icons/dashboard_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/Users/">
+                        <p>Users</p>
+                        <img src="~/Content/images/icons/users_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/Products/" >
+                        <p>Products</p>
+                        <img src="~/Content/images/icons/product_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/Orders/" >
+                        <p>Orders</p>
+                        <img src="~/Content/images/icons/orders_icon.png" />
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="col-3 col-sm-3 col-md-3 mb-2">
-            <div class="AdminDashboardButton">
-                <a href="/Users/" target="_blank">
-                    <p>Users</p>
-                    <img src="~/Content/images/icons/users_icon.png" />
-                </a>
-            </div>
-        </div>
-        <div class="col-3 col-sm-3 col-md-3 mb-2">
-            <div class="AdminDashboardButton">
-                <a href="/Products/" target="_blank">
-                    <p>Products</p>
-                    <img src="~/Content/images/icons/product_icon.png" />
-                </a>
-            </div>
-        </div>
-        <div class="col-3 col-sm-3 col-md-3 mb-2">
-            <div class="AdminDashboardButton">
-                <a href="/Orders/" target="_blank">
-                    <p>Orders</p>
-                    <img src="~/Content/images/icons/orders_icon.png" />
-                </a>
-            </div>
-        </div>
+
+
+        <h2 style="padding:50px 0px 10px 0px; color: #ba294d; font-weight: bold;">
+            Stock Management
+        </h2>
+
+        <table class="SpartaStoreTable table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stock) units
+                        </td>
+                        <td class="SpartaStoreButton" >
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-default" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-
-
-    <h2 style="padding:50px 25px 0 25px; color: #ba294d; font-weight: bold;">
-        Stock Management
-    </h2>
-</div>
-
-<h2>Update Stock</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID })
-            </td>
-        </tr>
-    }
-
-</table>
-<div>
-    <h2>@Html.ActionLink("Admin Home", "Index", "Admin")</h2>
-    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
-    <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
-</div>

@@ -10,7 +10,7 @@
     <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton" style="">
-                <a href="/Admin/" target="_blank">
+                <a href="/Admin/" >
                     <p>Dashboard</p>
                     <img src="~/Content/images/icons/dashboard_icon.png" />
                 </a>
@@ -18,7 +18,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/Products/" target="_blank">
+                <a href="/Products/" >
                     <p>Products</p>
                     <img src="~/Content/images/icons/product_icon.png" />
                 </a>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/StockOrders/" target="_blank">
+                <a href="/StockOrders/" >
                     <p>Stock</p>
                     <img src="~/Content/images/icons/stock_icon.png" />
                 </a>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/Orders/" target="_blank">
+                <a href="/Orders/" >
                     <p>Orders</p>
                     <img src="~/Content/images/icons/orders_icon.png" />
                 </a>
@@ -56,7 +56,7 @@
                     <div class="UserCardName" title="@item.FirstName @item.LastName">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</div>
                     <div class="UserCardEmail" title="@item.UserEmail">@Html.DisplayFor(modelItem => item.UserEmail)</div>
                     <div class="UserCardLastLogin" title="@item.LastLogin">@Html.DisplayFor(modelItem => item.LastLogin)</div>
-                    <div class="UserCardDetails"><a href="/Users/Details/@item.UserID">Details</a></div>
+                    <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/Details/@item.UserID">Details</a></div>
                 </div>
             </div>
 
