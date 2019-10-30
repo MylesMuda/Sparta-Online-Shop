@@ -77,6 +77,7 @@ namespace Sparta_Online_Shop.Controllers
 
                     if (product != null)
                     {
+
                         products.Add(product);
                     }
                     else
