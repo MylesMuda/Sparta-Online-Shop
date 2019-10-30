@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
+﻿﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
 @{
     ViewBag.Title = "Basket";
 }
@@ -31,7 +31,7 @@
                     <!-- Heading -->
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
-                        <span class="badge spartaPurple badge-pill">@ViewBag.CartSize</span>
+                        <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
                     </h4>
 
                     <!-- Cart -->
@@ -42,7 +42,10 @@
                         {
                         <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
                             <div>
-                                <h6 class="my-0" style="color: white; text-anchor: end">@item.Product.ProductName X @item.Quantity</h6>
+                                <h6 class="my-0" style="color: white; text-anchor: end">
+                                    @item.Product.ProductName
+                                    <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                                </h6>
                                 <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
                             </div>
                             <span class="text-muted">@item.Product.Price</span>

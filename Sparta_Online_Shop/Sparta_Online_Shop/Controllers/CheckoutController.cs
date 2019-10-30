@@ -36,15 +36,9 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult Basket()
         {
             var userID = GetUserID();
-            int counter = 0;
 
             List<BasketItem> itemsInBasket = db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
-            foreach(BasketItem item in itemsInBasket)
-            {
-                 counter++;
-            }
 
-            ViewBag.CartSize = counter;
             ViewBag.BasketItems = itemsInBasket;
             return View();
         }
@@ -101,6 +95,7 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult AddItem(int Quantity, int ProductID)
         {
             Basket UserBasket = null;
+            BasketItem currentRow = null;
             int UserID = GetUserID();
 
             List<Basket> Baskets = db.Baskets.Where(b => b.UserID == UserID).ToList();
@@ -117,12 +112,22 @@ namespace Sparta_Online_Shop.Controllers
                 db.SaveChanges();
             }
 
-            BasketItem NewBasketItem = new BasketItem();
-            NewBasketItem.BasketID = UserBasket.BasketID;
-            NewBasketItem.ProductID = ProductID;
-            NewBasketItem.Quantity = Quantity;
+            List<BasketItem> BasketItems = db.BasketItems.Where(item => item.BasketID == UserBasket.BasketID && item.ProductID == ProductID).ToList();
+            if(BasketItems.Count > 0)
+            {
+                currentRow = BasketItems[0];
+            }
+            else
+            {
+                currentRow = new BasketItem();
+                currentRow.BasketID = UserBasket.BasketID;
+                currentRow.ProductID = ProductID;
+                currentRow.Quantity = 0;
+                db.BasketItems.Add(currentRow);
+                db.SaveChanges();
+            }
 
-            db.BasketItems.Add(NewBasketItem);
+            currentRow.Quantity += Quantity;
             db.SaveChanges();
 
             return RedirectToAction("Products", "Home");
