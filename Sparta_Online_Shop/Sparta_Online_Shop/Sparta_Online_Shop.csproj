@@ -424,14 +424,11 @@
     <Content Include="Views\StockOrders\Edit.cshtml" />
     <Content Include="Views\Home\CreditsOld.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\ContactOld.cshtml" />
-    
     <Content Include="Views\Checkout\CheckoutSuccessful.cshtml" />
     <Content Include="Views\Checkout\CheckoutError.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

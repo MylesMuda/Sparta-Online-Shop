@@ -8,7 +8,8 @@ namespace Sparta_Online_Shop.Controllers
 {
     public class CheckoutController : Controller
     {
-        private SpartaShopModel db = new SpartaShopModel();
+        private BasketItem BasketItemDb = new BasketItem();
+        private Basket BasketDb = new Basket();
         // GET: Checkout
         public ActionResult Checkout()
         {
@@ -18,15 +19,6 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult Basket()
         {
             return View();
-        }
-        [HttpPost]
-        public ActionResult AddItem()
-        {
-            //if (ModelState.IsValid)
-            //{
-
-            //}
-            return RedirectToAction("Basket");
         }
         public ActionResult CheckoutError()
         {
@@ -62,6 +54,10 @@ namespace Sparta_Online_Shop.Controllers
 
             // return View("CheckoutSuccessful");
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
+        }
+        public ActionResult AddItem(Product product)
+        {
+            return RedirectToAction("Products", "Home");
         }
 
     }
