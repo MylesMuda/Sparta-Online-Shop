@@ -48,7 +48,8 @@ namespace Sparta_Online_Shop.Controllers
             {
                 Session[checkoutSuccessfulFlag] = "";
 
-                CreateAndSaveOrder();
+                int newOrderID = CreateAndSaveOrder();
+                CreateAndSaveOrderDetails(newOrderID);
                 ClearBasket();
 
                 return View();
@@ -132,7 +133,7 @@ namespace Sparta_Online_Shop.Controllers
             foreach(BasketItem item in items)
             {
                 OrderDetail orderDetail = new OrderDetail();
-                orderDetail.OrderID = 1;
+                orderDetail.OrderID = newlyCreatedOrder;
                 orderDetail.ProductID = item.ProductID;
                 orderDetail.ProductPrice = item.Product.Price;
                 orderDetail.Quantity = item.Quantity;
