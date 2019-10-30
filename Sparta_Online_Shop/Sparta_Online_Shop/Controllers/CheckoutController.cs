@@ -57,7 +57,6 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult PaypalPost(string orderID)
         {
             Session["orderID"] = orderID;
-
             Session[checkoutSuccessfulFlag] = "yes";
 
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
@@ -118,6 +117,13 @@ namespace Sparta_Online_Shop.Controllers
                 }
             }
             return id;
+        }
+
+        [NonAction]
+        public List<BasketItem> GetItemsInBasket()
+        {
+            int userID = GetUserID();
+            return db.BasketItems.Where(item => item.Basket.UserID == userID).ToList();
         }
 
         [NonAction]

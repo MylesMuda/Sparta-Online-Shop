@@ -4,23 +4,6 @@
     ViewBag.Title = "Checkout";
 }
 
-
-<script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
-
-@*<button onclick="DoPost('123456')">Click me</button>
-
-    @using (Html.BeginForm("PaypalPost", "Checkout", FormMethod.Post))
-    {
-        <input type="text" id="Amount" name="Amount" value="" />
-        <input type="submit" value="Checkout" />
-    }*@
-
-
-@*// Show a success message to your buyer
-    //var msg = 'thank you for your cooporation ' + details.payer.name.given_name;
-    //var theDiv = document.getElementById("transaction-result");
-    //theDiv.innerHTML += msg;*@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,6 +149,7 @@
                             <div id="paypal-button-container"></div>
 
                             <div asp-action="Index" asp-controller="Form">
+                                <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
                                 <script>
                                 paypal.Buttons({
                                     createOrder: function (data, actions) {
@@ -173,7 +157,7 @@
                                         return actions.order.create({
                                            purchase_units: [{
                                               amount: {
-                                                 value: '@ViewBag.Message'
+                                                 value: '@ViewBag.TotalPrice'
                                               }
                                            }]
                                         });
