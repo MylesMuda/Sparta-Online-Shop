@@ -77,7 +77,7 @@ namespace Sparta_Online_Shop.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LockOutUser([Bind(Include = "UserID,UserTypeID,Locked")] User user)
+        public ActionResult LockOutUser(User user)
         {
             var userToUpdate = db.Users.Find(user.UserID);
             userToUpdate.Locked = user.Locked;

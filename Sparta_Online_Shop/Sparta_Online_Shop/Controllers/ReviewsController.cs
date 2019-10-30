@@ -22,30 +22,7 @@ namespace Sparta_Online_Shop.Controllers
             var products = db.Products.ToList();
             return View(products);
         }
-
-        // Return all reviews to the view
-        public ActionResult Reviews()
-        {
-            var reviews = db.Reviews.ToList();
-            return View(reviews);
-        }
-
-        // GET: Reviews/Details/5
-        [Authorize]
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Review review = db.Reviews.Find(id);
-            if (review == null)
-            {
-                return HttpNotFound();
-            }
-            return View(review);
-        }
-
+        
         // GET: Reviews/Create?ProductID=5
         // Pass in productID of the selected product
         [Authorize]
@@ -145,22 +122,7 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", review.UserID);
             return View(review);
         }
-
-        [Authorize(Roles = "Admin")]
-        // GET: Reviews/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Review review = db.Reviews.Find(id);
-            if (review == null)
-            {
-                return HttpNotFound();
-            }
-            return View(review);
-        }
+        
 
         [Authorize(Roles = "Admin")]
         // POST: Reviews/Delete/5

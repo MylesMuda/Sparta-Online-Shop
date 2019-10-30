@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -92,7 +91,7 @@ namespace Sparta_Online_Shop.Controllers
             using (var db = new SpartaShopModel())
             {
                 var orderToUpdate = db.Orders.Find(order.OrderID);
-                orderToUpdate.OrderStatusID = order.OrderStatusID;
+                if (orderToUpdate != null) orderToUpdate.OrderStatusID = order.OrderStatusID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -109,7 +108,8 @@ namespace Sparta_Online_Shop.Controllers
             return View(GetAllOrders().Where(order => order.orderStatus.OrderStatusID != 4).ToList());
         }
 
-        public List<OrderPageModel> GetAllOrders()
+        [NonAction]
+        public static List<OrderPageModel> GetAllOrders()
         {
             var ordersToAdd = new List<OrderPageModel>();
             using (var db = new SpartaShopModel())
@@ -117,11 +117,12 @@ namespace Sparta_Online_Shop.Controllers
                 var orders = db.Orders;
                 foreach (var order in orders)
                 {
-                    var orderToAdd = new OrderPageModel();
+                    var orderToAdd = new OrderPageModel
+                    {
+                        order = order,
 
-                    orderToAdd.order = order;
-                    orderToAdd.orderDetails = order.OrderDetails;
-                    //orderToAdd.orderDetails = order.OrderDetails.Where(x => x.OrderID == order.OrderID);
+                        orderDetails = order.OrderDetails
+                    };
 
                     orderToAdd.orderProducts = orderToAdd.orderDetails.
                         Select(detail => detail.Product).
