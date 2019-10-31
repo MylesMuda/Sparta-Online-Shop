@@ -25,14 +25,15 @@
 <body style="background-color: #36393F;">
 
     <!--Main layout-->
-    <main class="mt-5 pt-4">
+    <main>
         <div class="container wow fadeIn">
 
             <!-- Heading -->
-            <h2 class="my-5 h2 text-center" style="color: white;">Checkout</h2>
+            <h2 class="mt-5 h2 text-center" style="color: #df3a63; font-weight: bold;">Checkout</h2>
             <!-- Heading -->
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span style="color: white">Your cart - £@ViewBag.TotalPrice</span>
+                @*<span style="color: white">Your cart - £@ViewBag.TotalPrice</span>*@
+                <span></span>
                 <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
             </h4>
             <!-- Cart -->
@@ -47,21 +48,24 @@
                                 @item.Product.ProductName
                                 <span class="badge spartaPurple badge-pill">@item.Quantity</span>
                             </h6>
-                            <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
+                            <small class="text-muted" style="text-anchor: end;color:#d6dbdf !important;">@item.Product.ProductDescription</small>
                         </div>
-                        <span class="text-muted">@item.Product.Price</span>
+                        <span class="text-muted" style="color:#d6dbdf !important;">@item.Product.Price</span>
                     </li>
                  }
             </ul>
             <div id="transaction-successful">
                 <h1 id=transaction-result> </h1>
             </div>
+            <div style="text-align:right; margin:20px; ">
+                <span style="color:#d6dbdf; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
+            </div>
+            <div>
+                <div style="margin-left: auto; min-width: initial; width: 200px;height: 100px;" id="paypal-button-container"></div>
 
-            <div id="paypal-button-container"></div>
-
-                        <div asp-action="Index" asp-controller="Form">
-                            <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
-                                <script>
+                <div asp-action="Index" asp-controller="Form">
+                    <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
+                    <script>
                                 paypal.Buttons({
                                     createOrder: function (data, actions) {
                                         // Set up the transaction
@@ -95,7 +99,8 @@
                                     });
                                }
                             }).render('#paypal-button-container');
-                </script>
+                    </script>
+                </div>
             </div>
             <!-- Cart -->
         </div>

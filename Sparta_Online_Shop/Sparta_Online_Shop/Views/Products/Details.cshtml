@@ -11,51 +11,51 @@
     </div>
     
     <div class="SpartaStoreButton">
-        <a class="btn btn-default" href="/Products/Edit/@Model.product.ProductID">Edit @Model.product.ProductName</a>
+        <a class="btn btn-default" href="/Products/Edit/@Model.Product.ProductID">Edit @Model.Product.ProductName</a>
     </div>
 
     <h2 style="padding:20px 0 10px 0; color: #ba294d; font-weight: bold;">
-        @Model.product.ProductName Details
+        @Model.Product.ProductName Details
     </h2>
 
     <div style="color: #dbcbd4;">
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.product.ProductName)
+                @Html.DisplayNameFor(model => model.Product.ProductName)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.product.ProductName)
+                @Html.DisplayFor(model => model.Product.ProductName)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.product.ProductDescription)
+                @Html.DisplayNameFor(model => model.Product.ProductDescription)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.product.ProductDescription)
+                @Html.DisplayFor(model => model.Product.ProductDescription)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.product.Stock)
+                @Html.DisplayNameFor(model => model.Product.Stock)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.product.Stock) units
+                @Html.DisplayFor(model => model.Product.Stock) units
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.product.Price)
+                @Html.DisplayNameFor(model => model.Product.Price)
             </dt>
           
             <dd>
-                @Html.DisplayFor(model => model.product.Price)
+                @Html.DisplayFor(model => model.Product.Price)
             </dd>
         </dl>
     </div>
 
     <h2 style="padding:20px 0 10px 0; color: #ba294d; font-weight: bold;">
-        @Model.product.ProductName Reviews
+        @Model.Product.ProductName Reviews
     </h2>
 
     <div>
@@ -77,7 +77,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.reviews)
+                @foreach (var item in Model.Reviews)
                 {
                     <tr>
                         <td>

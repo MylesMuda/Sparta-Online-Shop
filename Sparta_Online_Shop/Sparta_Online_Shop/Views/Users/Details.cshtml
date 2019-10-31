@@ -4,11 +4,30 @@
     ViewBag.Title = "User Details";
 }
 
-<style>
-   
+@{
 
-</style>
+    bool IsLocked = false;
 
+    string UserActiveStyle = "";
+
+    string UserActiveText = "";
+
+    if (@Model.user.Locked != null)
+    {
+        IsLocked = (bool)@Model.user.Locked;
+
+        UserActiveStyle = IsLocked ? "UserStatusLocked" : "UserStatus";
+
+        UserActiveText = IsLocked ? "Locked" : "Active";
+}
+    else
+    {
+        UserActiveStyle ="";
+
+        UserActiveText = "";
+    }
+
+}
 
 <div style="width:80%; margin:60px auto;">
 
@@ -19,7 +38,10 @@
     <div class="row wow fadeIn">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-2">
             <div class="UserCard">
-                <div class="UserCardName" title="@Model.user.FirstName @Model.user.LastName">@Html.DisplayFor(modelItem => modelItem.user.FirstName) @Html.DisplayFor(modelItem => @Model.user.LastName)</div>
+                <div class="UserCardName" title="@Model.user.FirstName @Model.user.LastName">
+                    <div class="@UserActiveStyle">@UserActiveText</div>
+                    @Html.DisplayFor(modelItem => modelItem.user.FirstName) @Html.DisplayFor(modelItem => @Model.user.LastName)
+                </div>
                 <div class="UserCardEmail" title="@Model.user.UserEmail">@Html.DisplayFor(modelItem => modelItem.user.UserEmail)</div>
                 <div class="UserCardLastLogin" title="@Model.user.LastLogin">@Html.DisplayFor(modelItem => modelItem.user.LastLogin)</div>
             </div>

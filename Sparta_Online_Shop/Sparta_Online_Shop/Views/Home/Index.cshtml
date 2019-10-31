@@ -183,15 +183,15 @@
                                     <div class="card-body text-center">
                                         <!--Category & Title-->
                                         <a href="/Home/Products/@product.ProductID" class="grey-text">
-                                            <h5 style="min-height: 50px;" >@product.ProductName</h5>
+                                            <h5 style="min-height: 50px;">@product.ProductName</h5>
                                         </a>
                                         @*<h5 style="max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap">
-                                            <strong>
-                                                <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
-                                                    @product.ProductDescription
-                                                </a>
-                                            </strong>
-                                        </h5>*@
+            <strong>
+                <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
+                    @product.ProductDescription
+                </a>
+            </strong>
+        </h5>*@
 
                                         <span class="badge badge-pill primary-color">bestseller</span>
 
@@ -199,12 +199,18 @@
                                             <strong>&pound;@product.Price</strong>
                                         </h4>
 
-                                        <div class="SpartaStoreButton" style="max-width: none;" >
-                                            <button class="btn btn-primary btn-md my-0 p" type="button">
-                                                Add to cart
-                                                <i class="fas fa-shopping-cart ml-1"></i>
-                                            </button>
-                                        </div>
+                                        @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+                                        {
+                                            <input aria-label="Search" class="form-control" type="hidden" value="1" name="Quantity" />
+                                            <div class="SpartaStoreButton" style="max-width: none;">
+                                                <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+
+                                                    Add to cart
+                                                    <i class="fas fa-shopping-cart ml-1"></i>
+                                                </button>
+                                            </div>
+
+                                        }
                                     </div>
                                     <!--Card content-->
                                 </div>

@@ -81,6 +81,7 @@ namespace Sparta_Online_Shop.Controllers
         {
             var userToUpdate = db.Users.Find(user.UserID);
             userToUpdate.Locked = user.Locked;
+            userToUpdate.ConfirmPassword = userToUpdate.UserPassword;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

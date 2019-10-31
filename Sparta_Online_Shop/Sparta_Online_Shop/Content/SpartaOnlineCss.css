@@ -417,6 +417,7 @@ body {
     color: #FFf;
     background-color: #721F46;
     padding: 10px;
+    position:relative;
 }
 
 .UserCard .UserCardEmail {
@@ -429,8 +430,9 @@ body {
 }
 
 .UserCard .UserCardDetails {
-    padding: 10px;
+    padding:5px 10px;
     text-align: right;
+    max-width:none;
 }
 
 .UserCard .UserCardDetails a {
@@ -438,11 +440,31 @@ body {
     background-color: #a82a51;
     border: 1px solid #e33661;
     color: #FFF;
+    margin:0;
 }
 
 .UserCard .UserCardDetails a:hover {
     background-color: #e33661;
     border: 1px solid #a82a51;
+}
+
+.UserStatus,
+.UserStatusLocked {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 0.5em;
+}
+
+.UserStatus {
+    background-color: #419d56;
+    color: #164d22;
+}
+
+.UserStatusLocked {
+    background-color: #e35151;
+    color: #640303;
 }
 
 /*Admin General*/
