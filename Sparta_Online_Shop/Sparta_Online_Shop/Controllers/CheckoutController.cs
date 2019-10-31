@@ -73,7 +73,6 @@ namespace Sparta_Online_Shop.Controllers
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult AddItem(int? Quantity, int? ProductID)
         {
