@@ -65,7 +65,7 @@ namespace Sparta_Online_Shop.Controllers
                     where r.ProductID == productID && r.Flagged != true
                     select r).ToList();
         }
-
+        
         // GET: Reviews/Create?ProductID=5
         // Pass in productID of the selected product
         [Authorize]
@@ -174,6 +174,18 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU", review.ProductID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", review.UserID);
             return View(review);
+        }
+
+        [Authorize(Roles = "Admin")]
+        // POST: Reviews/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Review review = db.Reviews.Find(id);
+            db.Reviews.Remove(review ?? throw new InvalidOperationException());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // Populate the rating drop down list with numbers from 1 to 5

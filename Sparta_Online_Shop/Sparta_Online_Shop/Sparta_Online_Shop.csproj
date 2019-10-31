@@ -213,7 +213,7 @@
     <Compile Include="Controllers\Admin\UsersController.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketItem.cs" />
-    <Compile Include="Controllers\AccountManagementController.cs" />
+    <Compile Include="Controllers\AccountManagement\AccountManagementController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Creator.cs" />
@@ -225,10 +225,12 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderPageModel.cs" />
     <Compile Include="Models\OrderStatu.cs" />
+    <Compile Include="Models\PasswordConfirmationModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\PayPalTransaction.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductReview.cs" />
     <Compile Include="Models\ProductReviews.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserOrderStatusOrder.cs" />
@@ -422,7 +424,7 @@
     <Content Include="Views\Home\ProductPageOld.cshtml" />
     <Content Include="Views\Checkout\Basket.cshtml" />
     <Content Include="Views\AccountManagement\Index.cshtml" />
-    <Content Include="Views\AccountManagement\LastOrders.cshtml" />
+    <Content Include="Views\AccountManagement\AllOrders.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Home\PrivacyPolicy.cshtml" />
@@ -461,6 +463,8 @@
     <Content Include="Views\Reviews\ProductRating.cshtml" />
     <Content Include="Views\Home\Index - Copy.cshtml" />
     <Content Include="Views\Shared\LoggedInUserName.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\AccountManagement\AllReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
