@@ -23,6 +23,12 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.TotalPrice = cart.totalPrice.ToString();
             ViewBag.BasketItems = cart.basketItems;
 
+            var totalStripePrice = (float)cart.totalPrice;
+            ViewBag.TotalStripePrice = totalStripePrice * 100;
+
+            var stripePublishKey = "pk_test_ii1MdJAIrjyooeSNgb2tw1lm00PAZuxSp1";
+            ViewBag.StripePublishKey = stripePublishKey;
+
             return View();
         }
 
@@ -33,20 +39,30 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.TotalPrice = cart.totalPrice.ToString();
             ViewBag.BasketItems = cart.basketItems;
 
-            var stripePublishKey = "pk_test_ii1MdJAIrjyooeSNgb2tw1lm00PAZuxSp1";
-            ViewBag.StripePublishKey = stripePublishKey;
+            
+            
 
             return View();
         }
 
+        [Authorize]
+        public ActionResult CheckoutError()
+        {
+            return View();
+        }
 
+        [Authorize]
         [HttpPost]
-        public ActionResult StripePost(string stripeEmail, string stripeToken)
+        public ActionResult StripeCheckoutSuccessfull(string stripeEmail, string stripeToken)
         {
             var customers = new CustomerService();
             var charges = new ChargeService();
 
-            var amount = ViewBag.TotalPrice;
+            var cart = GetCartAndTotalPrice();
+
+            var totalStripePrice = (float)cart.totalPrice;
+
+            var amount = totalStripePrice;
             long newAmount = (long)(amount * 100);
 
             var customer = customers.Create(new CustomerCreateOptions
@@ -54,7 +70,6 @@ namespace Sparta_Online_Shop.Controllers
                 Email = stripeEmail,
                 Source = stripeToken
             });
-
 
             var charge = charges.Create(new ChargeCreateOptions
             {
@@ -64,14 +79,15 @@ namespace Sparta_Online_Shop.Controllers
                 Customer = customer.Id
             });
 
-            return View();
-        }
+            Session["orderID"] = customer.Id;
+            Session[checkoutSuccessfulFlag] = "yes";
 
+            int newOrderID = CreateAndSaveOrder();
+            CreateAndSaveOrderDetails(newOrderID);
+            SaveOrderIDFromPayment(newOrderID, (string)Session["OrderID"]);
+            ClearBasket();
 
-        [Authorize]
-        public ActionResult CheckoutError()
-        {
-            return View();
+            return View("CheckoutSuccessful");
         }
 
         [Authorize]

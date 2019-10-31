@@ -88,7 +88,7 @@ namespace Sparta_Online_Shop.Controllers
         }
         
         [HttpGet]
-        public ActionResult Products(int? id)
+        public ActionResult Products(int? id, string searchString)
         {
             List<Product> products = new List<Product>();
             if (id == null)
@@ -112,6 +112,34 @@ namespace Sparta_Online_Shop.Controllers
                     else
                     {
                         products = null;
+                    }
+                }
+            }
+
+            using (var dbc = new SpartaShopModel())
+            {
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    if (searchString == "All")
+                    {
+                        products = dbc.Products.ToList();
+                    }
+                    else if (searchString == "Hoodies")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Hoodie")).ToList();
+                    }
+                    else if (searchString == "miscellaneous")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Key") || p.ProductName.Contains("Note") || p.ProductName.Contains("Umbrella")).ToList();
+                    }
+                    else if (searchString == "Food")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Brownies")).ToList();
+                    }
+                    else
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains(searchString) || searchString == null).ToList();
+
                     }
                 }
             }

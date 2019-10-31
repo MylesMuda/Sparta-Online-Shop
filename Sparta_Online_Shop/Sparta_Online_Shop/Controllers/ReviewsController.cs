@@ -48,7 +48,15 @@ namespace Sparta_Online_Shop.Controllers
             {
                 avgRating += r.Rating;
             }
-            avgRating /= reviews.Count;
+            if (avgRating != 0)
+            {
+                avgRating /= reviews.Count;
+            }
+            else
+            {
+                avgRating = 0;
+            }
+            
             avgRating = Decimal.Round(avgRating, 2);
             ViewBag.AvgRating = avgRating;
             ViewBag.NumOfReviews = reviews.Count;
