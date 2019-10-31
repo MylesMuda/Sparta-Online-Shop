@@ -15,226 +15,192 @@
     foreach (Product product in Model)
     {
         <!--Main layout-->
-<main class="pt-4">
-    <div class="container dark-grey-text mt-3">
-        <div class="SpartaStoreButton">
-            <a class="btn btn-primary btn-md my-0 p" href="/Home/Products" style="display:block; margin:10px 0;">&lt; back to all products</a>
-        </div>
-        <!--Grid row-->
-        <div class="row wow fadeIn">
+        <main class="pt-4">
+            <div class="container dark-grey-text mt-3">
+                <div class="SpartaStoreButton">
+                    <a class="btn btn-primary btn-md my-0 p" href="/Home/Products" style="display:block; margin:10px 0;">&lt; back to all products</a>
+                </div>
+                <!--Grid row-->
+                <div class="row wow fadeIn">
 
-            <!--Grid column-->
-            <div class="col-md-6 mb-4" style="text-align:center;">
-                <!-- Main product image -->
-                <img src="/Content/images/@product.ImageLink" class="img-fluid" alt="@product.ProductName" style="width: 95%;">
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4" style="text-align:center;">
+                        <!-- Main product image -->
+                        <img src="/Content/images/@product.ImageLink" class="img-fluid" alt="@product.ProductName" style="width: 95%;">
 
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-6 mb-4">
-
-                <!--Content-->
-                <div class="p-4">
-
-                    <div class="mb-3">
-                        <a href="">
-                            <span class="badge red mr-1">Bestseller</span>
-                        </a>
-                        <a>
-                            <p style="font-size: 2em; color: white;">@product.ProductName</p>
-                        </a>
                     </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4">
 
-                    <p style="color: white;">
-                        @product.ProductDescription
-                    </p>
+                        <!--Content-->
+                        <div class="p-4">
+
+                            <div class="mb-3">
+                                <a href="">
+                                    <span class="badge red mr-1">Bestseller</span>
+                                </a>
+                                <a>
+                                    <p style="font-size: 2em; color: white;">@product.ProductName</p>
+                                </a>
+                            </div>
+
+                            <p style="color: white;">
+                                @product.ProductDescription
+                            </p>
 
 
-                    <h3 class="font-weight-bold purple-text">
-                        <span style="color: white;">&pound;@product.Price</span>
-                    </h3>
+                            <h3 class="font-weight-bold purple-text">
+                                <span style="color: white;">&pound;@product.Price</span>
+                            </h3>
 
-                    @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
-                    {
-                        <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
-                            @{ int available = Math.Min((int)@product.Stock, 10); }
-                            @for (int i = 1; i < available; i++)
+                            @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                             {
-                                <option value=@i>@i</option>
-                            }
-                        </select>
-                      <div class="SpartaStoreButton" style="padding-left: 0;">
-                        <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
+                                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
+                                    @{ int available = Math.Min((int)@product.Stock, 10); }
+                                    @for (int i = 1; i < available; i++)
+                                    {
+                                        <option value=@i>@i</option>
+                                    }
+                                </select>
+                                <div class="SpartaStoreButton" style="padding-left: 0;">
+                                    <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
 
-                                Add to cart
-                                <i class="fas fa-shopping-cart ml-1"></i>
-                            </button>
-                        </div>
+                                        Add to cart
+                                        <i class="fas fa-shopping-cart ml-1"></i>
+                                    </button>
+                                </div>
 
-                        <!--Product rating-->
-                        <div>
-                            @{
-                                Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
+                                <!--Product rating-->
+                                <div>
+                                    @{
+                                        Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
+                                    }
+                                </div>
+                                <!--Product rating-->
                             }
+
                         </div>
-                        <!--Product rating-->
-                    }
+                        <!--Content-->
+
+                    </div>
+                    <!--Grid column-->
 
                 </div>
-                <!--Content-->
-
+                <!--Grid row-->
             </div>
-            <!--Grid column-->
 
-        </div>
-        <!--Grid row-->
-    </div>
-
-    <!--Create review-->
-    @if (Request.IsAuthenticated)
-    {
-        <div>
-            @{
-                Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+            <!--Create review-->
+            @if (Request.IsAuthenticated)
+            {
+                <div>
+                    @{
+                        Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+                    }
+                </div>
             }
-        </div>
-    }
-    @if (!Request.IsAuthenticated)
-    {
-        <div style="color:white">
-            @Html.ActionLink("Login", "Login", "Home") to review this product
-        </div>
-    }
-    <!--Create review-->
-    <!--List all reviews-->
-    <div>
-        @{
-            Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
-        }
-    </div>
-    <!--List all reviews-->
-</main>
+            @if (!Request.IsAuthenticated)
+            {
+                <div style="color:white">
+                    @Html.ActionLink("Login", "Login", "Home") to review this product
+                </div>
+            }
+            <!--Create review-->
+            <!--List all reviews-->
+            <div>
+                @{
+                    Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
+                }
+            </div>
+            <!--List all reviews-->
+        </main>
         <!--Main layout-->
-     }
+    }
 }
 else if (Model != null && Model.Count() > 0)
 {
-<main>
-    <div class="container" style="padding-top:10vmin;">
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark spartaPurple mt-3 mb-5">
+    <main>
+        <div class="container" style="padding-top:10vmin;">
+            <section class="text-center mb-4">
+                <!--Grid row-->
+                <div class="row wow fadeIn" style="justify-content:center">
 
-            <!-- Navbar brand -->
-            <span class="navbar-brand">Categories:</span>
+                    @foreach (Product product in Model)
+                    {
+                        <!--Grid column-->
 
-            <!-- Collapse button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <!--Card-->
+                            <div class="card">
+                                <!--Card image-->
+                                <div class="view overlay">
+                                    <img src="/Content/images/@product.ImageLink" class="card-img-top"
+                                         alt="@product.ProductName">
+                                    <a href="/Home/Products/@product.ProductID">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <!--Card image-->
+                                <!--Card content-->
+                                <div class="card-body text-center">
+                                    <!--Category & Title-->
+                                    <a href="/Home/Products/@product.ProductID" class="grey-text">
+                                        <h5 style="min-height: 50px;">@product.ProductName</h5>
+                                    </a>
 
-            <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="basicExampleNav">
+                                    <span class="badge badge-pill primary-color">bestseller</span>
 
-                <!-- Links -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        @using (Html.BeginForm("Products", "Home", FormMethod.Get))
-                        {
-                            <div class="md-form my-0">
-                                <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="All">
+                                    <h4 class="font-weight-bold purple-text">
+                                        <strong>&pound;@product.Price</strong>
+                                    </h4>
+                                    @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+                                    {
+                                        <input aria-label="Search" class="form-control" type="hidden" value="1" name="Quantity" />
+                                        <div class="SpartaStoreButton" style="max-width: none;">
+                                            <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+
+                                                Add to cart
+                                                <i class="fas fa-shopping-cart ml-1"></i>
+                                            </button>
+                                        </div>
+
+                                    }
+
+                                </div>
+                                <!--Card content-->
                             </div>
-                        }
-                    </li>
-                    <li class="nav-item">
-                        @using (Html.BeginForm("Products", "Home", FormMethod.Get))
-                        {
-                            <div class="md-form my-0">
-                                <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Hoodies">
-                            </div>
-                        }
-                    </li>
-                    <li class="nav-item">
-                        @using (Html.BeginForm("Products", "Home", FormMethod.Get))
-                        {
-                            <div class="md-form my-0">
-                                <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="miscellaneous">
-                            </div>
-                        }
-                    </li>
-                    <li class="nav-item">
-                        @using (Html.BeginForm("Products", "Home", FormMethod.Get))
-                        {
-                            <div class="md-form my-0">
-                                <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Food">
-                            </div>
-                        }
-                    </li>
-
-                </ul>
-                <!-- Links -->
-
-                @using (Html.BeginForm("Products", "Home", FormMethod.Get))
-                {
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="SearchString">
-                    </div>
-                }
-
-
-            </div>
-            <!-- Collapsible content -->
-
-        </nav>
-        <!--/.Navbar-->
-        <section class="text-center mb-4">
-            <!--Grid row-->
-            <div class="row wow fadeIn" style="justify-content:center">
-
-                <h4 class="font-weight-bold purple-text">
-                    <strong>&pound;@product.Price</strong>
-                </h4>
-                @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
-                {
-                    <input aria-label="Search" class="form-control" type="hidden" value="1" name="Quantity" />
-                    <div class="SpartaStoreButton" style="max-width: none;">
-                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
-
-                            Add to cart
-                            <i class="fas fa-shopping-cart ml-1"></i>
-                        </button>
-                    </div>
-
-                }
-
-            </div>
-        </section>
-    </div>
-</main>
+                            <!--Card-->
+                        </div>
+                        <!--Grid column-->
+                    }
+                </div>
+            </section>
+        </div>
+    </main>
 }
 else
 {
-<h3 style = "color: #8d223d; /* Old browsers */
+    <h3 style="color: #8d223d; /* Old browsers */
 color: -moz-linear-gradient(-90deg, #3a1338 0%, #93233d 100%); /* FF3.6-15 */
 color: -webkit-linear-gradient(-90deg, #3a1338 0%,#93233d 100%); /* Chrome10-25,Safari5.1-6 */
 color: linear-gradient(135deg, #3a1338 0%,#93233d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#3a1338',
 endColorstr= '#93233d', GradientType= 1); font-weight: bold; padding:10vmin;">
-Product not found
-</h3>
+        Product not found
+    </h3>
 }
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
-<script type = "text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="~/Content/js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type = "text/javascript" src="~/Content/js/popper.min.js"></script>
+<script type="text/javascript" src="~/Content/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 @*<script type = "text/javascript" src="~/Content/js/bootstrap.min.js"></script>*@
 <!-- MDB core JavaScript -->
-<script type = "text/javascript" src="~/Content/js/mdb.min.js"></script>
+<script type="text/javascript" src="~/Content/js/mdb.min.js"></script>
 <!-- Initializations -->
-<script type = "text/javascript" >
-// Animations initialization
-new WOW().init();
+<script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
 </script>
