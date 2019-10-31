@@ -1,28 +1,29 @@
-﻿﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
+﻿﻿@model IEnumerable
+<Sparta_Online_Shop.BasketItem>
 
-@{
-    ViewBag.Title = "Checkout";
-}
+    @{
+        ViewBag.Title = "Checkout";
+    }
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sparta Global Store</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="css/style.min.css" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sparta Global Store</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="css/style.min.css" rel="stylesheet">
+    </head>
 
-<body style="background-color: #36393F;">
+    <body style="background-color: #36393F;">
 
     <!--Main layout-->
     <main>
@@ -52,7 +53,7 @@
                         </div>
                         <span class="text-muted" style="color:#d6dbdf !important;">@item.Product.Price</span>
                     </li>
-                 }
+                }
             </ul>
             <div id="transaction-successful">
                 <h1 id=transaction-result> </h1>
@@ -120,6 +121,7 @@
         // Animations initialization
         new WOW().init();
     </script>
-</body>
+    </body>
 
-</html>
+    </html>
+</Sparta_Online_Shop.BasketItem>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -15,9 +14,6 @@ namespace Sparta_Online_Shop.Controllers
         private decimal? _incomeDay = 0;
         private decimal? _incomeMonth = 0;
         private decimal? _incomeYear = 0;
-        private string _productName = "";
-        private decimal? _stockLevel = 0;
-        private decimal? _setStockLevel = 10;
 
         [Authorize(Roles = "Admin")]
 
@@ -92,7 +88,11 @@ namespace Sparta_Online_Shop.Controllers
             using (var db = new SpartaShopModel())
             {
                 var orderToUpdate = db.Orders.Find(order.OrderID);
-                orderToUpdate.OrderStatusID = order.OrderStatusID;
+                if (orderToUpdate != null)
+                {
+                    orderToUpdate.OrderStatusID = order.OrderStatusID;
+                }
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,10 +117,11 @@ namespace Sparta_Online_Shop.Controllers
                 var orders = db.Orders;
                 foreach (var order in orders)
                 {
-                    var orderToAdd = new OrderPageModel();
+                    var orderToAdd = new OrderPageModel
+                    {
+                        order = order, orderDetails = order.OrderDetails
+                    };
 
-                    orderToAdd.order = order;
-                    orderToAdd.orderDetails = order.OrderDetails;
                     //orderToAdd.orderDetails = order.OrderDetails.Where(x => x.OrderID == order.OrderID);
 
                     orderToAdd.orderProducts = orderToAdd.orderDetails.

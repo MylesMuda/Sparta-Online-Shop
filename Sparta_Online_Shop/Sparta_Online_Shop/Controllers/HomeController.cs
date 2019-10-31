@@ -28,7 +28,6 @@ namespace Sparta_Online_Shop.Controllers
         [ChildActionOnly]
         public ActionResult LoggedInUserName()
         {
-
             // set any data you need here with ViewBag object
 
             ViewBag.Name = "xyz";
