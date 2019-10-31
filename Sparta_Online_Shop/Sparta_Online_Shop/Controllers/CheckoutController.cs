@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Stripe;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,6 +26,12 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.TotalPrice = cart.totalPrice.ToString();
             ViewBag.BasketItems = cart.basketItems;
 
+            var totalStripePrice = (float)cart.totalPrice;
+            ViewBag.TotalStripePrice = totalStripePrice * 100;
+
+            var stripePublishKey = "pk_test_ii1MdJAIrjyooeSNgb2tw1lm00PAZuxSp1";
+            ViewBag.StripePublishKey = stripePublishKey;
+
             return View();
         }
 
@@ -34,6 +42,9 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.TotalPrice = cart.totalPrice.ToString();
             ViewBag.BasketItems = cart.basketItems;
 
+            
+            
+
             return View();
         }
 
@@ -41,6 +52,45 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult CheckoutError()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult StripeCheckoutSuccessfull(string stripeEmail, string stripeToken)
+        {
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+
+            var cart = GetCartAndTotalPrice();
+
+            var totalStripePrice = (float)cart.totalPrice;
+
+            var amount = totalStripePrice;
+            long newAmount = (long)(amount * 100);
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+
+            var charge = charges.Create(new ChargeCreateOptions
+            {
+                Amount = newAmount,
+                Description = "Sample Charge",
+                Currency = "gbp",
+                Customer = customer.Id
+            });
+
+            Session["orderID"] = customer.Id;
+            Session[checkoutSuccessfulFlag] = "yes";
+
+            int newOrderID = CreateAndSaveOrder();
+            CreateAndSaveOrderDetails(newOrderID);
+            SaveOrderIDFromPayment(newOrderID, (string)Session["OrderID"]);
+            ClearBasket();
+
+            return View("CheckoutSuccessful");
         }
 
         [Authorize]

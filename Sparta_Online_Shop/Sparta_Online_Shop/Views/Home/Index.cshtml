@@ -134,23 +134,49 @@
                     <!-- Links -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">
-                                All
-                                <span class="sr-only">(current)</span>
-                            </a>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                            {
+                                <div class="md-form my-0">
+                                    <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="All">
+                                </div>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hoodies</a>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                            {
+                                <div class="md-form my-0">
+                                    <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Hoodies">
+                                </div>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pens</a>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                            {
+                                <div class="md-form my-0">
+                                    <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="miscellaneous">
+                                </div>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Food</a>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                            {
+                                <div class="md-form my-0">
+                                    <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Food">
+                                </div>
+                            }
                         </li>
 
                     </ul>
                     <!-- Links -->
+
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                    {
+                        <div class="md-form my-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="SearchString">
+                        </div>
+                    }
+
+
                 </div>
                 <!-- Collapsible content -->
 
