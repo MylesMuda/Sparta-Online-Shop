@@ -48,7 +48,10 @@ namespace Sparta_Online_Shop.Controllers
             {
                 avgRating += r.Rating;
             }
-            avgRating /= reviews.Count;
+            if (reviews.Count > 0)
+            {
+                avgRating /= reviews.Count;
+            }
             avgRating = Decimal.Round(avgRating, 2);
             ViewBag.AvgRating = avgRating;
             ViewBag.NumOfReviews = reviews.Count;
@@ -79,7 +82,7 @@ namespace Sparta_Online_Shop.Controllers
             // Redirect admin to CMS page
             if(GetUserTypeID() == 2)
             {
-                return Redirect("/Admin/Index");
+                //return Redirect("/Admin/Index");
             }
             if(review.UserID == 0)
             {
@@ -110,7 +113,7 @@ namespace Sparta_Online_Shop.Controllers
             }
             if (GetUserTypeID() == 2)
             {
-                return Redirect("/Admin/Index");
+                //return Redirect("/Admin/Index");
             }
             if (ModelState.IsValid)
             {

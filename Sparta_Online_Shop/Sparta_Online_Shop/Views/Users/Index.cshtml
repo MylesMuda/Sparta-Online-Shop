@@ -2,7 +2,14 @@
 
 @{
     ViewBag.Title = "Member Management";
+
+    bool IsLocked = false;
+
+    string UserActiveStyle = "UserStatusLocked";
+
+    string UserActiveText = "Locked";
 }
+
 
 <div style="width:80%; margin:60px auto;">
 
@@ -10,7 +17,7 @@
     <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton" style="">
-                <a href="/Admin/" >
+                <a href="/Admin/">
                     <p>Dashboard</p>
                     <img src="~/Content/images/icons/dashboard_icon.png" />
                 </a>
@@ -18,7 +25,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/Products/" >
+                <a href="/Products/">
                     <p>Products</p>
                     <img src="~/Content/images/icons/product_icon.png" />
                 </a>
@@ -26,7 +33,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/StockOrders/" >
+                <a href="/StockOrders/">
                     <p>Stock</p>
                     <img src="~/Content/images/icons/stock_icon.png" />
                 </a>
@@ -34,7 +41,7 @@
         </div>
         <div class="col-3 col-sm-3 col-md-3 mb-2">
             <div class="AdminDashboardButton">
-                <a href="/Orders/" >
+                <a href="/Admin/Orders/">
                     <p>Orders</p>
                     <img src="~/Content/images/icons/orders_icon.png" />
                 </a>
@@ -48,18 +55,34 @@
     <div class="row wow fadeIn">
         @foreach (var item in Model)
         {
+            if (@item.Locked != null)
+            {
+                IsLocked = (bool)@item.Locked;
+
+                UserActiveStyle = IsLocked ? "UserStatusLocked" : "UserStatus";
+
+                UserActiveText = IsLocked ? "Locked" : "Active";
+            }
+            else
+            {
+                UserActiveStyle ="";
+
+                UserActiveText = "";
+            }
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-3 mb-2">
                 <div class="UserCard">
-                    <div class="UserCardName" title="@item.FirstName @item.LastName">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</div>
+                    <div class="UserCardName" title="@item.FirstName @item.LastName">
+                        <div class="@UserActiveStyle">@UserActiveText</div>
+                        @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                    </div>
                     <div class="UserCardEmail" title="@item.UserEmail">@Html.DisplayFor(modelItem => item.UserEmail)</div>
                     <div class="UserCardLastLogin" title="@item.LastLogin">@Html.DisplayFor(modelItem => item.LastLogin)</div>
                     <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/Details/@item.UserID">Details</a></div>
-                   <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/LockOutUser/@item.UserID">Lock User</a></div>
+                    <div class="UserCardDetails SpartaStoreButton"><a class="btn btn-default" href="/Users/LockOutUser/@item.UserID">Lock User</a></div>
                 </div>
             </div>
 
         }
     </div>
 </div>
-   
