@@ -1,4 +1,4 @@
-﻿﻿@model IEnumerable
+﻿
 <Sparta_Online_Shop.BasketItem>
 
     @{
@@ -21,6 +21,10 @@
         <link href="css/mdb.min.css" rel="stylesheet">
         <!-- Your custom styles (optional) -->
         <link href="css/style.min.css" rel="stylesheet">
+
+        <style>
+            .stripe-button-el { display: none; }
+        </style>
     </head>
 
     <body style="background-color: #36393F;">
@@ -102,17 +106,24 @@
                             }).render('#paypal-button-container');
                     </script>
                 </div>
+                <div>
+                    <form action="/Checkout/StripeCheckoutSuccessfull" method="POST">
+                        <script src="//checkout.stripe.com/v2/checkout.js"
+                                class="stripe-button"
+                                data-key="@ViewBag.StripePublishKey"
+                                data-locale="auto"
+                                data-description="Input card information for payment"
+                                data-amount="@ViewBag.TotalStripePrice">
+                        </script>
+                        <button type="submit" class="btn btn-mdb-color float-right">
+                            <strong style="letter-spacing: 0.07em;">
+                                Pay with Stripe
+                            </strong>
+                        </button>
+                    </form>
+                </div>
+                
             </div>
-
-            <form action="/Checkout/StripeCheckoutSuccessfull" method="POST">
-                <script src="//checkout.stripe.com/v2/checkout.js"
-                        class="stripe-button btn-block"
-                        data-key="@ViewBag.StripePublishKey"
-                        data-locale="auto"
-                        data-description="Input card information for payment"
-                        data-amount="@ViewBag.TotalStripePrice">
-                </script>
-            </form>
             <!-- Cart -->
         </div>
     </main>
