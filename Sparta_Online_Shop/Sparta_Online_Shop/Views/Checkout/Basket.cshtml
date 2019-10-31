@@ -4,15 +4,3 @@
 }
 
 <h2>Basket</h2>
-
-
-<form action="/Checkout/Checkout" method="POST">
-    <input type="text" id="Amount" name="Amount" value="5.00" />
-    <script src="//checkout.stripe.com/v2/checkout.js"
-            class="stripe-button"
-            data-key="@ViewBag.stripePublishKey"
-            data-locale="auto"
-            data-description="Input card information for payment"
-            data-amount="@ViewBag.testAmount">
-    </script>
-</form>
