@@ -115,7 +115,7 @@ namespace Sparta_Online_Shop.Controllers
             currentRow.Quantity += Quantity;
             db.SaveChanges();
 
-            return RedirectToAction("Products", "Home");
+            return RedirectToAction("Basket", "Checkout");
         }
 
         [NonAction]
