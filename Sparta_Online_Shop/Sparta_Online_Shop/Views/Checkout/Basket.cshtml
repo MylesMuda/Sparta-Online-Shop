@@ -1,63 +1,76 @@
-﻿﻿@model IEnumerable<Sparta_Online_Shop.BasketItem>
-@{
-    ViewBag.Title = "Basket";
-}
-<!DOCTYPE html>
-<html lang="en">
+﻿<Sparta_Online_Shop.BasketItem>
+    @{
+        ViewBag.Title = "Basket";
+    }
+    <style>
+    .SpartaFormWrapper form{
+        text-align:right;
+    }
+</style>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sparta Global Store</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="css/style.min.css" rel="stylesheet">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<body style="background-color: #36393F;">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sparta Global Store</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="css/style.min.css" rel="stylesheet">
+    </head>
+
+    <body style="background-color: #36393F;">
 
     <!--Main layout-->
-    <main class="mt-5 pt-4">
+    <main class="pt-4">
         <div class="container wow fadeIn">
 
             <!-- Heading -->
-            <h2 class="my-5 h2 text-center" style="color: white;">Cart</h2>
-                    <!-- Heading -->
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span style="color: white">Your cart - £@ViewBag.TotalPrice</span>
-                        <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
-                    </h4>
+            <h2 class="mt-5 h2 text-center" style="color: #df3a63; font-weight: bold;">Cart</h2>
+            <!-- Heading -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                @*<span style="color: white">Your cart - £@ViewBag.TotalPrice</span>*@
+                <span></span>
+                <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
+            </h4>
 
-                    <!-- Cart -->
-                    <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
+            <!-- Cart -->
+            <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
                         background: linear-gradient(to right, #f31b4e, #3a1338);
                         padding: 1.5px; border-radius: .2em;">
-                        @foreach (BasketItem item in ViewBag.BasketItems)
-                        {
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white; text-anchor: end">
-                                    @item.Product.ProductName
-                                    <span class="badge spartaPurple badge-pill">@item.Quantity</span>
-                                </h6>
-                                <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
-                            </div>
-                            <span class="text-muted">@item.Product.Price</span>
-                        </li>
-                        }
-                    </ul>
-                    <!-- Cart -->
-
-                    @using (Html.BeginForm("Checkout", "Checkout"))
-                    {
-                        <input type="submit" value="Checkout" />
-                    }
+                @foreach (BasketItem item in ViewBag.BasketItems)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                        <div>
+                            <h6 class="my-0" style="color: white; text-anchor: end">
+                                @item.Product.ProductName
+                                <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                            </h6>
+                            <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
+                        </div>
+                        <span class="text-muted">@item.Product.Price</span>
+                    </li>
+                }
+            </ul>
+            <div style="text-align:right; margin:20px; ">
+                <span style="color:#d6dbdf; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
+            </div>
+            <!-- Cart -->
+            <div class="SpartaFormWrapper">
+                @using (Html.BeginForm("Checkout", "Checkout"))
+                {
+                    <div class="SpartaStoreButton" style="display:inline-block">
+                        <input style="padding: 10px 40px;" class="btn btn-default" type="submit" value="Checkout"/>
+                    </div>
+                }
+            </div>
         </div>
     </main>
     <!--Main layout-->
@@ -75,6 +88,7 @@
         // Animations initialization
         new WOW().init();
     </script>
-</body>
+    </body>
 
-</html>
+    </html>
+</Sparta_Online_Shop.BasketItem>

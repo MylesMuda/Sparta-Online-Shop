@@ -54,6 +54,17 @@ namespace Sparta_Online_Shop.Controllers
             return View(products);
         }
 
+        [ChildActionOnly]
+        public ActionResult LoggedInUserName()
+        {
+            // set any data you need here with ViewBag object
+
+            ViewBag.Name = "xyz";
+
+            return PartialView("_LoggedInUserName");
+
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

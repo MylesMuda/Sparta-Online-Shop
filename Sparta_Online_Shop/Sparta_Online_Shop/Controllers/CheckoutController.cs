@@ -11,6 +11,9 @@ namespace Sparta_Online_Shop.Controllers
     public class CheckoutController : Controller
     {
         static string checkoutSuccessfulFlag = "checkout-successful";
+        static string paymentType = "paymentType";
+        static string paymentTypePaypal = "paypal";
+        static string paymentTypeStripe = "stripe";
 
         private readonly SpartaShopModel db = new SpartaShopModel();
 
@@ -110,17 +113,22 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult PaypalPost(string orderID)
         {
             Session["orderID"] = orderID;
             Session[checkoutSuccessfulFlag] = "yes";
+            Session[paymentType] = paymentTypePaypal;
 
             return Json(new { redirectUrl = "/checkout/checkoutsuccessful" });
         }
 
         [Authorize]
-        public ActionResult AddItem(int Quantity, int ProductID)
+        public ActionResult AddItem(int? Quantity, int? ProductID)
         {
+            if(Quantity == null || ProductID == null)
+                return RedirectToAction("Products", "Home");
+
             Basket UserBasket = null;
             BasketItem currentRow = null;
             int UserID = GetUserID();
@@ -148,7 +156,7 @@ namespace Sparta_Online_Shop.Controllers
             {
                 currentRow = new BasketItem();
                 currentRow.BasketID = UserBasket.BasketID;
-                currentRow.ProductID = ProductID;
+                currentRow.ProductID = ProductID.Value;
                 currentRow.Quantity = 0;
                 db.BasketItems.Add(currentRow);
                 db.SaveChanges();

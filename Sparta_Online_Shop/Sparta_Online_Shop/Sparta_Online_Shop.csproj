@@ -253,6 +253,7 @@
     <Content Include="Content\images\background_pattern.png" />
     <Content Include="Content\images\creators\Alykhan.jpg" />
     <Content Include="Content\images\creators\Fuat.jpg" />
+    <Content Include="Content\images\creators\Jonathan.jpg" />
     <Content Include="Content\images\creators\Mary.jpg" />
     <Content Include="Content\images\creators\Miguel.jpg" />
     <Content Include="Content\images\creators\Mohssin.jpg" />
@@ -463,6 +464,7 @@
     <Content Include="Views\Reviews\ProductReviews.cshtml" />
     <Content Include="Views\Reviews\ProductRating.cshtml" />
     <Content Include="Views\Home\Index - Copy.cshtml" />
+    <Content Include="Views\Shared\LoggedInUserName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

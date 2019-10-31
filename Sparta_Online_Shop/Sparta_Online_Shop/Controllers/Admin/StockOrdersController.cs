@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Sparta_Online_Shop;
 
+// ReSharper disable once CheckNamespace
 namespace Sparta_Online_Shop.Controllers
 {
     public class StockOrdersController : Controller

@@ -63,8 +63,8 @@
                                 <option value=@i>@i</option>
                             }
                         </select>
-                        <div class="SpartaStoreButton" style="padding: 0 10px;">
-                            <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+                      <div class="SpartaStoreButton" style="padding-left: 0;">
+                        <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
 
                                 Add to cart
                                 <i class="fas fa-shopping-cart ml-1"></i>
@@ -191,48 +191,22 @@ else if (Model != null && Model.Count() > 0)
             <!--Grid row-->
             <div class="row wow fadeIn" style="justify-content:center">
 
-                @foreach (Product product in Model)
+                <h4 class="font-weight-bold purple-text">
+                    <strong>&pound;@product.Price</strong>
+                </h4>
+                @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                 {
-                    <!--Grid column-->
+                    <input aria-label="Search" class="form-control" type="hidden" value="1" name="Quantity" />
+                    <div class="SpartaStoreButton" style="max-width: none;">
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
 
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <!--Card-->
-                        <div class="card">
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="/Content/images/@product.ImageLink" class="card-img-top"
-                                     alt="@product.ProductName">
-                                <a href="/Home/Products/@product.ProductID">
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-                            <!--Card content-->
-                            <div class="card-body text-center">
-                                <!--Category & Title-->
-                                <a href="/Home/Products/@product.ProductID" class="grey-text">
-                                    <h5 style="min-height: 50px;">@product.ProductName</h5>
-                                </a>
-
-                                <span class="badge badge-pill primary-color">bestseller</span>
-
-                                <h4 class="font-weight-bold purple-text">
-                                    <strong>&pound;@product.Price</strong>
-                                </h4>
-
-                                <div class="SpartaStoreButton" style="max-width: none;">
-                                    <button class="btn btn-primary btn-md my-0 p" type="button">
-                                        Add to cart
-                                        <i class="fas fa-shopping-cart ml-1"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!--Card content-->
-                        </div>
-                        <!--Card-->
+                            Add to cart
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
                     </div>
-                    <!--Grid column-->
+
                 }
+
             </div>
         </section>
     </div>
