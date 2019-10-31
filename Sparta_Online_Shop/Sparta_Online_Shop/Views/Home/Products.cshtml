@@ -53,6 +53,7 @@
                     </p>
 
 
+
                     @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                     {
                 <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
@@ -63,6 +64,7 @@
                     }
                 </select>
                         <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+
                             Add to cart
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
@@ -75,8 +77,32 @@
 
         </div>
         <!--Grid row-->
-
     </div>
+
+    <!--Create review-->
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            @{
+                Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+            }
+        </div>
+    }
+    @if (!Request.IsAuthenticated)
+    {
+        <div style="color:white">
+            @Html.ActionLink("Login", "Login", "Home") to review this product
+        </div>
+    }
+    <!--Create review-->
+
+    <!--List Reviews-->
+    <div>
+        @{ 
+            Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
+        }
+    </div>
+    <!--List Reviews-->
 </main>
         <!--Main layout-->
      }
