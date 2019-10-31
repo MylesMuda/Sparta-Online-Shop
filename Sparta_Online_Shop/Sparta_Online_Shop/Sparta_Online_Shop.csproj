@@ -101,6 +101,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -226,15 +229,19 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderPageModel.cs" />
     <Compile Include="Models\OrderStatu.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\PayPalTransaction.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductReviews.cs" />
     <Compile Include="Models\UserLogin.cs" />
-    <Compile Include="Models\ProductReview.cs" />
     <Compile Include="Models\UserOrderStatusOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SpartaShopModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -243,7 +250,24 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\background_pattern.png" />
+    <Content Include="Content\images\creators\Alykhan.jpg" />
+    <Content Include="Content\images\creators\Fuat.jpg" />
+    <Content Include="Content\images\creators\Mary.jpg" />
+    <Content Include="Content\images\creators\Miguel.jpg" />
+    <Content Include="Content\images\creators\Mohssin.jpg" />
+    <Content Include="Content\images\creators\Myles.jpg" />
+    <Content Include="Content\images\creators\Ruoyi.jpg" />
+    <Content Include="Content\images\creators\Ryan.jpg" />
+    <Content Include="Content\images\creators\Samuel.jpg" />
+    <Content Include="Content\images\creators\team.jpg" />
+    <Content Include="Content\images\icons\dashboard_icon.png" />
     <Content Include="Content\images\icons\favicon.png" />
+    <Content Include="Content\images\icons\orders_icon.png" />
+    <Content Include="Content\images\icons\product_icon.png" />
+    <Content Include="Content\images\icons\stock_icon.png" />
+    <Content Include="Content\images\icons\users_icon.png" />
+    <Content Include="Content\images\DefaultProduct.jpg" />
     <Content Include="Content\images\SpartaGlobal-Logo.png" />
     <Content Include="Content\images\SpartaLogin.png" />
     <Content Include="Content\images\team2.PNG" />
@@ -270,19 +294,19 @@
     <Content Include="Content\css\modules\animations-extended.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
-    <Content Include="Content\images\Brownies_1.jpg" />
+    <Content Include="Content\images\ChocolateBrownies.jpg" />
     <Content Include="Content\images\Fuat_1.jpg" />
-    <Content Include="Content\images\KeyChain_1.jpg" />
+    <Content Include="Content\images\SpartaKeyChain.jpg" />
     <Content Include="Content\images\Logo.png" />
     <Content Include="Content\images\Mary_1.jpg" />
-    <Content Include="Content\images\Mary_2.jpg" />
-    <Content Include="Content\images\Miguel_1.jpg" />
+    <Content Include="Content\images\SpartaHoodieWomens.jpg" />
+    <Content Include="Content\images\SpartaHoodieMens.jpg" />
     <Content Include="Content\images\Myles_1%28happy%29.jpg" />
     <Content Include="Content\images\Myles_2%28sad%29.jpg" />
     <Content Include="Content\images\Myles_3%28happy%29.jpg" />
-    <Content Include="Content\images\Notepad_1.jpg" />
+    <Content Include="Content\images\SpartaNotepad.jpg" />
     <Content Include="Content\images\team1.PNG" />
-    <Content Include="Content\images\Umbrella_1.jpg" />
+    <Content Include="Content\images\SpartaUmbrella.jpg" />
     <Content Include="Content\img\flags.png" />
     <Content Include="Content\img\lightbox\default-skin.png" />
     <Content Include="Content\img\lightbox\default-skin.svg" />
@@ -368,6 +392,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Admin\OpenOrders.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\UpdateOrderStatus.cshtml" />
+    <Content Include="Views\Products\FlagReview.cshtml" />
+    <Content Include="Views\Users\LockOutUser.cshtml" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -418,7 +447,6 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\StockOrders\Index.cshtml" />
     <Content Include="Views\StockOrders\Edit.cshtml" />
@@ -427,6 +455,14 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\Credits.cshtml" />
     <Content Include="Views\Home\ContactOld.cshtml" />
+    <Content Include="Views\Checkout\CheckoutSuccessful.cshtml" />
+    <Content Include="Views\Checkout\CheckoutError.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\UserReviews.cshtml" />
+    <Content Include="Views\Reviews\ProductReviews.cshtml" />
+    <Content Include="Views\Reviews\ProductRating.cshtml" />
+    <Content Include="Views\Home\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

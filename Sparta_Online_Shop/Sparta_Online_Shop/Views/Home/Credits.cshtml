@@ -4,15 +4,27 @@
 }
 
 <style type="text/css">
-body{
-    background-color: #36393F;
-}
 
 html,
 body,
 header,
 .carousel {
     height: 90vh;
+}
+
+.CreatorImage{
+    margin:auto;
+    height:150px; 
+    width:150px; 
+    border-radius:100%;
+    background-size: 105% !important; 
+    background-position: center !important; 
+    border: 2px solid rgba(0,0,0,0.5);
+}
+
+.CreatorName{
+    font-weight:bold;
+    color:#ba294d;
 }
 
 @@media (max-width: 740px) {
@@ -41,10 +53,12 @@ header,
 <main>
     
     <div style="width: 100%;max-height: 500px;overflow: hidden;">
-        <img src="/Content/images/team2.PNG" alt="" style="width: 100%;margin-top: -10%;">
+        <img src="~/Content/images/creators/team.jpg" alt="" style="width: 100%;margin-top: -10%;">
     </div>
+
     <div style="text-align: left; height: 50%; padding:0 10%;">
-        <h2 style="padding:20px 0; color: #c41541; font-weight: bold;">
+
+        <h2 style="padding:20px 0; color: #ba294d; font-weight: bold;">
             MEET THE TEAM<span style="font-size:0.8em; color:#fff; font-weight:normal"> - Engineering 41</span>
         </h2>
 
@@ -54,10 +68,10 @@ header,
                 @foreach(Creator creator in @Model)
                 {
                     <div class="col-sm-6 col-md-3 mb-5">
-                        <a href="https://www.github.com/aesmailsparta" target="_blank">
-                            <div style="margin:auto; background:url(/Content/images/Miguel_1.jpg); height:150px; width:150px; border-radius:100%; background-size: cover; background-position: center; border: 2px solid rgba(0,0,0,0.5);"></div>
+                        <a href="@creator.GitHubLink" target="_blank">
+                            <div class="CreatorImage" style="background:url(/Content/images/creators/@creator.ProfileImage);"></div>
 
-                            <div>@creator.CreatorName</div>
+                            <div class="CreatorName">@creator.CreatorName</div>
                         </a>
                     </div>
                  }

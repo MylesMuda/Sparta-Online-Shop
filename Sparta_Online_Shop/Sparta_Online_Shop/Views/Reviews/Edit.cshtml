@@ -1,0 +1,95 @@
+﻿@model Sparta_Online_Shop.Review
+
+@{
+    ViewBag.Title = "Edit";
+}
+    <style>
+        textarea {
+            resize: none;
+        }
+        .checked {
+        color: orange;
+    }
+    </style>
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" style="color:white">
+        <h4>Review</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReviewID)
+
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.ProductID)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                var name = "star" + i;
+                                if (i <= Model.Rating)
+                                {
+                                    <span class="fa fa-star checked" id="@name" onclick="add(this,@i)"></span>
+                                }
+                                else
+                                {
+                                    <span class="fa fa-star" id="@name" onclick="add(this,@i)"></span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.Rating)@Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReviewText, "Content", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ReviewText, 3, 100, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReviewText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.DateOfReview)
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to previous page", null, null, null, new { href = Request.UrlReferrer })
+        </div>
+    </div>
+}
+<script>
+    function add(ths, sno) {
+        document.getElementById('Rating').value = sno;
+
+        for (var i = 1; i <= 5; i++) {
+            var cur = document.getElementById("star" + i)
+            cur.className = "fa fa-star"
+        }
+
+        for (var i = 1; i <= sno; i++) {
+            var cur = document.getElementById("star" + i)
+            if (cur.className == "fa fa-star") {
+                cur.className = "fa fa-star checked"
+            }
+        }
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
