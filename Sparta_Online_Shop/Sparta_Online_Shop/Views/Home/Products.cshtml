@@ -16,6 +16,55 @@
     {
         <!--Main layout-->
 <main class="pt-4">
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <div class="md-form my-0">
+                        <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="All">
+                    </div>
+                }
+            </li>
+            <li class="nav-item">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <div class="md-form my-0">
+                        <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Hoodies">
+                    </div>
+                }
+            </li>
+            <li class="nav-item">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <div class="md-form my-0">
+                        <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="miscellaneous">
+                    </div>
+                }
+            </li>
+            <li class="nav-item">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <div class="md-form my-0">
+                        <input class="btn btn-outline-white btn-sm" type="submit" aria-label="Search" name="SearchString" value="Food">
+                    </div>
+                }
+            </li>
+
+        </ul>
+        <!-- Links -->
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
+            <div class="md-form my-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="SearchString">
+            </div>
+        }
+
+
+    </div>
     <div class="container dark-grey-text mt-3">
         <div class="SpartaStoreButton">
             <a class="btn btn-primary btn-md my-0 p" href="/Home/Products" style="display:block; margin:10px 0;">&lt; back to all products</a>
@@ -56,30 +105,30 @@
 
                     @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                     {
-                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
-                    @{ int available = Math.Min((int)@product.Stock, 10); }
-                    @for (int i = 1; i < available; i++)
-                    {
-                        <option value=@i>@i</option>
-                    }
-                </select>
-                      <div class="SpartaStoreButton" style="padding: 0 10px;">
-                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+                        <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
+                            @{ int available = Math.Min((int)@product.Stock, 10); }
+                            @for (int i = 1; i < available; i++)
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        </select>
+                        <div class="SpartaStoreButton" style="padding: 0 10px;">
+                            <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
 
-                            Add to cart
-                            <i class="fas fa-shopping-cart ml-1"></i>
-                        </button>
+                                Add to cart
+                                <i class="fas fa-shopping-cart ml-1"></i>
+                            </button>
                         </div>
-                        
-                    <!--Product rating-->
-                    <div>
-                        @{
-                            Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
-                        }
-                    </div>
-                    <!--Product rating-->
+
+                        <!--Product rating-->
+                        <div>
+                            @{
+                                Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
+                            }
+                        </div>
+                        <!--Product rating-->
                     }
-              
+
                 </div>
                 <!--Content-->
 
@@ -106,10 +155,9 @@
         </div>
     }
     <!--Create review-->
-
     <!--List all reviews-->
     <div>
-        @{ 
+        @{
             Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
         }
     </div>

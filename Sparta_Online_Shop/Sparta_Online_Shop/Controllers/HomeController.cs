@@ -15,12 +15,41 @@ namespace Sparta_Online_Shop.Controllers
     public class HomeController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             List<Product> products = new List<Product>();
-            using(var dbc = new SpartaShopModel())
+
+            using (var dbc = new SpartaShopModel())
             {
                 products = dbc.Products.ToList();
+                //var products = (from p in dbc.Products
+                //               select p).ToList();
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    if (searchString == "All")
+                    {
+                        products = dbc.Products.ToList();
+                    }
+                    else if (searchString == "Hoodies")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Hoodie")).ToList();
+                    }
+                    else if (searchString == "miscellaneous")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Key") || p.ProductName.Contains("Note") || p.ProductName.Contains("Umbrella")).ToList();
+                    }
+                    else if (searchString == "Food")
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains("Brownies")).ToList();
+                    }
+                    else
+                    {
+                        products = dbc.Products.Where(p => p.ProductName.Contains(searchString) || searchString == null).ToList();
+
+                    }
+                }
+
             }
             return View(products);
         }

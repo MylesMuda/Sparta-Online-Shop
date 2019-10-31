@@ -33,8 +33,40 @@ namespace Sparta_Online_Shop.Controllers
             ViewBag.TotalPrice = cart.totalPrice.ToString();
             ViewBag.BasketItems = cart.basketItems;
 
+            var stripePublishKey = "pk_test_ii1MdJAIrjyooeSNgb2tw1lm00PAZuxSp1";
+            ViewBag.StripePublishKey = stripePublishKey;
+
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult StripePost(string stripeEmail, string stripeToken)
+        {
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+
+            var amount = ViewBag.TotalPrice;
+            long newAmount = (long)(amount * 100);
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+
+
+            var charge = charges.Create(new ChargeCreateOptions
+            {
+                Amount = newAmount,
+                Description = "Sample Charge",
+                Currency = "gbp",
+                Customer = customer.Id
+            });
+
+            return View();
+        }
+
 
         [Authorize]
         public ActionResult CheckoutError()
