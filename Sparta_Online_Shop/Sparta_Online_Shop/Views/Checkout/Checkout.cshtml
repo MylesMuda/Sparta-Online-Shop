@@ -64,7 +64,7 @@
                 <div style="margin-left: auto; min-width: initial; width: 200px;height: 100px;" id="paypal-button-container"></div>
 
                 <div asp-action="Index" asp-controller="Form">
-                    <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
+                    <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP&disable-funding=card"></script>
                     <script>
                                 paypal.Buttons({
                                     createOrder: function (data, actions) {
