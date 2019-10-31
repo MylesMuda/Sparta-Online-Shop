@@ -1,63 +1,65 @@
 ﻿@model Sparta_Online_Shop.Product
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Product Confirm";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Product</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SKU)
-        </dt>
+<div style="width:80%; margin:60px auto;color: #db7b7b;">
+    <h3>Are you sure you want to delete this product?</h3>
+    <div style="color: #dbcbd4;">
+        <h4> @Html.DisplayFor(model => model.ProductName) </h4>
+        <dl class="dl-horizontal">
+            <dt>
+                SKU
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SKU)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.SKU)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
+            <dt>
+                Product Name
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
+            <dt>
+                Description
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ProductDescription)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
+            <dt>
+                Amount of Stock
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Stock) units
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dt>
+                Price
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dd>
+                &pound;@Html.DisplayFor(model => model.Price)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="SpartaDeleteCancel form-actions no-color">
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "Cancel btn btn-default" })
+                <input type="submit" value="Delete" class="Delete btn btn-default" /> 
+            </div>
+        }
+    </div>
 </div>

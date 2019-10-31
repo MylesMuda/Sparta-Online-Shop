@@ -10,12 +10,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        h1,h2,h3,h4,h5{
-            color:bisque !important;
-        }
-    </style>
-
 </head>
 <body>
     <!-- Navbar -->
@@ -23,7 +17,7 @@
         <div class="container">
 
             <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="/" >
+            <a class="navbar-brand waves-effect" href="/">
                 <img src="~/Content/images/Logo.png" alt="" style="width:100px;height:45px;">
                 <!-- <strong class="spartaPink-text">Sparta Store</strong> -->
             </a>
@@ -53,6 +47,9 @@
                     <li class="nav-item">
                         <a href="~/Home/Contact" class="nav-link waves-effect" style="color: white;">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="~/Home/FAQs" class="nav-link waves-effect" style="color: white;">FAQs</a>
+                    </li>
                 </ul>
 
                 <!-- Right -->
@@ -71,7 +68,7 @@
                             <div class="bg-dark dropdown-menu" style="font-size: 0.9em; width:150px; border-radius:0; margin:0;">
                                 @if (User.IsInRole("Admin"))
                                 {
-                                    <a href="~/Admin/" class="dropdown-item">Admin Home</a>
+                                    <a href="~/Admin/" class="dropdown-item">Dashboard</a>
                                 }
                                 else
                                 {
@@ -97,11 +94,14 @@
 
         </div>
     </nav>
-    <div class="container body-content" style="padding-top:50px">
+    @*<div class="container body-content" style="padding-top:50px">
 
+        </div>*@
+    <div class="page-wrap">
+        @RenderBody()
     </div>
-    @RenderBody()
-    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+    <footer class="site-footer page-footer text-center font-small mt-4 wow fadeIn">
+
         <hr class="my-4">
         <!-- Social icons -->
         <div class="pb-4">
@@ -120,7 +120,7 @@
         <!--Copyright-->
         <div class="footer-copyright py-3" id="#section2">
             &copy; @DateTime.Now.Year Copyright
-            <a href="https://www.spartaglobal.com/" target="_blank" style="color: white;">Company Website</a> | 
+            <a href="https://www.spartaglobal.com/" target="_blank" style="color: white;">Company Website</a> |
             <a href="/Home/Credits/" target="_blank"> Engineering 41 </a>
         </div>
         <!--/.Copyright-->
