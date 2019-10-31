@@ -1,0 +1,47 @@
+﻿@model List<ProductReview>
+
+@{
+    ViewBag.Title = "All Reviews";
+}
+<br/>
+<br/>
+<br/>
+<h2 style="color: aliceblue">
+    All Reviews
+</h2>
+
+<table class="table" style="color: aliceblue">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Review
+        </th>
+        <th>
+            Rating
+        </th>
+        <th>
+            Date of Review
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.ReviewText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review.DateOfReview)
+        </td>
+    </tr>
+}
+
+</table>
