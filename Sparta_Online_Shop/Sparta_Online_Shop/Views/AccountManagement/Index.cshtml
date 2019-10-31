@@ -3,12 +3,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>AccountManagement</h2>
+<main class="pt-4">
 
-<!--Render UserReviews As Partial View-->
-<div>
-    @{
-        Html.RenderAction("UserReviews", "Reviews");
-    }
-</div>
-
+    <!--Render UserReviews As Partial View-->
+    <div>
+        @{
+            Html.RenderAction("UserReviews", "Reviews");
+        }
+    </div>
+</main>

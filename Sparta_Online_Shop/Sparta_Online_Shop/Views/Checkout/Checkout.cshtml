@@ -3,10 +3,6 @@
     @{
         ViewBag.Title = "Checkout";
     }
-
-    <!DOCTYPE html>
-    <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,39 +62,38 @@
                 <div asp-action="Index" asp-controller="Form">
                     <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
                     <script>
-                                paypal.Buttons({
-                                    createOrder: function (data, actions) {
-                                        // Set up the transaction
-                                        return actions.order.create({
-                                           purchase_units: [{
-                                              amount: {
-                                                 value: '@ViewBag.TotalPrice'
-                                              }
-                                           }]
-                                        });
-                                    },
-                                   onApprove: function (data, actions) {
-                                        // Capture the funds from the transaction
-                                       return actions.order.capture().then(function (details) {
-
-                                        // Call your server to save the transaction
-                                        return fetch('/Checkout/PaypalPost', {
-                                            method: 'post',
-                                            redirect: 'follow',
-                                            headers: {
-                                                'content-type': 'application/json'
-                                            },
-                                            body: JSON.stringify({
-                                               orderID: data.orderID
-                                            })
-                                        }).then(function (response) {
-                                            return response.json();
-                                        }).then(function (data) {
-                                            window.location.replace(data.redirectUrl)
-                                        });
+                        paypal.Buttons({
+                            createOrder: function (data, actions) {
+                                // Set up the transaction
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: '@ViewBag.TotalPrice'
+                                        }
+                                    }]
+                                });
+                            },
+                            onApprove: function (data, actions) {
+                                // Capture the funds from the transaction
+                                return actions.order.capture().then(function (details) {
+                                    // Call your server to save the transaction
+                                    return fetch('/Checkout/PaypalPost', {
+                                        method: 'post',
+                                        redirect: 'follow',
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            orderID: data.orderID
+                                        })
+                                    }).then(function (response) {
+                                        return response.json();
+                                    }).then(function (data) {
+                                        window.location.replace(data.redirectUrl)
                                     });
-                               }
-                            }).render('#paypal-button-container');
+                                });
+                            }
+                        }).render('#paypal-button-container');
                     </script>
                 </div>
             </div>
@@ -121,6 +116,4 @@
         new WOW().init();
     </script>
     </body>
-
-    </html>
 </Sparta_Online_Shop.BasketItem>
