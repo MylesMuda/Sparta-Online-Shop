@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Sparta_Online_Shop;
 
+// ReSharper disable once CheckNamespace
 namespace Sparta_Online_Shop.Controllers
 {
     public class ProductsController : Controller
@@ -66,7 +63,10 @@ namespace Sparta_Online_Shop.Controllers
         public ActionResult FlagReview(Review review)
         {
             var reviewToUpdate = db.Reviews.Find(review.ReviewID);
-            reviewToUpdate.Flagged = review.Flagged;
+            if (reviewToUpdate != null)
+            {
+                reviewToUpdate.Flagged = review.Flagged;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -81,9 +81,6 @@ namespace Sparta_Online_Shop.Controllers
 
 
         // POST: Products/Create
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -119,9 +116,6 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         // POST: Products/Edit/5
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]

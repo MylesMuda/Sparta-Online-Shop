@@ -14,9 +14,6 @@ namespace Sparta_Online_Shop.Controllers
         private decimal? _incomeDay = 0;
         private decimal? _incomeMonth = 0;
         private decimal? _incomeYear = 0;
-        private string _productName = "";
-        private decimal? _stockLevel = 0;
-        private decimal? _setStockLevel = 10;
 
         [Authorize(Roles = "Admin")]
 
@@ -91,7 +88,10 @@ namespace Sparta_Online_Shop.Controllers
             using (var db = new SpartaShopModel())
             {
                 var orderToUpdate = db.Orders.Find(order.OrderID);
-                if (orderToUpdate != null) orderToUpdate.OrderStatusID = order.OrderStatusID;
+                if (orderToUpdate != null)
+                {
+                    orderToUpdate.OrderStatusID = order.OrderStatusID;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

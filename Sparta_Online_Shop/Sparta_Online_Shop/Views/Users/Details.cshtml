@@ -1,123 +1,107 @@
 ﻿@model Sparta_Online_Shop.UserOrderStatusOrder
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>Details</h2>
+@{
 
-<div>
-    <h4>User</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.user.UserType.TypeName)
-        </dt>
+    bool IsLocked = false;
 
-        <dd>
-            @Html.DisplayFor(model => model.user.UserType.TypeName)
-        </dd>
+    string UserActiveStyle = "";
 
-        <dt>
-            @Html.DisplayNameFor(model => model.user.FirstName)
-        </dt>
+    string UserActiveText = "";
 
-        <dd>
-            @Html.DisplayFor(model => model.user.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.UserEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.UserEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.IsVerified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.IsVerified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.ActivationCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.ActivationCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.LastLogin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.LastLogin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.user.Locked)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.Locked)
-        </dd>
-    </dl>
-</div>
-<p>
-    @* @Html.ActionLink("Edit", "Edit", new { id = Model.user.UserID }) | *@
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-<h2>Orders</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            Order ID
-        </th>
-        <th>
-            Order Status
-        </th>
-        <th>
-            Total Cost
-        </th>
-        <th>
-            Order Date
-        </th>
-        <th>
-            Ship Date
-        </th>
-    </tr>
-
-    @foreach (var item in Model.orders)
+    if (@Model.user.Locked != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatu.StatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipDate)
-            </td>
-        </tr>
+        IsLocked = (bool)@Model.user.Locked;
+
+        UserActiveStyle = IsLocked ? "UserStatusLocked" : "UserStatus";
+
+        UserActiveText = IsLocked ? "Locked" : "Active";
+}
+    else
+    {
+        UserActiveStyle ="";
+
+        UserActiveText = "";
     }
-</table>
+
+}
+
+<div style="width:80%; margin:60px auto;">
+
+    <div class="SpartaStoreButton">
+        @Html.ActionLink("Back to Users", "Index", null, new { @class = "btn btn-default" })
+    </div>
+
+    <div class="row wow fadeIn">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-2">
+            <div class="UserCard">
+                <div class="UserCardName" title="@Model.user.FirstName @Model.user.LastName">
+                    <div class="@UserActiveStyle">@UserActiveText</div>
+                    @Html.DisplayFor(modelItem => modelItem.user.FirstName) @Html.DisplayFor(modelItem => @Model.user.LastName)
+                </div>
+                <div class="UserCardEmail" title="@Model.user.UserEmail">@Html.DisplayFor(modelItem => modelItem.user.UserEmail)</div>
+                <div class="UserCardLastLogin" title="@Model.user.LastLogin">@Html.DisplayFor(modelItem => modelItem.user.LastLogin)</div>
+            </div>
+        </div>
+    </div>
+
+    <h2 style="padding:50px 0px 0 0px; color: #ba294d; font-weight: bold;">
+        @Model.user.FirstName @Model.user.LastName's Orders
+    </h2>
+
+    <div class="row wow fadeIn">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-2">
+            <table class="SpartaStoreTable table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Order Number
+                        </th>
+                        <th>
+                            Order Date
+                        </th>
+                        <th>
+                            Ship Date
+                        </th>
+                        <th>
+                            Order Status
+                        </th>
+                        <th>
+                            Total Cost
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.orders)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShipDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderStatu.StatusName)
+                            </td>
+                            <td>
+                                &pound;@Html.DisplayFor(modelItem => item.TotalCost)
+                            </td>
+                            <td class="SpartaStoreButton">
+                                <a class="btn btn-default" style="color:#FFF !important;" href="Users/OrderDetails/">Details</a> <a class="btn btn-default" style="color:#FFF !important;" href="Users/Delete">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

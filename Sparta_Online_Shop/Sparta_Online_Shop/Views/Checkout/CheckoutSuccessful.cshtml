@@ -5,5 +5,4 @@
 
 <h2>Checkout Successful</h2>
 <h2>Order ID: @Session["orderID"]</h2>
-
-@{ Session["orderID"] = "";  }
+<h2>@Html.ActionLink("Back to Home", "Index", "Home")</h2>

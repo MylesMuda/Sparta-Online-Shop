@@ -13,14 +13,57 @@ namespace Sparta_Online_Shop.Controllers
     public class ReviewsController : Controller
     {
         private SpartaShopModel db = new SpartaShopModel();
-
-        // GET: Reviews
-        // A page listing all products for testing
-        // Deleted later
-        public ActionResult Index()
+        
+        // GET
+        // List of current user's reviews
+        [Authorize]
+        public ActionResult UserReviews()
         {
-            var products = db.Products.ToList();
-            return View(products);
+            int id = GetUserID();
+            var userReviews = (from r in db.Reviews
+                               where r.UserID == id
+                               select r).ToList();
+            return PartialView(userReviews);
+        }
+
+        // GET
+        // return a list of a specific product's reviews
+        public ActionResult ProductReviews(int? productID)
+        {
+            if(productID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Ambiguous);
+            }
+            var reviews = GetUserReviews(productID);
+            
+            return PartialView(reviews);
+        }
+
+        // Get overall rating of a product
+        public ActionResult ProductRating(int? productID)
+        {
+            var reviews = GetUserReviews(productID);
+            decimal avgRating = 0;
+            foreach (var r in reviews)
+            {
+                avgRating += r.Rating;
+            }
+            if (reviews.Count > 0)
+            {
+                avgRating /= reviews.Count;
+            }
+            avgRating = Decimal.Round(avgRating, 2);
+            ViewBag.AvgRating = avgRating;
+            ViewBag.NumOfReviews = reviews.Count;
+            return PartialView();
+        }
+
+        // List of one product's reviews
+        List<Review> GetUserReviews(int? productID)
+        {
+            return (from r in db.Reviews
+                    where r.ProductID == productID && r.Flagged != true
+                    select r).ToList();
         }
         
         // GET: Reviews/Create?ProductID=5
@@ -30,7 +73,7 @@ namespace Sparta_Online_Shop.Controllers
         {
             if (productID == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Ambiguous);
             }
             // Create an empty review with the passed in ProductID and current UserID
             // and return it to View
@@ -39,20 +82,21 @@ namespace Sparta_Online_Shop.Controllers
             // Redirect admin to CMS page
             if(GetUserTypeID() == 2)
             {
-                return Redirect("/Admin/Index");
+                //return Redirect("/Admin/Index");
             }
             if(review.UserID == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             review.ProductID = productID;
+            review.Rating = 3;
             ViewBag.SelectedProductName = db.Products.Find(productID).ProductName;
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName");
 
             ViewBag.Rating = RatingList();
 
-            return View(review);
+            return PartialView(review);
         }
         
         // POST: Reviews/Create?ProductID=5
@@ -69,7 +113,7 @@ namespace Sparta_Online_Shop.Controllers
             }
             if (GetUserTypeID() == 2)
             {
-                return Redirect("/Admin/Index");
+                //return Redirect("/Admin/Index");
             }
             if (ModelState.IsValid)
             {
@@ -77,7 +121,7 @@ namespace Sparta_Online_Shop.Controllers
                 review.DateOfReview = DateTime.Now;
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(url: Request.UrlReferrer.ToString());
             }
 
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU", review.ProductID);
@@ -98,6 +142,10 @@ namespace Sparta_Online_Shop.Controllers
             {
                 return HttpNotFound();
             }
+            if(review.UserID != GetUserID())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU", review.ProductID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", review.UserID);
             ViewBag.Rating = RatingList();
@@ -112,17 +160,21 @@ namespace Sparta_Online_Shop.Controllers
         [Authorize]
         public ActionResult Edit([Bind(Include = "ReviewID,UserID,ProductID,Rating,ReviewText,DateOfReview")] Review review)
         {
+            if (review.UserID != GetUserID())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/AccountManagement/Index");
             }
+            
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "SKU", review.ProductID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FirstName", review.UserID);
             return View(review);
         }
-        
 
         [Authorize(Roles = "Admin")]
         // POST: Reviews/Delete/5

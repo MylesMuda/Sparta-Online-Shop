@@ -4,92 +4,98 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div style="width:80%; margin:60px auto;">
 
-<div>
-    <h4>Product</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </dt>
+    <div class="SpartaStoreButton">
+        @Html.ActionLink("Back to Products List", "Index", null, new { @class = "btn btn-default" })
+    </div>
+    
+    <div class="SpartaStoreButton">
+        <a class="btn btn-default" href="/Products/Edit/@Model.Product.ProductID">Edit @Model.Product.ProductName</a>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.ProductName)
-        </dd>
+    <h2 style="padding:20px 0 10px 0; color: #ba294d; font-weight: bold;">
+        @Model.Product.ProductName Details
+    </h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.ProductDescription)
-        </dt>
+    <div style="color: #dbcbd4;">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.ProductDescription)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Product.ProductName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Stock)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.ProductDescription)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.Stock)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Product.ProductDescription)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Stock)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Stock) units
+            </dd>
 
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+          
+            <dd>
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+        </dl>
+    </div>
+
+    <h2 style="padding:20px 0 10px 0; color: #ba294d; font-weight: bold;">
+        @Model.Product.ProductName Reviews
+    </h2>
+
+    <div>
+        <table class="SpartaStoreTable table">
+            <thead>
+                <tr>
+                    <th>
+                        User's Name
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                    <th>
+                        ReviewText
+                    </th>
+                    <th>
+                        Date Of Review
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Reviews)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rating)&#x2B50;
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReviewText)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfReview)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-<p>
-    <a href="/Products/Edit/@Model.Product.ProductID">Edit</a>
-    <a href="/Products/Index">Back to List</a>
-</p>
 
-<h2>Reviews</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            User's Name
-        </th>
-        <th>
-            Rating
-        </th>
-        <th>
-            ReviewText
-        </th>
-        <th>
-            Date Of Review
-        </th>
-        <th>
-            Flagged
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Reviews)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReviewText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfReview)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Flagged)
-            </td>
-            <td>
-                <a href="/Products/FlagReview/@item.ReviewID">Edit</a>
-            </td>
-        </tr>
-    }
-</table>

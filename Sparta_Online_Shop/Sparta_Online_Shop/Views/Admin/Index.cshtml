@@ -1,43 +1,88 @@
 ﻿
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "Admin Dashboard";
     var totalSales = (int?)ViewBag.TotalSales;
     var income = (decimal?)ViewBag.Income;
     var incomeDay = (decimal?)ViewBag.IncomeDay;
     var incomeMonth = (decimal?)ViewBag.IncomeMonth;
     var incomeYear = (decimal?)ViewBag.IncomeYear;
 }
-<style>
-</style>
 
-<h1>Dashboard</h1>
 
-<p>This is the admin page</p>
-
-<body>
-    <div>
-        <h2>Total Sales</h2>
-        <p>@totalSales.Value</p>
+<div style="width:80%; margin:60px auto;">
+    <!--Admin Nav Links-->
+    <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton" style="">
+                <a href="/Users/" target="_blank">
+                    <p>Users</p>
+                    <img src="~/Content/images/icons/users_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/Products/" target="_blank">
+                    <p>Products</p>
+                    <img src="~/Content/images/icons/product_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/StockOrders/" target="_blank">
+                    <p>Stock</p>
+                    <img src="~/Content/images/icons/stock_icon.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 mb-2">
+            <div class="AdminDashboardButton">
+                <a href="/Admin/Orders/" target="_blank">
+                    <p>Orders</p>
+                    <img src="~/Content/images/icons/orders_icon.png" />
+                </a>
+            </div>
+        </div>
     </div>
-    <div>
-        <h3>Total Income:</h3>
-        <p>£@income.Value</p>
 
-        <h4>Day:</h4>
-        <p>£@incomeDay.Value</p>
-
-        <h4>Month:</h4>
-        <p>£@incomeMonth.Value</p>
-
-        <h4>Year:</h4>
-        <p>£@incomeYear.Value</p>
+    <!--Admin OverAll Stats-->
+    <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+        <div class="d-none d-sm-none col-md-1 mt-3 mb-2"></div>
+        <div class="col-5 col-sm-5 col-md-5 mt-3 mb-2">
+            <div class="AdminDashboardStats BlueStats" style="width:90%;">
+                <p class="StatsData" >@totalSales.Value</p>
+                <p class="StatsLabel">Products Sold</p>
+            </div>
+        </div>
+        <div class="col-7 col-sm-7 col-md-5 mt-3 mb-2">
+            <div class="AdminDashboardStats BlueStats" style="width:90%;">
+                <p class="StatsDataSmall">&pound;@income.Value</p>
+                <p class="StatsLabel">Total Income</p>
+            </div>
+        </div>
+        <div class="d-none d-sm-none col-md-1 mt-3 mb-2"></div>
+    </div>   
+    
+    <!--Admin Stats by TimeFrame-->
+    <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 mt-3 mb-2">
+            <div class="AdminDashboardStats GreenStats" style="width:90%;">
+                <p class="StatsDataSmall" >&pound;@incomeDay.Value</p>
+                <p class="StatsLabel">@DateTime.Now.ToShortDateString() Income</p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 mt-3 mb-2">
+            <div class="AdminDashboardStats GreenStats" style="width:90%;">
+                <p class="StatsDataSmall">&pound;@incomeMonth.Value</p>
+                <p class="StatsLabel">@DateTime.Now.ToString("MMM yyyy") Income</p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 mt-3 mb-2">
+            <div class="AdminDashboardStats GreenStats" style="width:90%;">
+                <p class="StatsDataSmall">&pound;@incomeYear.Value</p>
+                <p class="StatsLabel">@DateTime.Now.Year Income</p>
+            </div>
+        </div>
     </div>
-</body>
-
-<div>
-    <h2>@Html.ActionLink("Products", "Index", "Products")</h2>
-    <h2>@Html.ActionLink("Stock Update", "Index", "StockOrders")</h2>
-    <h2>@Html.ActionLink("Users", "Index", "Users")</h2>
-    <h2>@Html.ActionLink("Open Orders", "OpenOrders", "Admin")</h2>
-    <h2>@Html.ActionLink("All Orders", "Orders", "Admin")</h2>
 </div>

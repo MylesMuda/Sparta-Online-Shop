@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -71,16 +70,18 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         // POST: Users/Edit/5
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LockOutUser(User user)
         {
             var userToUpdate = db.Users.Find(user.UserID);
-            userToUpdate.Locked = user.Locked;
+            if (userToUpdate != null)
+            {
+                userToUpdate.Locked = user.Locked;
+                userToUpdate.ConfirmPassword = userToUpdate.UserPassword;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
