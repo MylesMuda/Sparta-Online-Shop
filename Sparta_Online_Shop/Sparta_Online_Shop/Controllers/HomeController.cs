@@ -152,7 +152,7 @@ namespace Sparta_Online_Shop.Controllers
                 using (var dbc = new SpartaShopModel())
                 {
                     //user.UserID = null;
-                    user.UserTypeID = '1';
+                    user.UserTypeID = 1;
                     //Commit user to database
                     dbc.Users.Add(user);
                     dbc.SaveChanges();
