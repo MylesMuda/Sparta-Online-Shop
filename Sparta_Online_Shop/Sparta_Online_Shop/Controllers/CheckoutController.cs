@@ -69,8 +69,11 @@ namespace Sparta_Online_Shop.Controllers
         }
 
         [Authorize]
-        public ActionResult AddItem(int Quantity, int ProductID)
+        public ActionResult AddItem(int? Quantity, int? ProductID)
         {
+            if(Quantity == null || ProductID == null)
+                return RedirectToAction("Products", "Home");
+
             Basket UserBasket = null;
             BasketItem currentRow = null;
             int UserID = GetUserID();
@@ -98,7 +101,7 @@ namespace Sparta_Online_Shop.Controllers
             {
                 currentRow = new BasketItem();
                 currentRow.BasketID = UserBasket.BasketID;
-                currentRow.ProductID = ProductID;
+                currentRow.ProductID = ProductID.Value;
                 currentRow.Quantity = 0;
                 db.BasketItems.Add(currentRow);
                 db.SaveChanges();
