@@ -83,8 +83,64 @@ namespace Sparta_Online_Shop.Controllers
             BasketItem currentRow = null;
             int UserID = GetUserID();
 
+            UserBasket = GetOrCreateUserBasket();
+            currentRow = GetOrCreateUserBasketItem(UserBasket, ProductID.Value);
+
+            currentRow.Quantity += Quantity.Value;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Products", "Home");
+        }
+
+        [Authorize]
+        public ActionResult RemoveItem(int? Quantity, int? ProductID)
+        {
+            if (Quantity == null || ProductID == null)
+                return View("Basket");
+
+            RemoveItemFromUserBasket(Quantity.Value, ProductID.Value);
+
+            return View("Basket");
+        }
+
+        [NonAction]
+        public void RemoveItemFromUserBasket(int Quantity, int ProductID)
+        {
+            Basket UserBasket = null;
+            BasketItem currentRow = null;
+            int UserID = GetUserID();
+
+            //if user has a basket
             List<Basket> Baskets = db.Baskets.Where(b => b.UserID == UserID).ToList();
-            if(Baskets.Count > 0)
+            if (Baskets.Count > 0)
+            {
+                //if user has the item already in the basket
+                UserBasket = Baskets[0];
+                List<BasketItem> BasketItems = db.BasketItems.Where(item => item.BasketID == UserBasket.BasketID && item.ProductID == ProductID).ToList();
+                if (BasketItems.Count > 0)
+                {
+                    currentRow = BasketItems[0];
+                    if (currentRow.Quantity >= Quantity)
+                        currentRow.Quantity -= Quantity;
+                    else
+                    {
+                        db.BasketItems.Remove(currentRow);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        [NonAction]
+        public Basket GetOrCreateUserBasket()
+        {
+            Basket UserBasket = null;
+            int UserID = GetUserID();
+
+            List<Basket> Baskets = db.Baskets.Where(b => b.UserID == UserID).ToList();
+            if (Baskets.Count > 0)
             {
                 UserBasket = Baskets[0];
             }
@@ -97,8 +153,16 @@ namespace Sparta_Online_Shop.Controllers
                 db.SaveChanges();
             }
 
+            return UserBasket;
+        }
+
+        [NonAction]
+        public BasketItem GetOrCreateUserBasketItem(Basket UserBasket, int ProductID)
+        {
+            BasketItem currentRow = null;
+
             List<BasketItem> BasketItems = db.BasketItems.Where(item => item.BasketID == UserBasket.BasketID && item.ProductID == ProductID).ToList();
-            if(BasketItems.Count > 0)
+            if (BasketItems.Count > 0)
             {
                 currentRow = BasketItems[0];
             }
@@ -106,16 +170,13 @@ namespace Sparta_Online_Shop.Controllers
             {
                 currentRow = new BasketItem();
                 currentRow.BasketID = UserBasket.BasketID;
-                currentRow.ProductID = ProductID.Value;
+                currentRow.ProductID = ProductID;
                 currentRow.Quantity = 0;
                 db.BasketItems.Add(currentRow);
                 db.SaveChanges();
             }
 
-            currentRow.Quantity += Quantity;
-            db.SaveChanges();
-
-            return RedirectToAction("Products", "Home");
+            return currentRow;
         }
 
         [NonAction]
