@@ -176,18 +176,6 @@ namespace Sparta_Online_Shop.Controllers
             return View(review);
         }
 
-        [Authorize(Roles = "Admin")]
-        // POST: Reviews/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Review review = db.Reviews.Find(id);
-            db.Reviews.Remove(review ?? throw new InvalidOperationException());
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         // Populate the rating drop down list with numbers from 1 to 5
         List<SelectListItem> RatingList()
         {
