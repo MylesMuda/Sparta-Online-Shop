@@ -1,179 +1,78 @@
-﻿@model IEnumerable<Sparta_Online_Shop.Product>
+﻿<Sparta_Online_Shop.BasketItem>
 
-@{
-    ViewBag.Title = "Checkout";
-}
+    @{
+        ViewBag.Title = "Checkout";
+    }
 
+    <!DOCTYPE html>
+    <html lang="en">
 
-<script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sparta Global Store</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="css/style.min.css" rel="stylesheet">
+    </head>
 
-@*<button onclick="DoPost('123456')">Click me</button>
-
-    @using (Html.BeginForm("PaypalPost", "Checkout", FormMethod.Post))
-    {
-        <input type="text" id="Amount" name="Amount" value="" />
-        <input type="submit" value="Checkout" />
-    }*@
-
-
-@*// Show a success message to your buyer
-    //var msg = 'thank you for your cooporation ' + details.payer.name.given_name;
-    //var theDiv = document.getElementById("transaction-result");
-    //theDiv.innerHTML += msg;*@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sparta Global Store</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="css/style.min.css" rel="stylesheet">
-</head>
-
-<body style="background-color: #36393F;">
+    <body style="background-color: #36393F;">
 
     <!--Main layout-->
-    <main class="mt-5 pt-4">
+    <main>
         <div class="container wow fadeIn">
 
             <!-- Heading -->
-            <h2 class="my-5 h2 text-center" style="color: white;">Checkout</h2>
+            <h2 class="mt-5 h2 text-center" style="color: #df3a63; font-weight: bold;">Checkout</h2>
+            <!-- Heading -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                @*<span style="color: white">Your cart - £@ViewBag.TotalPrice</span>*@
+                <span></span>
+                <span class="badge spartaPurple badge-pill">@ViewBag.BasketItems.Count</span>
+            </h4>
+            <!-- Cart -->
+            <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
+                    background: linear-gradient(to right, #f31b4e, #3a1338);
+                    padding: 1.5px; border-radius: .2em;">
+                @foreach (BasketItem item in ViewBag.BasketItems)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                        <div>
+                            <h6 class="my-0" style="color: white; text-anchor: end">
+                                @item.Product.ProductName
+                                <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                            </h6>
+                            <small class="text-muted" style="text-anchor: end;color:#d6dbdf !important;">@item.Product.ProductDescription</small>
+                        </div>
+                        <span class="text-muted" style="color:#d6dbdf !important;">@item.Product.Price</span>
+                    </li>
+                }
+            </ul>
+            <div id="transaction-successful">
+                <h1 id=transaction-result> </h1>
+            </div>
+            <div style="text-align:right; margin:20px; ">
+                <span style="color:#d6dbdf; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
+            </div>
+            <div>
+                <div style="margin-left: auto; min-width: initial; width: 200px;height: 100px;" id="paypal-button-container"></div>
 
-            <!--Grid row-->
-            <div class="row">
-
-                <!--Grid column-->
-                <div class="col-md-8 mb-4" style="padding: 1rem;
-        background: linear-gradient(to right, #f31b4e, #3a1338);
-        padding: 1.5px; border-radius: .4em;">
-
-                    <!--Card-->
-                    <div class="card" style="background-color:#1f2124">
-
-                        <!--Card content-->
-                        <form class="card-body">
-
-                            <!--Grid row-->
-                            <div class="row">
-
-                                <!--Grid column-->
-                                <div class="col-md-6 mb-2">
-
-                                    <!--firstName-->
-                                    <div class="md-form ">
-                                        <input type="text" id="firstName" class="form-control">
-                                        <label for="firstName" class="">First name</label>
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-md-6 mb-2">
-
-                                    <!--lastName-->
-                                    <div class="md-form">
-                                        <input type="text" id="lastName" class="form-control">
-                                        <label for="lastName" class="">Last name</label>
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-
-                            </div>
-                            <!--Grid row-->
-                            <!--Username-->
-                            <div class="md-form input-group pl-0 mb-5">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"></span>
-                                </div>
-                                <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
-                            </div>
-
-                            <!--email-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
-                            </div>
-
-                            <!--address-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="address" class="form-control" placeholder="1234 Main St">
-                            </div>
-
-                            <!--address-2-->
-                            <div class="md-form mb-5">
-                                <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
-                            </div>
-
-                            <!--Grid row-->
-                            <div class="row">
-
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-12 mb-4">
-
-                                    <label for="country" style="color: #6C757D;">Country</label>
-                                    <select class="custom-select d-block w-100" id="country" required>
-                                        <option value="">Choose...</option>
-                                        <option>United Kingdom</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-6 mb-4">
-
-                                    <label for="state" style="color: #6C757D;">Building</label>
-                                    <select class="custom-select d-block w-100" id="state" required>
-                                        <option value="">Choose...</option>
-                                        <option>125 London Wall</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-                                <!--Grid column-->
-                                <div class="col-lg-4 col-md-6 mb-4">
-
-                                    <label for="zip" style="color: #6C757D;">Company</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Building name required.
-                                    </div>
-
-                                </div>
-                                <!--Grid column-->
-
-                            </div>
-                            <!--Grid row-->
-
-                            <div id="transaction-successful">
-                                <h1 id=transaction-result> </h1>
-                            </div>
-
-                            <div id="paypal-button-container"></div>
-
-                            <div asp-action="Index" asp-controller="Form">
-                                <script>
+                <div asp-action="Index" asp-controller="Form">
+                    <script src="https://www.paypal.com/sdk/js?client-id=AX1KuTdKO9Yk80dWu-JMT_LjIdR2xqRICckC__LhTt60F2IHrqL-UxUcaT_0KROwBt9sZTssFt40tm3O&currency=GBP"></script>
+                    <script>
                                 paypal.Buttons({
                                     createOrder: function (data, actions) {
                                         // Set up the transaction
                                         return actions.order.create({
                                            purchase_units: [{
                                               amount: {
-                                                 value: '@ViewBag.Message'
+                                                 value: '@ViewBag.TotalPrice'
                                               }
                                            }]
                                         });
@@ -182,83 +81,28 @@
                                         // Capture the funds from the transaction
                                        return actions.order.capture().then(function (details) {
 
-                                           // Call your server to save the transaction
-                                           return fetch('/Checkout/PaypalPost', {
-                                               method: 'post',
-                                               redirect: 'follow',
-                                               headers: {
-                                                   'content-type': 'application/json'
-                                               },
-                                               body: JSON.stringify({
-                                                  orderID: data.orderID
-                                               })
-                                           }).then(function (response) {
-                                               return response.json();
-                                           }).then(function (data) {
-                                               window.location.replace(data.redirectUrl)
-                                           });
-                                       });
-                                   }
-                                }).render('#paypal-button-container');
-                                </script>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!--/.Card-->
-
+                                        // Call your server to save the transaction
+                                        return fetch('/Checkout/PaypalPost', {
+                                            method: 'post',
+                                            redirect: 'follow',
+                                            headers: {
+                                                'content-type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                               orderID: data.orderID
+                                            })
+                                        }).then(function (response) {
+                                            return response.json();
+                                        }).then(function (data) {
+                                            window.location.replace(data.redirectUrl)
+                                        });
+                                    });
+                               }
+                            }).render('#paypal-button-container');
+                    </script>
                 </div>
-                <!--Grid column-->
-                <div class="col-md-4 mb-4">
-
-                    <!-- Heading -->
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
-                        <span class="badge spartaPurple badge-pill">4</span>
-                    </h4>
-
-                    <!-- Cart -->
-                    <ul class="list-group mb-3 z-depth-1" style="padding: 1rem;
-                        background: linear-gradient(to right, #f31b4e, #3a1338);
-                        padding: 1.5px; border-radius: .2em;">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                            <div>
-                                <h6 class="my-0" style="color: white;">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">£12</span>
-                        </li>
-
-                    </ul>
-                    <!-- Cart -->
-
-                </div>
-                <!--Grid column-->
-
             </div>
-            <!--Grid row-->
-
+            <!-- Cart -->
         </div>
     </main>
     <!--Main layout-->
@@ -276,6 +120,7 @@
         // Animations initialization
         new WOW().init();
     </script>
-</body>
+    </body>
 
-</html>
+    </html>
+</Sparta_Online_Shop.BasketItem>

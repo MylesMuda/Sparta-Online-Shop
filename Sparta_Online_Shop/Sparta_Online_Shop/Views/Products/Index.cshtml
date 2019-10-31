@@ -1,103 +1,97 @@
 ﻿@model IEnumerable<Sparta_Online_Shop.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Product Management";
 }
 
-<style>
-</style>
+    <div style="width:80%; margin:60px auto;">
 
-<h1>Products</h1>
+        <!--Admin Nav Links-->
+        <div class="row wow fadeIn" style="text-align:center; justify-content:space-evenly">
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton" style="">
+                    <a href="/Admin/">
+                        <p>Dashboard</p>
+                        <img src="~/Content/images/icons/dashboard_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/Users/">
+                        <p>Users</p>
+                        <img src="~/Content/images/icons/users_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/StockOrders/" >
+                        <p>Stock</p>
+                        <img src="~/Content/images/icons/stock_icon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 mb-2">
+                <div class="AdminDashboardButton">
+                    <a href="/Admin/Orders/" >
+                        <p>Orders</p>
+                        <img src="~/Content/images/icons/orders_icon.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+        <h2 style="padding:50px 0px 0 0px; color: #ba294d; font-weight: bold;">
+            Product Management
+        </h2>
 
-    <div>
-        <div>Product Description: @ViewBag.ProductDescription</div>
-        <div>Product Reviews: @ViewBag.ProductReview</div>
-        <div>Flag Reviews</div>
+
+        <div class="SpartaStoreButton">
+            @Html.ActionLink("New Product", "Create", null, new { @class = "btn btn-default" })
+        </div>
+
+        <table class="SpartaStoreTable table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stock)
+                        </td>
+                        <td>
+                            &pound;@Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td class="SpartaStoreButton">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "btn btn-default" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-
-    <div>
-        <h2>
-            <a href="/Users/Index">Users</a>
-        </h2>
-        <h2>
-            <a href="/Users/Index">Users</a>
-        </h2>
-        <h2>@Html.ActionLink("Stock Orders", "Index", "StockOrders")</h2>
-    </div>
-
-    <p>
-        <h2>
-            <a href="Create.cshtml">Create</a>
-        </h2>
-    </p>
-    <table class="table">
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-            </td>
-        </tr>
-    }
-</table>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SKU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a href="/Products/Edit/@item.ProductID">Edit</a> |
-                    <a href="/Products/Details/@item.ProductID">Details</a> |
-                    <a href="/Products/Delete/@item.ProductID">Delete</a>
-                </td>
-            </tr>
-        }
-    </table>

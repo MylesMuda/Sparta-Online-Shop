@@ -1,0 +1,56 @@
+﻿@model Sparta_Online_Shop.User
+
+@{
+    ViewBag.Title = "LockOutUser";
+}
+
+<style>
+    .SelectStyle{
+        max-width: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 2px;
+    }
+</style>
+
+<div>
+    <h2 style="padding:50px 0px 10px 0px; color: #ba294d; font-weight: bold;">
+        Lockout User
+    </h2>
+
+    <div class="SpartaStoreButton">
+        @Html.ActionLink("Back to Users", "Index", null, new { @class = "btn btn-default" })
+    </div>
+
+    <div class="SpartaForm">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>@Model.FirstName @Model.LastName</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.UserID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Locked, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Locked, "", new { @class = "SelectStyle" })
+                            @Html.ValidationMessageFor(model => model.Locked, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="SpartaStoreButton col-md-12" style="max-width:none;">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

@@ -16,16 +16,17 @@
     {
         <!--Main layout-->
 <main class="pt-4">
-    <div class="container dark-grey-text mt-5">
-
-        <a href="/Home/Products" style="display:block; margin:10px 0;">back to all products</a>
+    <div class="container dark-grey-text mt-3">
+        <div class="SpartaStoreButton">
+            <a class="btn btn-primary btn-md my-0 p" href="/Home/Products" style="display:block; margin:10px 0;">&lt; back to all products</a>
+        </div>
         <!--Grid row-->
         <div class="row wow fadeIn">
 
             <!--Grid column-->
             <div class="col-md-6 mb-4" style="text-align:center;">
                 <!-- Main product image -->
-                <img src="/Content/images/Mary_1.jpg" class="img-fluid" alt="@product.ProductName" style="width: 80%;">
+                <img src="/Content/images/@product.ImageLink" class="img-fluid" alt="@product.ProductName" style="width: 95%;">
 
             </div>
             <!--Grid column-->
@@ -44,29 +45,41 @@
                         </a>
                     </div>
 
-                    <p class="lead">
-                        <span style="color: white;">&pound;@product.Price</span>
-                    </p>
-
                     <p style="color: white;">
                         @product.ProductDescription
                     </p>
 
 
+                    <h3 class="font-weight-bold purple-text">
+                        <span style="color: white;">&pound;@product.Price</span>
+                    </h3>
+
                     @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
                     {
-                <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
-                    @{ int available = Math.Min((int)@product.Stock, 10); }
-                    @for (int i = 1; i < available; i++)
-                    {
-                        <option value=@i>@i</option>
-                    }
-                </select>
-                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+                        <select aria-label="Search" class="form-control" style="width: 100px" name="Quantity">
+                            @{ int available = Math.Min((int)@product.Stock, 10); }
+                            @for (int i = 1; i < available; i++)
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        </select>
+                      <div class="SpartaStoreButton" style="padding-left: 0;">
+                        <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
+
                             Add to cart
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
+                        </div>
+                        
+                    <!--Product rating-->
+                    <div>
+                        @{
+                            Html.RenderAction("ProductRating", "Reviews", new { productID = product.ProductID });
+                        }
+                    </div>
+                    <!--Product rating-->
                     }
+              
                 </div>
                 <!--Content-->
 
@@ -75,8 +88,32 @@
 
         </div>
         <!--Grid row-->
-
     </div>
+
+    <!--Create review-->
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            @{
+                Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
+            }
+        </div>
+    }
+    @if (!Request.IsAuthenticated)
+    {
+        <div style="color:white">
+            @Html.ActionLink("Login", "Login", "Home") to review this product
+        </div>
+    }
+    <!--Create review-->
+
+    <!--List all reviews-->
+    <div>
+        @{ 
+            Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
+        }
+    </div>
+    <!--List all reviews-->
 </main>
         <!--Main layout-->
      }
@@ -87,7 +124,7 @@ else if (Model != null && Model.Count() > 0)
 <div class="container" style="padding-top:10vmin;">
 <section class="text-center mb-4">
 <!--Grid row-->
-<div class="row wow fadeIn">
+<div class="row wow fadeIn" style="justify-content:center">
 
 @foreach(Product product in Model)
                     {
@@ -98,7 +135,7 @@ else if (Model != null && Model.Count() > 0)
         <div class="card">
             <!--Card image-->
             <div class="view overlay">
-                <img src = "/Content/images/Miguel_1.jpg" class="card-img-top"
+                <img src = "/Content/images/@product.ImageLink" class="card-img-top"
                      alt="@product.ProductName">
                 <a href="/Home/Products/@product.ProductID">
                     <div class="mask rgba-white-slight"></div>
@@ -108,22 +145,27 @@ else if (Model != null && Model.Count() > 0)
             <!--Card content-->
             <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href = "/Home/Products/@product.ProductID" class="grey-text">
-                    <h5>@product.ProductName</h5>
+                <a href="/Home/Products/@product.ProductID" class="grey-text">
+                    <h5 style="min-height: 50px;">@product.ProductName</h5>
                 </a>
-                <h5 style = "max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap" >
-                    <strong>
-                        <a href="/Home/Products/@product.ProductID" class="dark-grey-text">
-                            @product.ProductDescription
-                        </a>
-                    </strong>
-                </h5>
 
                 <span class="badge badge-pill primary-color">bestseller</span>
 
                 <h4 class="font-weight-bold purple-text">
                     <strong>&pound;@product.Price</strong>
                 </h4>
+                @using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+                {
+                    <input aria-label="Search" class="form-control" type="hidden" value="1" name="Quantity" />
+                    <div class="SpartaStoreButton" style="max-width: none;">
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="ProductID" value="@product.ProductID">
+
+                            Add to cart
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
+                    </div>
+
+                }
 
             </div>
             <!--Card content-->

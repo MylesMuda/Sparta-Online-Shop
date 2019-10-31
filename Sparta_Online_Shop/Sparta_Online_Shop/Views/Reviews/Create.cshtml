@@ -1,0 +1,93 @@
+﻿@model Sparta_Online_Shop.Review
+
+<style>
+    textarea {
+        resize: none;
+    }
+
+    .checked {
+        color: orange;
+    }
+</style>
+
+<div id="review-form">
+    @using (Html.BeginForm("Create", "Reviews", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="color:white">
+            <div style="height: 45vh;">
+                <div style="padding:0 30px;">
+                    <h4 style="margin-top: 8vh; font-weight:bold;">Review @ViewBag.SelectedProductName</h4>
+                </div>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div style="padding:0 30px;">
+                    @Html.HiddenFor(model => model.UserID)
+
+                    @Html.HiddenFor(model => model.ProductID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            <div class="container">
+                                    <div class="row">
+                                        <div class="rating">
+                                            <span class="fa fa-star checked" id="star1" onclick="add(this,1)"></span>
+                                            <span class="fa fa-star checked" id="star2" onclick="add(this,2)"></span>
+                                            <span class="fa fa-star checked" id="star3" onclick="add(this,3)"></span>
+                                            <span class="fa fa-star" id="star4" onclick="add(this,4)"></span>
+                                            <span class="fa fa-star" id="star5" onclick="add(this,5)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @Html.HiddenFor(model =>model.Rating)
+                            @*@Html.DropDownList("Rating", new SelectList(ViewBag.Rating, "Text", "Value"), htmlAttributes: new { @class = "control-label col-md-offset-2 col-md-2" })*@
+                            @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReviewText, "Content", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.ReviewText, 3, 100, new { htmlAttributes = new { @class = "control-label col-md-offset-2 col-md-2" } })
+                            @Html.ValidationMessageFor(model => model.ReviewText, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="padding:0;">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function add(ths, sno) {
+        document.getElementById('Rating').value = sno;
+
+        for (var i = 1; i <= 5; i++) {
+            var cur = document.getElementById("star" + i)
+            cur.className = "fa fa-star"
+        }
+
+        for (var i = 1; i <= sno; i++) {
+            var cur = document.getElementById("star" + i)
+            if (cur.className == "fa fa-star") {
+                cur.className = "fa fa-star checked"
+            }
+        }
+
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+}
