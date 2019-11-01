@@ -61,7 +61,7 @@ namespace Sparta_Online_Shop.Controllers
             var ordersToAdd = new List<OrderPageModel>();
             using (var db = new SpartaShopModel())
             {
-                var orders = db.Orders;
+                var orders = db.Orders.OrderByDescending(o => o.OrderDate);
                 foreach (var order in orders)
                 {
                     var orderToAdd = new OrderPageModel

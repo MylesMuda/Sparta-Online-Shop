@@ -11,6 +11,10 @@ namespace Sparta_Online_Shop
     {
         public static string Hash(string value)
         {
+            if(value == null)
+            {
+                return "";
+            }
             return Convert.ToBase64String(
                 SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(value))
                 );

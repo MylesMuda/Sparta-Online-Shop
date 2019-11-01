@@ -263,6 +263,7 @@
     <Content Include="Content\images\icons\dashboard_icon.png" />
     <Content Include="Content\images\icons\favicon.png" />
     <Content Include="Content\images\icons\orders_icon.png" />
+    <Content Include="Content\images\icons\payment_icon.png" />
     <Content Include="Content\images\icons\product_icon.png" />
     <Content Include="Content\images\icons\stock_icon.png" />
     <Content Include="Content\images\icons\users_icon.png" />

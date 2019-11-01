@@ -4,86 +4,89 @@
     ViewBag.Title = "Orders";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Orders</title>
-</head>
-
-<br/>
-<br/>
-<br/>
-
-<body>
-    <grid>
-
-    </grid>
-    <div>
-        @foreach (var order in Model)
-        {
-            <table class="table border" style="color: white;">
-                <tr>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        User Name
-                    </th>
-                    <th>
-                        Order Date
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => order.orderStatus.StatusName)<br />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => order.user.FirstName)
-                        @Html.DisplayFor(modelItem => order.user.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => order.order.OrderDate)
-                    </td>
-                </tr>
-                <tr>
-                    <table class="table border" style="color: white; margin-left: 10%">
+<div style="width:80%; margin:60px auto;">
+        <h1 style="padding-top:50px; color: #c41541; font-weight: bold;">
+            My Orders
+        </h1>
+        <div class="SpartaStoreTable" >
+            @foreach (var order in Model)
+            {
+                var collapseName = $"Order{@order.order.OrderID}";
+                <table class="table border" style="color: white;">
+                    <thead>
                         <tr>
                             <th>
-                                Product Name
+                                Order Date
                             </th>
                             <th>
-                                Quantity
+                                Status
                             </th>
                             <th>
-                                Price Per Unit
                             </th>
                         </tr>
-                        @foreach (var orderDetail in order.orderDetails)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => orderDetail.Product.ProductName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => orderDetail.Quantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => orderDetail.ProductPrice)
-                                </td>
-                            </tr>
-                        }
-                        <tr >
-                            <td colspan="3">
-                                Total Cost : @Html.DisplayFor(modelItem => order.order.TotalCost)
+                    </thead>
+                    <tbody>
+                        <tr data-toggle="collapse" data-target="#@collapseName" class="clickable">
+                            <td>
+                                @Html.DisplayFor(modelItem => order.order.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => order.orderStatus.StatusName)<br />
+                            </td>
+                            <td>
+
+                                <div class="SpartaStoreButton">
+                                    <button class="btn btn-default">More Details</button>
+                                </div>
                             </td>
                         </tr>
-                    </table>
-                    <br>
-                    <br>
-                </tr>
-            </table>
-        }
-    </div>
-</body>
-</html>
+                        <tr>
+                            <td colspan="3" style="padding:0;">
+                                <div id="@collapseName" class="collapse">
+                                    <h6 style="padding: 30px 10px 10px 10px; color: #c41541; font-weight: bold; margin:0;">
+                                        Order Details
+                                    </h6>
+                                    <table class="table border" style="color: white; margin:0;">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Product Name
+                                                </th>
+                                                <th>
+                                                    Quantity
+                                                </th>
+                                                <th>
+                                                    Price Per Unit
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var orderDetail in order.orderDetails)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => orderDetail.Product.ProductName)
+                                                    </td>
+                                                    <td>
+                                                        x @Html.DisplayFor(modelItem => orderDetail.Quantity)
+                                                    </td>
+                                                    <td>
+                                                        &pound;@Html.DisplayFor(modelItem => orderDetail.ProductPrice)
+                                                    </td>
+                                                </tr>
+                                            }
+                                            <tr>
+                                                <td colspan="3" style="text-align:right; background-color: #644d60;">
+                                                    Total Cost : @Html.DisplayFor(modelItem => order.order.TotalCost)
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+</div>

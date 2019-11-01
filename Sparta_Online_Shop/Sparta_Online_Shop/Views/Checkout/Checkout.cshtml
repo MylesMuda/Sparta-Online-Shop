@@ -4,25 +4,6 @@
         ViewBag.Title = "Checkout";
     }
 
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Sparta Global Store</title>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-        <link href="css/style.min.css" rel="stylesheet">
-    </head>
-
-    <body style="background-color: #36393F;">
 
     <!--Main layout-->
     <main>
@@ -31,6 +12,9 @@
             <!-- Heading -->
             <h2 class="mt-5 h2 text-center" style="color: #df3a63; font-weight: bold;">Checkout</h2>
             <!-- Heading -->
+            <div class="SpartaStoreButton" style="margin-bottom: -40px;">
+                <a href="~/Checkout/Basket/" class="btn btn-default">Back to Shopping Cart</a>
+            </div>
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 @*<span style="color: white">Your cart - £@ViewBag.TotalPrice</span>*@
                 <span></span>
@@ -48,9 +32,9 @@
                                 @item.Product.ProductName
                                 <span class="badge spartaPurple badge-pill">@item.Quantity</span>
                             </h6>
-                            <small class="text-muted" style="text-anchor: end;color:#d6dbdf !important;">@item.Product.ProductDescription</small>
+                            <small class="text-muted" style="text-anchor: end;color:#cbc2db !important;">@item.Product.ProductDescription</small>
                         </div>
-                        <span class="text-muted" style="color:#d6dbdf !important;">@item.Product.Price</span>
+                        <span class="text-muted" style="color:#cbc2db !important;">@item.Product.Price</span>
                     </li>
                 }
             </ul>
@@ -58,7 +42,7 @@
                 <h1 id=transaction-result> </h1>
             </div>
             <div style="text-align:right; margin:20px; ">
-                <span style="color:#d6dbdf; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
+                <span style="color:#cbc2db; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
             </div>
             <div>
                 <div style="margin-left: auto; min-width: initial; width: 200px;height: 100px;" id="paypal-button-container"></div>
@@ -120,7 +104,4 @@
         // Animations initialization
         new WOW().init();
     </script>
-    </body>
-
-    </html>
 </Sparta_Online_Shop.BasketItem>

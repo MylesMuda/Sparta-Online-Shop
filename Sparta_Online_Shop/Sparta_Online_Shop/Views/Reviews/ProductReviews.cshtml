@@ -4,43 +4,44 @@
     .checked {
         color: orange;
     }
+    .ReviewData{
+        font-size:0.9em;
+    }
+    .ReviewTag{
+        color:#db98a1;
+        font-size: 1.05em;
+    }
 </style>
 
 <!--Partial View-->
 <!--All reviews of a product-->
 <div style="color:white">
-    <h4>Customer Reviews</h4>
+    <h4 style="margin-top: 30px; font-weight:bold; color:#c41541;">Customer Reviews</h4>
     @foreach (var item in Model)
     {
-<div>
-    <div>
-        <div>
-            @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+        <div style="margin:20px 0">
+            <div>
+                <div class="ReviewData" >
+                    @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName) - @Html.DisplayFor(modelItem => item.DateOfReview)
+                </div>
+                <div class="ReviewData" >
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= item.Rating)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="ReviewData" >
+                <span class="ReviewTag">Review:</span><p style="margin-left:10px;">@Html.DisplayFor(modelItem => item.ReviewText)</p>
+            </div>
         </div>
-        <div>
-            Rating: @Html.DisplayFor(modelItem => item.Rating)
-        </div>
-        <div>
-            @for (int i = 1; i <= 5; i++)
-            {
-                if (i <= item.Rating)
-                {
-                    <span class="fa fa-star checked"></span>
-                }
-                else
-                {
-                    <span class="fa fa-star"></span>
-                }
-            }
-        </div>
-    </div>
-    <div>
-        @Html.DisplayFor(modelItem => item.DateOfReview)
-    </div>
-    <div>
-        <p>@Html.DisplayFor(modelItem => item.ReviewText)</p>
-    </div>
-</div>
 
     }
 </div>

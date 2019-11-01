@@ -116,6 +116,17 @@ namespace Sparta_Online_Shop.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Basket", "Checkout");
+        } 
+        
+        [Authorize]
+        public ActionResult RemoveItem(int? BasketItemID)
+        {
+            if(BasketItemID == null)
+                return RedirectToAction("Basket", "Checkout");
+
+            RemoveItemFromBasket((int)BasketItemID);
+
+            return RedirectToAction("Basket", "Checkout");
         }
 
         [NonAction]
@@ -191,6 +202,20 @@ namespace Sparta_Online_Shop.Controllers
                 db.BasketItems.Remove(item);
             }
             db.SaveChanges();
+        }
+
+        [NonAction]
+        public void RemoveItemFromBasket(int BasketItemID)
+        {
+            if (BasketItemID > 0)
+            {
+                BasketItem item = db.BasketItems.Find(BasketItemID);
+                if (item != null)
+                {
+                    db.BasketItems.Remove(item);
+                    db.SaveChanges();
+                }
+            }
         }
 
         [NonAction]

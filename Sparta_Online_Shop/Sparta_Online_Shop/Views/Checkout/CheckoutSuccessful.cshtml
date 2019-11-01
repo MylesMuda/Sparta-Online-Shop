@@ -3,6 +3,18 @@
     ViewBag.Title = "CheckoutSuccessful";
 }
 
-<h2>Checkout Successful</h2>
+@*<h2>Checkout Successful</h2>
 <h2>Order ID: @Session["orderID"]</h2>
-<h2>@Html.ActionLink("Back to Home", "Index", "Home")</h2>
+<h2>@Html.ActionLink("Back to Home", "Index", "Home")</h2>*@
+
+<div style="width:80%; margin:60px auto; text-align:left">
+    <img src="~/Content/images/icons/payment_icon.png" style="height: 200px; margin: 25px auto;" />
+    <h2 style="color: #d4bcc6; font-size: 1.2em;">
+        Congratulations, you have completed your payment, we are processing your order and
+        an email with details of your purchase should be in your inbox.
+    </h2>
+    <h2 style="color: #d871a5;">Order Reference: @Session["orderID"]</h2>
+    <div class="SpartaStoreButton">
+        @Html.ActionLink("Back to Home", "Index", "Home")
+    </div>
+</div>

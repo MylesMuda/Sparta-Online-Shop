@@ -63,14 +63,15 @@
                                 <option value=@i>@i</option>
                             }
                         </select>
-                      <div class="SpartaStoreButton" style="padding-left: 0;">
-                        <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
+                        <div class="SpartaStoreButton" style="padding-left: 0;">
+                            <button class="btn btn-primary btn-md my-0 p" style="margin-left:0" type="submit" name="ProductID" value="@product.ProductID">
 
-                            Add to cart
-                            <i class="fas fa-shopping-cart ml-1"></i>
-                        </button>
+                                Add to cart
+                                <i class="fas fa-shopping-cart ml-1"></i>
+                            </button>
                         </div>
-                        
+
+                    }
                     <!--Product rating-->
                     <div>
                         @{
@@ -78,8 +79,7 @@
                         }
                     </div>
                     <!--Product rating-->
-                    }
-              
+
                 </div>
                 <!--Content-->
 
@@ -93,7 +93,7 @@
     <!--Create review-->
     @if (Request.IsAuthenticated)
     {
-        <div>
+        <div style="width:80%; margin:auto;">
             @{
                 Html.RenderAction("Create", "Reviews", new { productID = product.ProductID });
             }
@@ -101,14 +101,14 @@
     }
     @if (!Request.IsAuthenticated)
     {
-        <div style="color:white">
+        <div style="color:white; width:80%; margin:20px auto; font-size: 1.2em;">
             @Html.ActionLink("Login", "Login", "Home") to review this product
         </div>
     }
     <!--Create review-->
 
     <!--List all reviews-->
-    <div>
+    <div style="width:80%; margin:auto;">
         @{ 
             Html.RenderAction("ProductReviews", "Reviews", new { productID = product.ProductID });
         }

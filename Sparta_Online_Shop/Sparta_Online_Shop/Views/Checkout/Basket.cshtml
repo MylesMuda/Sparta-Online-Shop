@@ -6,27 +6,22 @@
     .SpartaFormWrapper form{
         text-align:right;
     }
+    .BasketRemove{
+        position:absolute;
+        right:10px;
+        bottom:5px;
+    }
+    .BasketRemove button{
+        font-size: 0.7em !important;
+        font-weight: bold;
+        background-color: #ed3b65 !important;
+        color: #FFF !important;
+        padding: 5px 15px !important;
+        border-radius: 10px;
+        line-height: 10px;
+    }
 </style>
 
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Sparta Global Store</title>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-        <link href="css/style.min.css" rel="stylesheet">
-    </head>
-
-    <body style="background-color: #36393F;">
 
     <!--Main layout-->
     <main class="pt-4">
@@ -47,28 +42,44 @@
                         padding: 1.5px; border-radius: .2em;">
                 @foreach (BasketItem item in ViewBag.BasketItems)
                 {
-                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
-                        <div>
-                            <h6 class="my-0" style="color: white; text-anchor: end">
-                                @item.Product.ProductName
-                                <span class="badge spartaPurple badge-pill">@item.Quantity</span>
-                            </h6>
-                            <small class="text-muted" style="text-anchor: end">@item.Product.ProductDescription</small>
-                        </div>
-                        <span class="text-muted">@item.Product.Price</span>
-                    </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed" style="background-color: #36393F;">
+                    <div>
+                        <h6 class="my-0" style="color: white; text-anchor: end">
+                            @item.Product.ProductName
+                            <span class="badge spartaPurple badge-pill">@item.Quantity</span>
+                        </h6>
+                        <small class="text-muted" style="text-anchor: end;color:#cbc2db !important;">@item.Product.ProductDescription</small>
+                    </div>
+                    <span class="text-muted" style="color:#cbc2db !important;">@item.Product.Price</span>
+                    @using (Html.BeginForm("RemoveItem", "Checkout", FormMethod.Post, new { @class="BasketRemove"}))
+                    {
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" name="BasketItemID" value="@item.BasketItemID">
+
+                            remove
+                        </button>
+                    }
+                </li>
                 }
             </ul>
             <div style="text-align:right; margin:20px; ">
-                <span style="color:#d6dbdf; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
+                <span style="color:#cbc2db; font-size: 1.3em;">Total Cost: £@ViewBag.TotalPrice</span>
             </div>
             <!-- Cart -->
             <div class="SpartaFormWrapper">
                 @using (Html.BeginForm("Checkout", "Checkout"))
                 {
-                    <div class="SpartaStoreButton" style="display:inline-block">
-                        <input style="padding: 10px 40px;" class="btn btn-default" type="submit" value="Checkout"/>
-                    </div>
+                    if (ViewBag.BasketItems != null && ViewBag.BasketItems.Count > 0)
+                    {
+                        <div class="SpartaStoreButton" style="display:inline-block">
+                            <input style="padding: 10px 40px;" class="btn btn-default" type="submit" value="Checkout" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="SpartaStoreButton" style="display:inline-block">
+                            <a class="btn btn-default" href="/Home/Products/" >Continue Shopping</a>
+                        </div>
+                    }
                 }
             </div>
         </div>
@@ -88,7 +99,4 @@
         // Animations initialization
         new WOW().init();
     </script>
-    </body>
-
-    </html>
 </Sparta_Online_Shop.BasketItem>
