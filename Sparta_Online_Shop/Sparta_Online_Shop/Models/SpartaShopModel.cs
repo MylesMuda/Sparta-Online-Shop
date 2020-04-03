@@ -17,8 +17,9 @@ namespace Sparta_Online_Shop
         private static string SpPass = Environment.GetEnvironmentVariable("APPSETTING_SpartaShopPassword");
 #endif
 
-        private static string connectionString = $"data source=spartaonlineshop.database.windows.net;initial catalog = SpartaShop; user id = {SpUser}; password={SpPass};MultipleActiveResultSets=True;App=EntityFramework";
-        
+        //private static string connectionString = $"data source=spartaonlineshop.database.windows.net;initial catalog = SpartaShop; user id = {SpUser}; password={SpPass};MultipleActiveResultSets=True;App=EntityFramework";
+        private static string connectionString = $"data source=(localdb)\\mssqllocaldb;initial catalog = sparta;Integrated Security=True;MultipleActiveResultSets=true";
+
         public SpartaShopModel()
             : base(connectionString)
         {
